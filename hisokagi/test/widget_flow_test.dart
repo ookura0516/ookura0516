@@ -11,11 +11,14 @@ import 'package:hisokagi/ui/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'fakes.dart';
+
 const code = RoomCode(scenario: 1, players: 2, seed: 233);
 
 Future<AppController> _controller() async {
   SharedPreferences.setMockInitialValues({});
-  return AppController(store: await SessionStore.open());
+  return AppController(
+      store: await SessionStore.open(), purchases: FakePurchaseService());
 }
 
 void _phoneSize(WidgetTester tester) {

@@ -6,6 +6,7 @@ import '../../scenario/model.dart';
 import '../../scenario/registry.dart';
 import '../app_controller.dart';
 import '../theme.dart';
+import 'pass_screen.dart';
 import 'ready_screen.dart';
 
 enum ScenarioPurpose { create, solo }
@@ -39,7 +40,7 @@ class ScenarioScreen extends StatelessWidget {
                               style: text.titleLarge
                                   ?.copyWith(color: HisokagiTheme.star)),
                         ),
-                        if (s.free) const Chip(label: Text('無料')),
+                        Chip(label: Text(s.free ? '無料' : 'パス')),
                       ]),
                       const SizedBox(height: 8),
                       Text(s.tagline, style: const TextStyle(height: 1.6)),
@@ -69,6 +70,11 @@ class ScenarioScreen extends StatelessWidget {
 
   void _choose(BuildContext context, ScenarioDef scenario) {
     final app = context.read<AppController>();
+    if (!app.canCreate(scenario)) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (_) => const PassScreen()));
+      return;
+    }
     final code = AppController.newRoomCode(scenario);
     final solo = purpose == ScenarioPurpose.solo;
     final session = app.start(

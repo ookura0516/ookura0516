@@ -74,7 +74,9 @@ class EndingScreen extends StatelessWidget {
               const SizedBox(height: 24),
               FilledButton(
                 onPressed: () async {
-                  await context.read<AppController>().discard();
+                  final app = context.read<AppController>();
+                  await app.afterClear();
+                  await app.discard();
                   if (context.mounted) {
                     Navigator.popUntil(context, (r) => r.isFirst);
                   }

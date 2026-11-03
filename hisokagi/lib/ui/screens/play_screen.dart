@@ -7,6 +7,7 @@ import '../app_controller.dart';
 import '../theme.dart';
 import '../widgets/panels.dart';
 import 'ending_screen.dart';
+import 'pass_screen.dart';
 
 class PlayScreen extends StatefulWidget {
   const PlayScreen({super.key, required this.session});
@@ -199,11 +200,11 @@ class _PlayScreenState extends State<PlayScreen> {
           if (stage == null) return const SizedBox.shrink();
           final level = s.hintLevel(s.activeRole, s.currentIndex);
           final hints = stage.hints[s.activeRole]!;
-          final needsAd = s.scenario.free;
+          final needsAd = app.hintNeedsAd(s, level + 1);
           final next = switch (level) {
             0 => 'ヒント1を見る',
-            1 => needsAd ? 'ヒント2を見る（広告）' : 'ヒント2を見る',
-            2 => needsAd ? '答えを見る（広告）' : '答えを見る',
+            1 => needsAd ? '広告を見て ヒント2を開く' : 'ヒント2を見る',
+            2 => needsAd ? '広告を見て 答えを開く' : '答えを見る',
             _ => null,
           };
           return SafeArea(
@@ -236,15 +237,29 @@ class _PlayScreenState extends State<PlayScreen> {
                   if (next != null) ...[
                     const SizedBox(height: 12),
                     OutlinedButton(
+                      key: const Key('next-hint'),
                       onPressed: () async {
-                        if (level >= 1 && needsAd) {
-                          final ok = await app.ads.showRewarded();
-                          if (!ok) return;
+                        final unlock = await app.unlockHint(s, level + 1);
+                        if (unlock == HintUnlock.skipped) {
+                          if (c.mounted) {
+                            ScaffoldMessenger.of(c).showSnackBar(const SnackBar(
+                                content: Text('広告を最後まで見ると、ヒントが開きます。')));
+                          }
+                          return;
                         }
                         s.revealNextHint();
                       },
                       child: Text(next),
                     ),
+                    if (needsAd)
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(c);
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => const PassScreen()));
+                        },
+                        child: const Text('ひそかぎパスなら、広告なしで開きます'),
+                      ),
                   ],
                 ],
               ),

@@ -5,6 +5,7 @@ import '../app_controller.dart';
 import '../theme.dart';
 import 'how_to_screen.dart';
 import 'join_screen.dart';
+import 'pass_screen.dart';
 import 'play_screen.dart';
 import 'scenario_screen.dart';
 
@@ -92,6 +93,12 @@ class TitleScreen extends StatelessWidget {
                   onPressed: () => Navigator.push(context,
                       MaterialPageRoute(builder: (_) => const HowToScreen())),
                   child: const Text('遊びかた'),
+                ),
+                TextButton(
+                  key: const Key('open-pass'),
+                  onPressed: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => const PassScreen())),
+                  child: Text(app.hasPass ? 'ひそかぎパス（有効）' : 'ひそかぎパス・購入の復元'),
                 ),
                 const Spacer(),
               ],

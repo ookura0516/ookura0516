@@ -41,7 +41,16 @@ class Rng {
     return list;
   }
 
-  static int _imul(int a, int b) => (a * b) & _mask;
+  /// 32ビットどうしの掛け算の下位32ビット。
+  ///
+  /// `(a * b) & _mask` だと、Web（JavaScript の数値）では 2^53 を超えて桁が落ち、
+  /// スマホと違う謎になる。16ビットずつに分けて、どの環境でも同じ値にする。
+  static int _imul(int a, int b) {
+    final aHi = (a >>> 16) & 0xFFFF, aLo = a & 0xFFFF;
+    final bHi = (b >>> 16) & 0xFFFF, bLo = b & 0xFFFF;
+    final cross = ((aHi * bLo + aLo * bHi) & 0xFFFF) * 0x10000;
+    return (aLo * bLo + cross) & _mask;
+  }
 
   /// FNV-1a で文字列と数値を32ビットにまとめる。
   static int mix(List<Object> parts) {

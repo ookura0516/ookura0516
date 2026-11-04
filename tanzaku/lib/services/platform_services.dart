@@ -88,11 +88,33 @@ abstract class NotificationService {
     int minutes,
   );
   Future<void> cancelAll();
+
+  /// 通知をタップしてアプリが起動したときの payload（tanzaku://compose）。
+  Future<Uri?> launchLink();
+
+  /// アプリを開いている間に通知をタップしたとき。
+  Stream<Uri?> get taps;
 }
 
 class LocalNotificationService implements NotificationService {
   final _plugin = FlutterLocalNotificationsPlugin();
+  final _taps = StreamController<Uri?>.broadcast();
   bool _ready = false;
+
+  @override
+  Stream<Uri?> get taps => _taps.stream;
+
+  @override
+  Future<Uri?> launchLink() async {
+    try {
+      await _init();
+      final d = await _plugin.getNotificationAppLaunchDetails();
+      if (d == null || !d.didNotificationLaunchApp) return null;
+      return Uri.tryParse(d.notificationResponse?.payload ?? '');
+    } catch (_) {
+      return null;
+    }
+  }
 
   Future<void> _init() async {
     if (_ready) return;
@@ -107,6 +129,8 @@ class LocalNotificationService implements NotificationService {
           requestSoundPermission: false,
         ),
       ),
+      onDidReceiveNotificationResponse: (r) =>
+          _taps.add(Uri.tryParse(r.payload ?? '')),
     );
     _ready = true;
   }

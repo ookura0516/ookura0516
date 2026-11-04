@@ -33,16 +33,16 @@ Future<void> main() async {
     dictionary: dictionary,
     extraReadings: yomi,
     settings: settings,
-    // 購入は仮の実装。ストアにつなぐときはここを差し替える。
-    purchases: PlaceholderPurchaseService(prefs),
+    purchases: StorePurchaseService(prefs),
     share: PlatformShareSink(),
     notifications: LocalNotificationService(),
     widgets: HomeWidgetBridge(),
     review: InAppReviewPrompter(),
   );
-  await controller.purchases.init();
   await controller.load();
   runApp(TanzakuApp(controller: controller));
+  // ストアの準備は、画面を出してから裏で進める（購入済みかどうかは端末の記録で分かる）。
+  controller.purchases.init();
 }
 
 /// 歳時記の JSON を、版が上がっていたらデータベースに入れ直し、データベースから読む。

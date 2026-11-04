@@ -7,6 +7,8 @@
 - 毎日1つの兼題（季語）。二十四節気で「今の季節」が切り替わる
 - サーバーもアカウントも使わない。句は端末の中（SQLite）だけ。広告なし
 
+ストアに出すまでの手順：[docs/STORE_SETUP.md](docs/STORE_SETUP.md)　ストア素材：[store/README.md](store/README.md)　プライバシーポリシー：[docs/PRIVACY.md](docs/PRIVACY.md)
+
 設計書：リポジトリの `claude/dazzling-planck-qofymj` ブランチの「アプリ4案_設計書_第2弾.md」の「案1 タンザク」と「共通の技術方針」。
 
 ## 動かし方
@@ -66,24 +68,28 @@ flutter test tool/render_samples_test.dart --dart-define=OUT=/tmp/tanzaku
 | データ | drift（SQLite）で `haiku`・`haiku_revision`・`kigo`・`theme_log`。歳時記はアセットの JSON から初回（と版が上がったとき）に入れる |
 | 書き出し | JSON（全句・推敲履歴・兼題の記録）。読み込みは同じ日の同じ句を重ねない |
 | ウィジェット | Android は AppWidget（今日の季語・連続日数、タップで「詠む」、翌日分を先に書いて日本時間0時で切り替え）。iOS は WidgetKit の拡張（`TanzakuWidgetExtension`、iOS 17 以上、ホーム小・中とロック画面）を Runner に埋め込み、App Group `group.com.ookura.tanzaku` で同じ値を読む |
-| 購入 | 「すずり」買い切り ¥730：書体2種、和紙5種と色紙、落款のカスタム、月の十句ポスター、縦書き PDF。差し替えられる仮の実装（`PlaceholderPurchaseService`） |
+| 購入 | 「すずり」買い切り ¥730：書体2種、和紙5種と色紙、落款のカスタム、月の十句ポスター、縦書き PDF。in_app_purchase の非消耗型（商品ID `tanzaku_suzuri`）。購入・復元・失敗・ストアにつながらないときの案内。購入の記録は端末に残し、通信なしでも使える。テストと見本画像では差し替えた仮の実装を使う |
+| 通知 | 兼題を1日1回（初期はオフ）。14日分を予約し、起動のたびに入れ直す。タップで「詠む」を開く |
 | 評価依頼 | 短冊を保存・共有した直後、10句目・30句目・100句目だけ、365日に3回まで |
 | フォント | Noto Serif JP（無料）、しっぽり明朝・Yuji Syuku（すずり）。3つとも SIL OFL 1.1 で、ライセンス文を設定画面とライセンス一覧に出す |
 | 文字の大きさ | 入力欄は22pt（前書き・メモは18pt）。端末の文字サイズの設定に従う（2倍でもテスト） |
-| テスト | 79件。縦書きの変換、音数、季語の検出と歳時記データ、二十四節気と兼題（1年分）、連続日数、データベースと書き出し・読み込み、評価依頼、主な画面の流れ（ウィジェットテスト） |
+| アイコン・スプラッシュ・ストア素材 | できた（[store/README.md](store/README.md)）。アイコンとスクリーンショットはアプリと同じ描画のコードで描いた。スクリーンショットは実機の画面ではない |
+| リリースの設定 | バージョン 1.0.0+1。Android は `android/key.properties` があればその鍵で署名。iOS は輸出コンプライアンスの申告（`ITSAppUsesNonExemptEncryption`）、写真への保存の説明、URL スキーム `tanzaku://` |
+| テスト | 86件。購入（ストアとのやりとり）、ウィジェットと通知のタップ、縦書きの変換、音数、季語の検出と歳時記データ、二十四節気と兼題（1年分）、連続日数、データベースと書き出し・読み込み、評価依頼、主な画面の流れ（ウィジェットテスト） |
 | `flutter analyze` / `flutter test` | どちらも通る |
 
 ## まだのこと
 
 | 項目 | 状態・やること |
 | --- | --- |
+| ストアの管理画面での作業 | ID と App Group の登録、Xcode での署名、すずりの商品登録、Android の鍵、プライバシーの申告。手順は [docs/STORE_SETUP.md](docs/STORE_SETUP.md) |
+| 実機での確認 | まだ。この環境に Android SDK と Xcode がなく、dl.google.com にもつながらないので、`flutter build` も通していない。設計書の「端末3機種」の確認を含め、[docs/STORE_SETUP.md](docs/STORE_SETUP.md) の6章のチェックリストでやる |
+| プライバシーポリシーの公開 | 文面は [docs/PRIVACY.md](docs/PRIVACY.md)。連絡先を書き足し、ウェブで公開して URL を両ストアに登録する |
+| Google Play のクローズドテスト | 12人 × 14日（設計書の工程） |
+| キーワードとアプリ名の確定 | 設計書の「作る前の検証」（ストア検索の上位10本、名前の重複）の結果で決める。今の案は [store/listing_ja.md](store/listing_ja.md) |
 | 歳時記の残り450語 | データの形は600語まで増やせる（テストで確かめた）。人が足す前提。手順は [assets/data/README.md](assets/data/README.md) |
-| 購入のストア接続 | 今は仮の実装で、押すとすぐ「買った」ことになる。リリース前に in_app_purchase の実装（ひそかぎの `StorePurchaseService` と同じ形、商品ID `tanzaku_suzuri`）に差し替え、`main.dart` の1行を変える |
-| iOS のウィジェットの署名とビルド | ターゲットは `tool/add_ios_widget_target.rb` で足した（この環境に Xcode がないため）。Xcode で一度開いて Runner と `TanzakuWidgetExtension` の両方に開発チームを選び、Apple Developer で App Group `group.com.ookura.tanzaku` と Bundle ID `com.ookura.tanzaku.TanzakuWidget` を登録する。ビルドはまだ確かめていない |
-| 実機での確認 | まだ。この環境に Android SDK と Xcode がないので、ビルド・画像保存・共有・通知・ウィジェットの0時更新は実機で確かめていない（設計書の「端末3機種」の確認が要る） |
 | 毛筆系の追加フォント | 衡山毛筆フォントはアプリへの同梱条件を文面で確かめられなかったので入れていない。確かめられたら `assets/fonts` に足し、`TanzakuFont` とライセンス画面に加える |
-| アイコン・スプラッシュ・ストア素材 | まだ（Flutter の初期アイコンのまま） |
-| 旧仮名遣いの表示 | まだ（設計書の設定にあるが、今回の範囲に入れなかった） |
+| 旧仮名遣いの表示 | まだ（設計書の設定にあるが、初版の範囲に入れなかった） |
 | 漢字の読みの精度 | 第2版で iOS のテキスト変換（CFStringTransform）を MethodChannel で呼ぶ（設計書どおり） |
 | 書き出しの ZIP | JSON だけ。画像は句から作り直せるので入れていない |
 | 英語版・短歌・川柳モード | 初版の範囲外 |
@@ -112,5 +118,7 @@ flutter test tool/render_samples_test.dart --dart-define=OUT=/tmp/tanzaku
 | `lib/services` | 設定、購入、共有・通知・ウィジェット・評価依頼（差し替えられる形） |
 | `lib/ui` | 画面 |
 | `assets` | 歳時記の JSON、フォント、フォントのライセンス文 |
+| `store` | ストアの素材（アイコン、スクリーンショット、掲載文）と、スクリーンショットを撮るテスト |
+| `docs` | ストアに出すまでの手順、プライバシーポリシー |
 | `ios/TanzakuWidget` | iOS のウィジェット（Swift、Info.plist、App Group の entitlements） |
-| `tool` | 歳時記の JSON を作るスクリプト、見本画像の書き出し、iOS のウィジェットのターゲットを足すスクリプト |
+| `tool` | 歳時記の JSON を作るスクリプト、見本画像・アイコンの書き出し、iOS のウィジェットのターゲットを足すスクリプト |

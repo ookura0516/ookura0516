@@ -20,6 +20,7 @@ class RootScreen extends StatefulWidget {
 class _RootScreenState extends State<RootScreen> {
   int _tab = 0;
   StreamSubscription<Uri?>? _clicks;
+  StreamSubscription<Uri?>? _taps;
 
   @override
   void initState() {
@@ -27,14 +28,18 @@ class _RootScreenState extends State<RootScreen> {
     final app = context.read<AppController>();
     // ウィジェットをタップしたら「詠む」を開く。
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final uri = await app.widgets.initialLaunch();
+      final uri =
+          await app.widgets.initialLaunch() ??
+          await app.notifications.launchLink();
       if (mounted) _openFromWidget(uri);
     });
     _clicks = app.widgets.clicks.listen(_openFromWidget, onError: (_) {});
+    // 兼題の通知をタップしても「詠む」を開く。
+    _taps = app.notifications.taps.listen(_openFromWidget, onError: (_) {});
   }
 
   void _openFromWidget(Uri? uri) {
-    if (uri == null || uri.host != 'compose') return;
+    if (uri == null || uri.scheme != 'tanzaku' || uri.host != 'compose') return;
     final app = context.read<AppController>();
     Navigator.of(context).popUntil((r) => r.isFirst);
     openCompose(context, theme: app.todayTheme);
@@ -43,6 +48,7 @@ class _RootScreenState extends State<RootScreen> {
   @override
   void dispose() {
     _clicks?.cancel();
+    _taps?.cancel();
     super.dispose();
   }
 

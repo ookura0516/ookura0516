@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(20),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const Text(
                         '今日の兼題',
@@ -112,25 +112,17 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: FilledButton(
-                              key: const Key('compose-theme'),
-                              onPressed: () =>
-                                  openCompose(context, theme: theme),
-                              child: const Text('この兼題で詠む'),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: OutlinedButton(
-                              key: const Key('compose-free'),
-                              onPressed: () => openCompose(context),
-                              child: const Text('自由題で詠む'),
-                            ),
-                          ),
-                        ],
+                      // 2つは同じ大きさ（自由題でもよい）。字が大きい端末でも折り返さないよう縦に並べる。
+                      FilledButton(
+                        key: const Key('compose-theme'),
+                        onPressed: () => openCompose(context, theme: theme),
+                        child: const Text('この兼題で詠む'),
+                      ),
+                      const SizedBox(height: 10),
+                      OutlinedButton(
+                        key: const Key('compose-free'),
+                        onPressed: () => openCompose(context),
+                        child: const Text('自由題で詠む'),
                       ),
                     ],
                   ),

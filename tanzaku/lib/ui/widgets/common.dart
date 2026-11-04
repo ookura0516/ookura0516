@@ -64,17 +64,23 @@ class KigoChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final p = SeasonPalette.of(kigo.season);
+    final label = Text(
+      '${kigo.word}　${kigo.season.label}・${kigo.category}',
+      style: const TextStyle(
+        color: TanzakuTheme.ink,
+        fontFamily: TanzakuTheme.haikuFont,
+      ),
+    );
+    final side = BorderSide(color: p.accent.withValues(alpha: 0.4));
+    // 押せないときに薄く見えないよう、ただのチップにする。
+    if (onTap == null) {
+      return Chip(backgroundColor: p.wash, side: side, label: label);
+    }
     return ActionChip(
       onPressed: onTap,
       backgroundColor: p.wash,
-      side: BorderSide(color: p.accent.withValues(alpha: 0.4)),
-      label: Text(
-        '${kigo.word}　${kigo.season.label}・${kigo.category}',
-        style: TextStyle(
-          color: TanzakuTheme.ink,
-          fontFamily: TanzakuTheme.haikuFont,
-        ),
-      ),
+      side: side,
+      label: label,
     );
   }
 }
@@ -136,6 +142,17 @@ class PurchaseSheet extends StatelessWidget {
               style: TextStyle(color: TanzakuTheme.inkDim),
             ),
             const SizedBox(height: 16),
+            if (!app.hasSuzuri && _statusText(p.status) != null)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Text(
+                  _statusText(p.status)!,
+                  key: const Key('purchase-status'),
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+              ),
             if (app.hasSuzuri)
               FilledButton(
                 onPressed: () => Navigator.pop(context, true),
@@ -159,13 +176,7 @@ class PurchaseSheet extends StatelessWidget {
                 onPressed: () async {
                   await p.restore();
                   if (!context.mounted) return;
-                  if (p.hasSuzuri) {
-                    Navigator.pop(context, true);
-                  } else if (p.status == PurchaseStatus.nothingToRestore) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('購入の記録が見つかりませんでした')),
-                    );
-                  }
+                  if (p.hasSuzuri) Navigator.pop(context, true);
                 },
                 child: const Text('購入を復元'),
               ),
@@ -176,6 +187,14 @@ class PurchaseSheet extends StatelessWidget {
     );
   }
 }
+
+String? _statusText(PurchaseStatus s) => switch (s) {
+  PurchaseStatus.pending => 'ストアの画面を開いています…',
+  PurchaseStatus.failed => '購入できませんでした。もう一度お試しください',
+  PurchaseStatus.unavailable => 'ストアにつながりません。通信を確かめてください',
+  PurchaseStatus.nothingToRestore => '購入の記録が見つかりませんでした',
+  _ => null,
+};
 
 /// 鍵の印付きの選択肢。
 class LockedLabel extends StatelessWidget {

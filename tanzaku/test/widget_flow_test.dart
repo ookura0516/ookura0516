@@ -245,4 +245,24 @@ void main() {
     expect(field.style!.fontSize, greaterThanOrEqualTo(18));
     expect(tester.takeException(), isNull);
   });
+
+  testWidgets('ウィジェットや通知をタップすると「詠む」が開く', (tester) async {
+    final t = await _start(tester);
+    t.widgets.clickController.add(Uri.parse('tanzaku://compose?homeWidget'));
+    await tester.pumpAndSettle();
+    expect(find.byType(ComposeScreen), findsOneWidget);
+    expect(find.text('兼題　'), findsOneWidget);
+
+    await _tap(tester, find.byType(BackButton));
+    expect(find.byType(ComposeScreen), findsNothing);
+    t.notifications.tapController.add(Uri.parse('tanzaku://compose'));
+    await tester.pumpAndSettle();
+    expect(find.byType(ComposeScreen), findsOneWidget);
+
+    // 知らないリンクでは何もしない
+    await _tap(tester, find.byType(BackButton));
+    t.notifications.tapController.add(Uri.parse('https://example.com/compose'));
+    await tester.pumpAndSettle();
+    expect(find.byType(ComposeScreen), findsNothing);
+  });
 }

@@ -65,7 +65,11 @@ class TanzakuTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
           ),
-          textStyle: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+          // 書体はテーマの文字（端末の日本語フォント）のまま、大きさと太さだけ変える。
+          textStyle: base.textTheme.labelLarge?.copyWith(
+            fontSize: 17,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
@@ -76,7 +80,7 @@ class TanzakuTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
           ),
-          textStyle: const TextStyle(fontSize: 17),
+          textStyle: base.textTheme.labelLarge?.copyWith(fontSize: 17),
         ),
       ),
       snackBarTheme: const SnackBarThemeData(

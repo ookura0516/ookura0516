@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -71,10 +72,20 @@ class FakeNotifications implements NotificationService {
 
   @override
   Future<void> cancelAll() async => scheduled = [];
+
+  Uri? launch;
+  final tapController = StreamController<Uri?>.broadcast();
+
+  @override
+  Future<Uri?> launchLink() async => launch;
+
+  @override
+  Stream<Uri?> get taps => tapController.stream;
 }
 
 class FakeWidgets implements HomeWidgetService {
   WidgetSnapshot? last;
+  final clickController = StreamController<Uri?>.broadcast();
 
   @override
   Future<void> update(WidgetSnapshot s) async => last = s;
@@ -83,7 +94,7 @@ class FakeWidgets implements HomeWidgetService {
   Future<Uri?> initialLaunch() async => null;
 
   @override
-  Stream<Uri?> get clicks => const Stream.empty();
+  Stream<Uri?> get clicks => clickController.stream;
 }
 
 class FakeReview implements ReviewPrompter {

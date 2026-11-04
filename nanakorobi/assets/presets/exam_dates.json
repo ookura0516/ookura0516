@@ -1,0 +1,114 @@
+{
+  "updated": "2026-11-04",
+  "note": "日程は各団体の公式ページで確認したものだけを入れる。確認元は source、確認日は checked。",
+  "presets": [
+    {
+      "id": "kyotsu-2027",
+      "name": "大学入学共通テスト 2027（本試験1日目）",
+      "short": "共通テスト",
+      "date": "2027-01-16",
+      "category": "大学入試",
+      "source": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r9/",
+      "checked": "2026-11-04"
+    },
+    {
+      "id": "kyotsu-2027-sai",
+      "name": "大学入学共通テスト 2027（追・再試験1日目）",
+      "short": "追・再試験",
+      "date": "2027-01-23",
+      "category": "大学入試",
+      "source": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r9/",
+      "checked": "2026-11-04"
+    },
+    {
+      "id": "eiken-2026-3",
+      "name": "英検 2026年度 第3回 一次試験（本会場）",
+      "short": "英検",
+      "date": "2027-01-24",
+      "category": "英語",
+      "source": "https://www.eiken.or.jp/eiken/schedule/2026-examinee.html",
+      "checked": "2026-11-04"
+    },
+    {
+      "id": "boki-174",
+      "name": "日商簿記 第174回 統一試験（1〜3級）",
+      "short": "簿記",
+      "date": "2026-11-15",
+      "category": "資格",
+      "source": "https://www.kentei.ne.jp/calendar_2026",
+      "checked": "2026-11-04"
+    },
+    {
+      "id": "boki-175",
+      "name": "日商簿記 第175回 統一試験（2・3級）",
+      "short": "簿記",
+      "date": "2027-02-28",
+      "category": "資格",
+      "source": "https://www.kentei.ne.jp/calendar_2026",
+      "checked": "2026-11-04"
+    },
+    {
+      "id": "fp1-2027-01",
+      "name": "FP技能検定 1級 学科（きんざい）",
+      "short": "FP1級",
+      "date": "2027-01-24",
+      "category": "資格",
+      "source": "https://products.kinzai.or.jp/exam/exam-schedule/",
+      "checked": "2026-11-04"
+    },
+    {
+      "id": "toeic-2026-12-19",
+      "name": "TOEIC L&R 公開テスト（12月19日）",
+      "short": "TOEIC",
+      "date": "2026-12-19",
+      "category": "英語",
+      "source": "https://www.iibc-global.org/toeic/test/lr/guide01/schedule.html",
+      "checked": "2026-11-04"
+    },
+    {
+      "id": "toeic-2027-01-10",
+      "name": "TOEIC L&R 公開テスト（1月10日）",
+      "short": "TOEIC",
+      "date": "2027-01-10",
+      "category": "英語",
+      "source": "https://www.iibc-global.org/toeic/test/lr/guide01/schedule.html",
+      "checked": "2026-11-04"
+    },
+    {
+      "id": "toeic-2027-01-24",
+      "name": "TOEIC L&R 公開テスト（1月24日）",
+      "short": "TOEIC",
+      "date": "2027-01-24",
+      "category": "英語",
+      "source": "https://www.iibc-global.org/toeic/test/lr/guide01/schedule.html",
+      "checked": "2026-11-04"
+    },
+    {
+      "id": "toeic-2027-02-14",
+      "name": "TOEIC L&R 公開テスト（2月14日）",
+      "short": "TOEIC",
+      "date": "2027-02-14",
+      "category": "英語",
+      "source": "https://www.iibc-global.org/toeic/test/lr/guide01/schedule.html",
+      "checked": "2026-11-04"
+    },
+    {
+      "id": "toeic-2027-03-06",
+      "name": "TOEIC L&R 公開テスト（3月6日）",
+      "short": "TOEIC",
+      "date": "2027-03-06",
+      "category": "英語",
+      "source": "https://www.iibc-global.org/toeic/test/lr/guide01/schedule.html",
+      "checked": "2026-11-04"
+    },
+    {
+      "id": "toeic-2027-03-14",
+      "name": "TOEIC L&R 公開テスト（3月14日）",
+      "short": "TOEIC",
+      "date": "2027-03-14",
+      "category": "英語",
+      "source": "https://www.iibc-global.org/toeic/test/lr/guide01/schedule.html",
+      "checked": "2026-11-04"
+    }
+  ]
+}

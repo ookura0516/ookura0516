@@ -1,0 +1,9 @@
+"widget_description" = "Your daruma and the days left";
+"widget_empty" = "Make a daruma";
+"widget_default_label" = "The big day";
+"widget_days_left" = "%d days left";
+"widget_days_unit" = "days";
+"widget_today" = "Today is the day";
+"widget_days_passed" = "%d days ago";
+"widget_day_n" = "Day %d";
+"widget_done" = "Done today";

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ナナコロビ</string>
+    <string name="widget_label">ナナコロビ</string>
+    <string name="widget_description">だるまと、本番までの残り日数</string>
+    <string name="widget_empty">だるまを作る</string>
+    <string name="widget_default_label">本番</string>
+    <string name="widget_days_left">あと%1$d日</string>
+    <string name="widget_today">今日が本番</string>
+    <string name="widget_days_passed">%1$d日 過ぎました</string>
+    <string name="widget_day_n">開眼から%1$d日目</string>
+    <string name="widget_done">今日の一歩 済</string>
+</resources>

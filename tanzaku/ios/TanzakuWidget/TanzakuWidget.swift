@@ -1,9 +1,8 @@
 // タンザクのホーム画面・ロック画面ウィジェット（WidgetKit）。
 //
-// このファイルはまだ Xcode のプロジェクトに入っていない。Xcode で
-// File > New > Target > Widget Extension（名前 TanzakuWidget）を作り、
-// できたファイルをこのファイルで置き換える。本体とウィジェットの両方に
-// App Group「group.com.ookura.tanzaku」を付ける（README の手順）。
+// Xcode のターゲットは TanzakuWidgetExtension（iOS 17 以上）。本体（Runner）に埋め込む。
+// 本体とウィジェットは App Group「group.com.ookura.tanzaku」でデータを共有する。
+// アプリ側が書く値は lib/services/platform_services.dart の WidgetSnapshot。
 import SwiftUI
 import WidgetKit
 

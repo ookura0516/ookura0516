@@ -65,7 +65,7 @@ flutter test tool/render_samples_test.dart --dart-define=OUT=/tmp/tanzaku
 | 共有画像 | 短冊 1080×1350、色紙 1080×1080、月の十句 1080×1350。アプリ名を小さく入れ、ストアのリンクは入れない |
 | データ | drift（SQLite）で `haiku`・`haiku_revision`・`kigo`・`theme_log`。歳時記はアセットの JSON から初回（と版が上がったとき）に入れる |
 | 書き出し | JSON（全句・推敲履歴・兼題の記録）。読み込みは同じ日の同じ句を重ねない |
-| ウィジェット | Android は AppWidget（今日の季語・連続日数、タップで「詠む」、翌日分を先に書いて日本時間0時で切り替え）。iOS は WidgetKit のコード（小・中・ロック画面）まで |
+| ウィジェット | Android は AppWidget（今日の季語・連続日数、タップで「詠む」、翌日分を先に書いて日本時間0時で切り替え）。iOS は WidgetKit の拡張（`TanzakuWidgetExtension`、iOS 17 以上、ホーム小・中とロック画面）を Runner に埋め込み、App Group `group.com.ookura.tanzaku` で同じ値を読む |
 | 購入 | 「すずり」買い切り ¥730：書体2種、和紙5種と色紙、落款のカスタム、月の十句ポスター、縦書き PDF。差し替えられる仮の実装（`PlaceholderPurchaseService`） |
 | 評価依頼 | 短冊を保存・共有した直後、10句目・30句目・100句目だけ、365日に3回まで |
 | フォント | Noto Serif JP（無料）、しっぽり明朝・Yuji Syuku（すずり）。3つとも SIL OFL 1.1 で、ライセンス文を設定画面とライセンス一覧に出す |
@@ -79,7 +79,7 @@ flutter test tool/render_samples_test.dart --dart-define=OUT=/tmp/tanzaku
 | --- | --- |
 | 歳時記の残り450語 | データの形は600語まで増やせる（テストで確かめた）。人が足す前提。手順は [assets/data/README.md](assets/data/README.md) |
 | 購入のストア接続 | 今は仮の実装で、押すとすぐ「買った」ことになる。リリース前に in_app_purchase の実装（ひそかぎの `StorePurchaseService` と同じ形、商品ID `tanzaku_suzuri`）に差し替え、`main.dart` の1行を変える |
-| iOS のウィジェット | `ios/TanzakuWidget/TanzakuWidget.swift` を書いたが、Xcode のターゲットは未追加。Xcode で Widget Extension（`TanzakuWidget`、iOS 17 以上）を作ってこのファイルに置き換え、本体とウィジェットに App Group `group.com.ookura.tanzaku` を付ける |
+| iOS のウィジェットの署名とビルド | ターゲットは `tool/add_ios_widget_target.rb` で足した（この環境に Xcode がないため）。Xcode で一度開いて Runner と `TanzakuWidgetExtension` の両方に開発チームを選び、Apple Developer で App Group `group.com.ookura.tanzaku` と Bundle ID `com.ookura.tanzaku.TanzakuWidget` を登録する。ビルドはまだ確かめていない |
 | 実機での確認 | まだ。この環境に Android SDK と Xcode がないので、ビルド・画像保存・共有・通知・ウィジェットの0時更新は実機で確かめていない（設計書の「端末3機種」の確認が要る） |
 | 毛筆系の追加フォント | 衡山毛筆フォントはアプリへの同梱条件を文面で確かめられなかったので入れていない。確かめられたら `assets/fonts` に足し、`TanzakuFont` とライセンス画面に加える |
 | アイコン・スプラッシュ・ストア素材 | まだ（Flutter の初期アイコンのまま） |
@@ -112,4 +112,5 @@ flutter test tool/render_samples_test.dart --dart-define=OUT=/tmp/tanzaku
 | `lib/services` | 設定、購入、共有・通知・ウィジェット・評価依頼（差し替えられる形） |
 | `lib/ui` | 画面 |
 | `assets` | 歳時記の JSON、フォント、フォントのライセンス文 |
-| `tool` | 歳時記の JSON を作るスクリプト、見本画像の書き出し |
+| `ios/TanzakuWidget` | iOS のウィジェット（Swift、Info.plist、App Group の entitlements） |
+| `tool` | 歳時記の JSON を作るスクリプト、見本画像の書き出し、iOS のウィジェットのターゲットを足すスクリプト |

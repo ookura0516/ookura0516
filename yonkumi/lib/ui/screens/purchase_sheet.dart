@@ -46,7 +46,7 @@ class _PurchaseSheet extends StatelessWidget {
             else ...[
               FilledButton(
                 key: const Key('buy'),
-                onPressed: p.status == PurchaseStatus.pending ? null : p.buy,
+                onPressed: p.status == PackStatus.pending ? null : p.buy,
                 child: Text('${p.priceLabel}で購入'),
               ),
               TextButton(onPressed: p.restore, child: const Text('購入を復元')),
@@ -62,11 +62,11 @@ class _PurchaseSheet extends StatelessWidget {
     );
   }
 
-  String? _statusText(PurchaseStatus s) => switch (s) {
-    PurchaseStatus.unavailable => 'いまは購入できません（ストアの準備中です）',
-    PurchaseStatus.failed => '購入できませんでした。時間をおいて試してください',
-    PurchaseStatus.nothingToRestore => '復元できる購入がありませんでした',
-    PurchaseStatus.restored => '購入を復元しました',
+  String? _statusText(PackStatus s) => switch (s) {
+    PackStatus.unavailable => 'いまは購入できません（ストアの準備中です）',
+    PackStatus.failed => '購入できませんでした。時間をおいて試してください',
+    PackStatus.nothingToRestore => '復元できる購入がありませんでした',
+    PackStatus.restored => '購入を復元しました',
     _ => null,
   };
 }

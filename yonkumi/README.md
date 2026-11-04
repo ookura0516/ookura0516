@@ -5,6 +5,8 @@
 日替わりの言葉パズルです。毎日、日本時間の0時に1問だけ替わります。仕分けの軸は「同じ読み」「同じ漢字」「季語の季節」「隠れた県名」「ことわざの穴」「数え方」「カタカナ語の元」「前に「お」で別の言葉」など、日本語ならではのひねりにしています。サーバーもアカウントも使いません。
 
 - 設計：[docs/DESIGN.md](docs/DESIGN.md)
+- ストアに出すまでの手順：[docs/STORE_SETUP.md](docs/STORE_SETUP.md)
+- ストア素材と掲載文：[store/](store/README.md)
 - 元の企画：「人気ジャンル分析から作るアプリ4案 設計書（第2弾）」の案3と「共通の技術方針」
 - 共通部品：[../packages/ookura_daily](../packages/ookura_daily)（日替わり・連続日数・結果画像・ウィジェット用データ。キップテンとタンザクでも使う）
 
@@ -25,26 +27,28 @@
 | 共通部品 `packages/ookura_daily` | できた。テスト済み |
 | ウィジェット（第N問・未解決／解決済み・連続日数、0時に翌日分へ） | Dart 側とネイティブのコードはできた。実機での確認はまだ |
 | 通知（1日1回・初期オフ・「第N問が出ました」だけ） | できた。予約の中身をテスト済み。実機での確認はまだ |
-| 広告（結果画面の下のバナーだけ）と全問パック ¥600 | 差し替えられる仮の実装。広告 ID とストアの商品は入れていない |
-| `flutter analyze` と `flutter test` | 通る（アプリ 69件、共通部品 19件） |
+| 広告（結果画面の下の AdMob バナーだけ） | できた。いまは Google のテスト ID。本番 ID を入れるまでリリースビルドでは広告を出さない |
+| 全問パック ¥600（in_app_purchase、非消耗型 `yonkumi_fullpack`） | できた。購入・復元・失敗をテスト済み。ストアの商品はまだ |
+| アイコン・スプラッシュ・ストア素材（スクリーンショット、掲載文、プライバシーポリシー） | できた（[store/](store/README.md)） |
+| リリースの設定（署名、Info.plist、AndroidManifest、バージョン 1.0.0） | できた。署名鍵は手元で作る（[手順](docs/STORE_SETUP.md#2-androidリリースの署名鍵を作る)） |
+| `flutter analyze` と `flutter test` | 通る（アプリ 77件、共通部品 19件） |
 
 ## まだのこと
 
+手順は [docs/STORE_SETUP.md](docs/STORE_SETUP.md) に順番に書いてある。どれも Apple・Google・AdMob のアカウントか、Mac・実機が要る。
+
 | 項目 | メモ |
 | --- | --- |
-| 問題を200問にする | いまは60問（11〜12月分）。`tool/` の CLI で足す（[作問の流れ](docs/DESIGN.md#作問の流れ)） |
-| 第1日の決定 | `lib/core/schedule.dart` の `kFirstDay` はいま 2026-11-01（仮）。リリース日に変えて `build` し直す |
-| AdMob の組み込み | `AdService` を実装したクラスに差し替える（下の「広告と購入の差し替え」） |
-| ストアの商品と購入 | `PurchaseService` を in_app_purchase で実装する |
-| ookura_consent（ATT・UMP） | 広告を本物にするときに必須。非公開パッケージなので、この環境では未対応 |
-| ookura_design・ookura_a11y・ookura_meta | 非公開パッケージなので未対応（ひそかぎと同じ） |
-| iOS のウィジェットと App Group を Xcode に組み込む | ファイルは `ios/YonkumiWidget/` にある。下の「iOS のウィジェット」 |
-| 実機での確認 | Android SDK と Xcode がない環境で作ったので、ビルドと実機（画像生成・ウィジェットの0時更新・通知）はまだ |
-| 評価の依頼（in_app_review） | 設計書では「パーフェクトでクリアした直後」。まだ |
-| 記録の書き出し（JSON のファイル） | まだ |
-| ウィジェットの「未解決ならタイルを点滅」 | いまは色を変えるだけ |
-| 配色テーマ（全問パックの特典） | まだ |
-| アイコン・スプラッシュ・ストア素材 | まだ |
+| 第1問の日を決める | `kFirstDay` はいま 2026-11-01。そのままでも出せる（[0.](docs/STORE_SETUP.md#0-第1問の日を決める)） |
+| iOS のウィジェットと App Group を Xcode に組み込む | Swift と entitlements は用意済み。Xcode でターゲットを足す |
+| AdMob の本番 ID・同意メッセージ | 3か所を書き換えて `isPlaceholder` を false に |
+| ストアの商品（App Store Connect・Play Console） | `yonkumi_fullpack`、¥600 |
+| プライバシーポリシーの公開 | 文面は `store/privacy_policy_ja.md`。公開した URL を `lib/ui/links.dart` に |
+| ビルド・実機確認・提出 | この環境には Xcode も Android SDK もない（dl.google.com に届かない）ので、`flutter build ipa` / `appbundle` はまだ一度も通していない |
+| Google Play のクローズドテスト | 12人×14日 |
+| 問題を200問にする | いまは60問（11〜12月分） |
+| ookura_consent・ookura_design・ookura_a11y・ookura_meta | 非公開パッケージなので未対応。広告の同意（UMP）は AdMob の SDK で直接出している |
+| 評価の依頼（in_app_review）・記録の書き出し・配色テーマ・ウィジェットの点滅 | まだ |
 
 ## 動かし方
 
@@ -92,20 +96,9 @@ dart run tool/yonkumi.dart build
 
 `tool/puzzles/puzzles.json` を直したら、必ず `build` で `assets/puzzles.json` を作り直す（テストが元の問題とアセットの一致を確かめる）。
 
-### 広告と購入の差し替え
+### ストア素材を作り直す
 
-`lib/main.dart` で、仮の実装を本物に替える。
-
-- 広告：`AdService`（`lib/monetize/ad_service.dart`）を google_mobile_ads のアンカーアダプティブバナーで実装し、`PlaceholderAdService` の代わりに渡す。ひそかぎの `AdUnitIds` と同じく、本番 ID が未設定のリリースビルドでは出さないようにする。AndroidManifest.xml と Info.plist に AdMob のアプリ ID を足す
-- 購入：`PurchaseService`（`lib/monetize/purchase_service.dart`）を in_app_purchase で実装する。形はひそかぎの `StorePurchaseService` と同じ（非消耗型1つ、Android は起動時に復元、iOS は「復元」ボタン）。App Store Connect と Play Console に非消耗型の商品（¥600）を作る
-
-### iOS のウィジェット
-
-1. Xcode で `ios/Runner.xcworkspace` を開き、Widget Extension のターゲットを「YonkumiWidget」の名前で足す
-2. できたひな形の Swift を `ios/YonkumiWidget/YonkumiWidget.swift` に、Info.plist を `ios/YonkumiWidget/Info.plist` に置き換える
-3. Runner と YonkumiWidget の両方に App Groups の capability を付け、`group.com.ookura.yonkumi` を選ぶ（`Runner/Runner.entitlements` と `YonkumiWidget/YonkumiWidget.entitlements` に同じ値を書いてある）
-
-Android のウィジェット（`YonkumiWidgetProvider`）と通知の受け口は AndroidManifest.xml に登録済み。
+[store/README.md](store/README.md) を参照。
 
 ## 設計書と変えたところ
 
@@ -123,4 +116,5 @@ Android のウィジェット（`YonkumiWidgetProvider`）と通知の受け口�
 | （記載なし） | 前と同じ4語の決定は間違いに数えない | うっかり同じ組を2回出して1回減るのは理不尽なため |
 | 通知は1日1回・初期オフ | それに加えて時刻を選べる（6〜22時、初期8時） | 番号入りの文面にするため、繰り返し通知ではなく1日ずつ予約する。そのついでに時刻を選べるようにした |
 | 共通基盤（ookura_design ほか） | 使っていない | 非公開パッケージで、この環境から取れない（ひそかぎと同じ） |
-| 依頼文の「hisokagi の PlaceholderAdService」 | `PlaceholderAdService` を新しく作った | hisokagi にあるのは広告を出さない `NoAdService` と AdMob の実装で、同名のクラスはなかった。考え方（差し替えられる窓口と、ID なしの仮の実装）に合わせた |
+| 依頼文の「hisokagi の PlaceholderAdService」 | `PlaceholderAdService` を新しく作った（いまはテストと画面確認用。本番は `AdMobService`） | hisokagi にあるのは広告を出さない `NoAdService` と AdMob の実装で、同名のクラスはなかった。考え方（差し替えられる窓口と、ID なしの仮の実装）に合わせた |
+| 共通基盤の ookura_consent（ATT・UMP） | AdMob の SDK の同意管理（UMP）を直接使う。ATT は出さない | ookura_consent が取れないため。ひそかぎと同じ形 |

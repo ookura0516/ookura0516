@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../game/stats.dart';
 import '../../monetize/purchase_service.dart';
 import '../app_controller.dart';
+import '../links.dart';
 import '../theme.dart';
 import 'how_to_screen.dart';
 import 'purchase_sheet.dart';
@@ -99,8 +101,29 @@ class SettingsScreen extends StatelessWidget {
             title: Text('ヨンクミ'),
             subtitle: Text(
               '16語を4組に分ける、日替わりの言葉パズル。'
-              '記録はこの端末の中だけに残り、どこにも送りません。',
+              '遊んだ記録はこの端末の中だけに残り、どこにも送りません。',
             ),
+          ),
+          ListTile(
+            key: const Key('privacy-policy'),
+            leading: const Icon(Icons.privacy_tip_outlined),
+            title: const Text('プライバシーポリシー'),
+            onTap: () => launchUrl(
+              Uri.parse(kPrivacyPolicyUrl),
+              mode: LaunchMode.externalApplication,
+            ),
+          ),
+          // EEA・英国などで同意フォームが出る地域だけ、設定し直す入口を出す。
+          FutureBuilder<bool>(
+            future: app.ads.privacyOptionsRequired(),
+            builder: (context, snap) => snap.data == true
+                ? ListTile(
+                    key: const Key('ad-privacy'),
+                    leading: const Icon(Icons.tune),
+                    title: const Text('広告のプライバシー設定'),
+                    onTap: app.ads.showPrivacyOptions,
+                  )
+                : const SizedBox.shrink(),
           ),
         ],
       ),

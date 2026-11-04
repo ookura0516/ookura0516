@@ -8,6 +8,7 @@ import 'core/puzzle_bundle.dart';
 import 'core/schedule.dart';
 import 'game/local_notifications.dart';
 import 'monetize/ad_service.dart';
+import 'monetize/ad_unit_ids.dart';
 import 'monetize/purchase_service.dart';
 import 'ui/app_controller.dart';
 import 'ui/screens/home.dart';
@@ -26,9 +27,9 @@ Future<void> main() async {
   final controller = AppController(
     prefs: prefs,
     bundle: bundle,
-    // どちらも仮の実装。ID とストアの商品を作ったら差し替える（README）。
-    purchases: PlaceholderPurchaseService(prefs),
-    ads: const PlaceholderAdService(),
+    purchases: StorePurchaseService(prefs),
+    // 本番の広告 ID が未設定のリリースビルドでは、広告を出さない。
+    ads: AdUnitIds.enabled ? AdMobService() : const NoAdService(),
     notifications: LocalNotificationService(),
     widgets: const HomeWidgetSink(
       appGroupId: kAppGroupId,

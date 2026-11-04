@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
 
+import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:ookura_daily/ookura_daily_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yonkumi/core/puzzle_bundle.dart';
@@ -114,4 +116,66 @@ class MutableClock {
   DateTime value;
 
   DateTime call() => value;
+}
+
+/// ストア（in_app_purchase）の代わり。購入の結果は [emit] で流す。
+class FakeInAppPurchase implements InAppPurchase {
+  final _stream = StreamController<List<PurchaseDetails>>.broadcast();
+  bool available = true;
+  int restoreCalls = 0;
+  final completed = <String>[];
+  PurchaseParam? lastBuy;
+
+  void emit(List<PurchaseDetails> p) => _stream.add(p);
+
+  static PurchaseDetails details(String id, PurchaseStatus status) =>
+      PurchaseDetails(
+        productID: id,
+        verificationData: PurchaseVerificationData(
+          localVerificationData: '',
+          serverVerificationData: '',
+          source: 'test',
+        ),
+        transactionDate: '0',
+        status: status,
+      )..pendingCompletePurchase = true;
+
+  @override
+  Stream<List<PurchaseDetails>> get purchaseStream => _stream.stream;
+
+  @override
+  Future<bool> isAvailable() async => available;
+
+  @override
+  Future<ProductDetailsResponse> queryProductDetails(Set<String> ids) async =>
+      ProductDetailsResponse(
+        productDetails: [
+          ProductDetails(
+            id: kFullPackProductId,
+            title: '全問パック',
+            description: '',
+            price: '¥610',
+            rawPrice: 610,
+            currencyCode: 'JPY',
+          ),
+        ],
+        notFoundIDs: const [],
+      );
+
+  @override
+  Future<bool> buyNonConsumable({required PurchaseParam purchaseParam}) async {
+    lastBuy = purchaseParam;
+    return true;
+  }
+
+  @override
+  Future<void> completePurchase(PurchaseDetails purchase) async =>
+      completed.add(purchase.productID);
+
+  @override
+  Future<void> restorePurchases({String? applicationUserName}) async =>
+      restoreCalls++;
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }

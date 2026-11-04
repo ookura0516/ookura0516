@@ -140,9 +140,12 @@ class _ResultScreenState extends State<ResultScreen> {
                   Text('ひっかけ', style: Theme.of(context).textTheme.titleSmall),
                   const SizedBox(height: 4),
                   for (final d in puzzle.decoys)
-                    Text(
-                      '・${d.word}は${d.title}にも見えるが、'
-                      '「${puzzle.groupOf(d.word).title}」の組',
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 2),
+                      child: Text(
+                        '・${d.word}：${d.title}…ではなく、'
+                        '${puzzle.groupOf(d.word).title}',
+                      ),
                     ),
                 ],
                 if (!entry.isTutorial) ...[

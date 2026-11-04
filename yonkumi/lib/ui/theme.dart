@@ -66,6 +66,14 @@ class YonkumiTheme {
           side: const BorderSide(color: inkDim),
         ),
       ),
+      segmentedButtonTheme: SegmentedButtonThemeData(
+        style: SegmentedButton.styleFrom(
+          selectedBackgroundColor: tile,
+          selectedForegroundColor: ink,
+          foregroundColor: ink,
+          side: const BorderSide(color: inkDim),
+        ),
+      ),
       textTheme: base.textTheme.apply(bodyColor: ink, displayColor: ink),
     );
   }

@@ -153,7 +153,10 @@ yonkumi/ で `dart run tool/yonkumi.dart <コマンド>`。
 
 - 全画面広告（インタースティシャル）とリワード広告は使わない。問題の画面には広告を出さない
 - 購入の入口は、アーカイブの8日より前をタップしたときと、バナーの「広告を消す」、設定
-- いまは仮の実装（`lib/monetize/`）。`PlaceholderAdService` は広告の枠だけを描き、`PlaceholderPurchaseService` はデバッグビルドでだけ端末に購入済みを記録する（リリースビルドでは買えない）。広告 ID とストアの商品 ID は入れていない。差し替え方は README
+- 広告は `AdMobService`（アンカー アダプティブ バナー、非パーソナライズ、年齢区分 G、EEA などでは UMP の同意フォーム）。広告ユニット ID は `lib/monetize/ad_unit_ids.dart`。本番 ID を入れて `isPlaceholder` を false にするまで、リリースビルドでは広告を出さない（デバッグはテスト広告）
+- 購入は `StorePurchaseService`（in_app_purchase、非消耗型 `yonkumi_fullpack`）。購入済みは端末に保存し、通信がなくても分かる。Android は起動時に復元、iOS は「購入を復元」で復元する。サーバーでの検証はしない（ひそかぎと同じ判断）
+- テストと画面の確認には、ネットワークを使わない `PlaceholderAdService`・`PlaceholderPurchaseService` を使う
+- 設定に、プライバシーポリシーへのリンクと、同意が要る地域だけ「広告のプライバシー設定」を出す
 
 ## 11. 共通部品（`packages/ookura_daily`）
 
@@ -178,5 +181,6 @@ yonkumi/ で `dart run tool/yonkumi.dart <コマンド>`。
 | `test/cipher_test.dart` | 暗号の往復、日付違いで開けない、公開前は開かない、収録アセットが元の問題と一致 |
 | `test/validator_test.dart` | 検証の各項目、軸の当てはまり、分け方の数、収録60問がすべて通る |
 | `test/records_test.dart` | 連続日数（失敗でも続く・アーカイブは数えない）、成績の集計、記録の保存、ウィジェット用データ、通知の予約、文字の結果 |
+| `test/monetize_test.dart` | ストアの購入（価格・購入・保存・失敗・復元・ほかの商品の完了）、広告 ID の切り替え、設定のプライバシーポリシー |
 | `test/widget_flow_test.dart` | チュートリアル→今日、あと1つ・間違い・正解→結果と共有・広告削除、失敗の流れ、解きかけ、アーカイブの無料範囲と購入、設定、0時の切り替え、再出題、結果画像の大きさ |
 | `packages/ookura_daily/test/` | 日付と切り替え、連続日数、ウィジェット用データ、PNG の大きさ |

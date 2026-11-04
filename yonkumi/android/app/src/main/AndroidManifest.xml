@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- 通知の予約と、ウィジェットの更新の予約を、再起動のあとも残す。 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- 広告（AdMob）とストアの購入に使う。ゲーム自体は通信なしで遊べる。 -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:label="ヨンクミ"
         android:name="${applicationName}"
@@ -27,6 +29,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <!-- AdMob のアプリ ID。いまは Google 公式のテスト ID。本番の ID に置き換える
+             （lib/monetize/ad_unit_ids.dart と docs/STORE_SETUP.md）。 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
         <!-- ホーム画面ウィジェット -->
         <receiver
             android:name=".YonkumiWidgetProvider"

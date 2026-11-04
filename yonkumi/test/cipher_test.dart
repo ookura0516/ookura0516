@@ -76,7 +76,7 @@ void main() {
           jsonDecode(File('tool/puzzles/puzzles.json').readAsStringSync())
               as List;
       expect(b.count, source.length);
-      expect(b.count, greaterThanOrEqualTo(30));
+      expect(b.count, greaterThanOrEqualTo(60));
       for (var n = 1; n <= b.count; n++) {
         final p = b.open(n, today: b.count);
         final src = Puzzle.fromJson(source[n - 1] as Map<String, dynamic>);

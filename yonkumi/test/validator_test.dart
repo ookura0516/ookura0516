@@ -223,8 +223,8 @@ void main() {
     final dictionary = loadDictionary(paths);
     final puzzles = loadPuzzles(paths.puzzles);
 
-    test('30問以上あり、すべての検証を通る', () {
-      expect(puzzles.length, greaterThanOrEqualTo(30));
+    test('60問以上あり、すべての検証を通る', () {
+      expect(puzzles.length, greaterThanOrEqualTo(60));
       final issues = PuzzleValidator(dictionary).validateAll(puzzles);
       expect([
         for (final i in issues)

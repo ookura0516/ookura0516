@@ -277,12 +277,14 @@ void main() {
   });
 
   testWidgets('問題が尽きた日は過去の問題を再出題する', (tester) async {
-    final t = await TestApp.create(now: jst(2026, 12, 15));
+    final t = await TestApp.create(now: jst(2027, 1, 15));
+    final count = t.controller.bundle.count;
     await _pump(tester, t.controller);
     final e = t.controller.todayEntry!;
-    expect(e.day, 45);
+    expect(e.day, 76);
+    expect(e.day, greaterThan(count), reason: '収録数を超えた日で確かめる');
     expect(e.rerun, isTrue);
-    expect(e.puzzle.number, inInclusiveRange(1, 30));
+    expect(e.puzzle.number, inInclusiveRange(1, count));
     expect(find.textContaining('再出題'), findsOneWidget);
   });
 

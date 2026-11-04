@@ -1,9 +1,0 @@
-"widget_description" = "だるまと、本番までの残り日数";
-"widget_empty" = "だるまを作る";
-"widget_default_label" = "本番";
-"widget_days_left" = "あと%d日";
-"widget_days_unit" = "日";
-"widget_today" = "今日が本番";
-"widget_days_passed" = "%d日 過ぎました";
-"widget_day_n" = "開眼から%d日目";
-"widget_done" = "今日の一歩 済";

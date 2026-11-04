@@ -85,7 +85,7 @@ flutter build appbundle --release
 
 ## 2. App Store（8 日目以降）
 
-1. Xcode で Widget Extension を足す（[docs/WIDGET_SETUP.md](WIDGET_SETUP.md)）
+1. ウィジェットのターゲットは追加済み（[docs/WIDGET_SETUP.md](WIDGET_SETUP.md)）。Xcode で開く場合は Team を選ぶだけ
 2. App Store Connect でアプリを作る（Bundle ID `com.ookura.nanakorobi`）。サブタイトル・プロモーションテキスト・キーワードは [store/listing_ja.md](../store/listing_ja.md)
 3. App のプライバシー：**データを収集しない**
 4. 年齢制限：4+
@@ -93,7 +93,7 @@ flutter build appbundle --release
    - A goal journal based on the Japanese daruma custom: paint one eye to start, log once a day, paint the other eye when done. No account, no server, no ads, no in-app purchase in this version
    - The home-screen widget shows the days left; the app itself is where you log
    - The brush font (Yuji Syuku) is under the SIL Open Font License
-6. `flutter build ipa --release` → Transporter または Xcode でアップロード → TestFlight → 審査
+6. `flutter build ipa --release` → Transporter または Xcode でアップロード → TestFlight → 審査。または GitHub Actions の `testflight`（下の 5）
 7. iOS 版が出たら、`lib/main.dart` の `InAppReviewService(appStoreId: '...')` に App Store の数字の ID を入れる（設定の「このアプリを評価する」が App Store を開くため）
 
 ## 3. 公開後の記録
@@ -110,6 +110,41 @@ flutter build appbundle --release
 | 1 日目アンインストール率、クラッシュ率 | Play Console の統計、Android vitals |
 
 14 日目に 1 回だけ判定する（型：1 日 20 インストール、または「受験カウントダウン」で 3 位以内。副判定：7 日維持率 25%、送客タップ率 2%、「だるま」「合格 だるま」で 1 位）。
+
+## 5. GitHub Actions でのビルドとアップロード
+
+`.github/workflows/nanakorobi.yml`（keshiin と同じ形）。push と pull request でテストと署名なしのビルド（Android の AAB/APK、iOS のウィジェット込み）が走り、成果物 `nanakorobi-android` に AAB と APK が残ります。
+
+Actions → nanakorobi → Run workflow で `upload` を選ぶと、署名してストアのテスト用の場所に上げます。
+
+| upload | 上げる先 |
+| --- | --- |
+| `play-internal` | Google Play の内部テスト（下書き） |
+| `testflight` | App Store Connect（TestFlight） |
+| `both` | 両方 |
+
+一般公開（Google Play の製品版への昇格、App Store の審査への提出）は、ストアの管理画面で人が行います。
+
+### 前もってストアの管理画面でやること
+
+- Google Play：アプリを作り、**最初の AAB は Play Console に手で上げる**（API で上げられるのは 2 本目から）。署名鍵のシークレットを入れたあとの成果物 `nanakorobi-android` の `app-release.aab` を使ってよい
+- App Store Connect：アプリ（Bundle ID `com.ookura.nanakorobi`）を作る
+
+### シークレット（Settings → Secrets and variables → Actions）
+
+keshiin と同じ名前を使うので、すでにあればそのまま動きます。
+
+| 名前 | 中身 |
+| --- | --- |
+| `ANDROID_KEYSTORE_BASE64` | アップロード鍵（`.jks`）を base64 にしたもの（`base64 -i upload.jks`） |
+| `ANDROID_KEYSTORE_PASSWORD` | 鍵ストアのパスワード |
+| `ANDROID_KEY_ALIAS` | 鍵の別名（`upload`） |
+| `ANDROID_KEY_PASSWORD` | 鍵のパスワード |
+| `PLAY_SERVICE_ACCOUNT_JSON` | Play Console の API アクセスで作ったサービスアカウントの JSON（「リリース」の権限） |
+| `APPLE_TEAM_ID` | Apple Developer のチーム ID（10 文字） |
+| `ASC_KEY_ID` | App Store Connect の API キーの ID（役割は「App Manager」以上） |
+| `ASC_ISSUER_ID` | API キーの Issuer ID |
+| `ASC_KEY_P8_BASE64` | API キー（`AuthKey_XXXX.p8`）を base64 にしたもの |
 
 ## 4. 判定後に作るもの（設計書の初版の範囲のうち、最小版で外したもの）
 

@@ -3,7 +3,7 @@
 // Flutter 側（lib/services/widget_sync.dart）が App Group の UserDefaults に書いた
 // だるまの絵（通常・転倒）と日付の元データから、残り日数と転倒を「その日の日付」で計算する。
 // Timeline に今後 14 日分の 0 時のエントリを前もって入れるので、アプリを開かなくても日数が進む。
-// Xcode への追加手順は docs/WIDGET_SETUP.md。
+// ターゲットは tool/add_ios_widget_target.py が足す（docs/WIDGET_SETUP.md）。
 import SwiftUI
 import WidgetKit
 
@@ -20,6 +20,20 @@ struct DarumaEntry: TimelineEntry {
   let fallen: Bool
   let doneToday: Bool
   let image: UIImage?
+}
+
+/// 文言。端末の言語が日本語でなければ英語。
+private enum L {
+  static let ja = (Locale.preferredLanguages.first ?? "ja").hasPrefix("ja")
+  static func daysLeft(_ n: Int) -> String { ja ? "あと\(n)日" : "\(n) days left" }
+  static var today: String { ja ? "今日が本番" : "Today is the day" }
+  static func daysPassed(_ n: Int) -> String { ja ? "\(n)日 過ぎました" : "\(n) days ago" }
+  static func dayN(_ n: Int) -> String { ja ? "開眼から\(n)日目" : "Day \(n)" }
+  static var done: String { ja ? "今日の一歩 済" : "Done today" }
+  static var empty: String { ja ? "だるまを作る" : "Make a daruma" }
+  static var defaultLabel: String { ja ? "本番" : "The big day" }
+  static var description: String { ja ? "だるまと、本番までの残り日数" : "Your daruma and the days left" }
+  static var daysUnit: String { ja ? "日" : "days" }
 }
 
 /// 端末のローカル日付の epoch day（Flutter 側の LocalDate.epochDay と同じ数）。
@@ -87,16 +101,16 @@ private let red = Color(red: 0.765, green: 0.149, blue: 0.165)
 
 private func daysText(_ e: DarumaEntry) -> String {
   guard let left = e.daysLeft else { return e.name }
-  if left > 0 { return String(format: NSLocalizedString("widget_days_left", comment: ""), left) }
-  if left == 0 { return NSLocalizedString("widget_today", comment: "") }
-  return String(format: NSLocalizedString("widget_days_passed", comment: ""), -left)
+  if left > 0 { return L.daysLeft(left) }
+  if left == 0 { return L.today }
+  return L.daysPassed(-left)
 }
 
 private func subText(_ e: DarumaEntry) -> String {
   if e.daysLeft != nil {
-    return e.label.isEmpty ? NSLocalizedString("widget_default_label", comment: "") : e.label
+    return e.label.isEmpty ? L.defaultLabel : e.label
   }
-  return String(format: NSLocalizedString("widget_day_n", comment: ""), e.dayNumber)
+  return L.dayN(e.dayNumber)
 }
 
 struct NanakorobiWidgetView: View {
@@ -111,7 +125,7 @@ struct NanakorobiWidgetView: View {
         VStack(spacing: 0) {
           if let left = entry.daysLeft {
             Text("\(left)").font(.system(size: 22, weight: .bold))
-            Text(NSLocalizedString("widget_days_unit", comment: "")).font(.system(size: 9))
+            Text(L.daysUnit).font(.system(size: 9))
           } else {
             Text(entry.name).font(.system(size: 14, weight: .bold)).minimumScaleFactor(0.6)
           }
@@ -122,7 +136,7 @@ struct NanakorobiWidgetView: View {
         VStack(alignment: .leading, spacing: 2) {
           Text(subText(entry)).font(.caption)
           Text(daysText(entry)).font(.headline)
-          if entry.doneToday { Text(NSLocalizedString("widget_done", comment: "")).font(.caption2) }
+          if entry.doneToday { Text(L.done).font(.caption2) }
         }
         Spacer(minLength: 0)
       }
@@ -135,7 +149,7 @@ struct NanakorobiWidgetView: View {
     Group {
       if !entry.has {
         VStack(spacing: 6) {
-          Text(NSLocalizedString("widget_empty", comment: "")).font(.headline).foregroundStyle(ink)
+          Text(L.empty).font(.headline).foregroundStyle(ink)
           Text("ナナコロビ").font(.caption).foregroundStyle(inkDim)
         }
       } else if family == .systemMedium {
@@ -145,7 +159,7 @@ struct NanakorobiWidgetView: View {
             Text(subText(entry)).font(.caption).foregroundStyle(inkDim)
             Text(daysText(entry)).font(.title2.bold()).foregroundStyle(ink).minimumScaleFactor(0.6)
             if entry.doneToday {
-              Text(NSLocalizedString("widget_done", comment: "")).font(.caption2).foregroundStyle(red)
+              Text(L.done).font(.caption2).foregroundStyle(red)
             }
           }
           Spacer(minLength: 0)
@@ -156,7 +170,7 @@ struct NanakorobiWidgetView: View {
           Text(daysText(entry)).font(.headline).foregroundStyle(ink).minimumScaleFactor(0.6).lineLimit(1)
           Text(subText(entry)).font(.caption2).foregroundStyle(inkDim).lineLimit(1)
           if entry.doneToday {
-            Text(NSLocalizedString("widget_done", comment: "")).font(.caption2).foregroundStyle(red)
+            Text(L.done).font(.caption2).foregroundStyle(red)
           }
         }
       }
@@ -185,7 +199,7 @@ struct NanakorobiWidget: Widget {
       NanakorobiWidgetView(entry: entry)
     }
     .configurationDisplayName("ナナコロビ")
-    .description(NSLocalizedString("widget_description", comment: ""))
+    .description(L.description)
     .supportedFamilies([.systemSmall, .systemMedium, .accessoryCircular, .accessoryRectangular])
   }
 }

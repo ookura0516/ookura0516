@@ -40,8 +40,9 @@ flutter run
 | 画面：初回説明 → 作成 → 開眼 → ホーム → 記録 → 両目 → 棚、試験日、設定 | できた。`test/flow_test.dart` で画面から通しで確認 |
 | 試験日プリセット（共通テスト、英検、簿記、FP1級、TOEIC） | できた。公式ページで確認した日程だけ |
 | 共有画像（1080×1350）、評価依頼 | コードはできた。実機では未確認 |
-| Android ウィジェット（2×2、0時更新） | コードはできた。この環境には Android SDK がなく、ビルドと実機は未確認 |
-| iOS ウィジェット（WidgetKit、ロック画面） | Swift はできた。Xcode でターゲットを足す（[docs/WIDGET_SETUP.md](docs/WIDGET_SETUP.md)） |
+| Android ウィジェット（2×2、0時更新） | コードはできた。ビルドは GitHub Actions で確かめる。実機は未確認 |
+| iOS ウィジェット（WidgetKit、ロック画面） | Swift と Xcode のターゲット（`tool/add_ios_widget_target.py`）はできた。ビルドは GitHub Actions で確かめる。実機は未確認（[docs/WIDGET_SETUP.md](docs/WIDGET_SETUP.md)） |
+| CI（テスト、Android・iOS のビルド、ストアへのアップロード） | できた（`.github/workflows/nanakorobi.yml`。keshiin と同じ形） |
 | アイコン・スプラッシュ・ストア素材・掲載文 | できた（[store/README.md](store/README.md)）。スクリーンショットは Web で撮ったもので、実機の画面ではない |
 | プラス（買い切り）、休み券、通知、英語版 | まだ（2週間の判定後。[docs/STORE_RELEASE.md](docs/STORE_RELEASE.md) の 4） |
 | 共有パッケージ（ookura_settings など）の組み込み | まだ（非公開パッケージのため、窓口だけ切って仮実装） |

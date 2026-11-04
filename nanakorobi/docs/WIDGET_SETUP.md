@@ -26,19 +26,21 @@ Flutter 側は `lib/services/widget_sync.dart` が、記録のたびに home_wid
 - [ ] 再起動後も翌日の 0 時に進む
 - [ ] ウィジェットをタップするとアプリが開く
 
-## iOS（Xcode で Widget Extension を足す）
+## iOS（ターゲットは追加済み）
 
-ファイルは `ios/NanakorobiWidget/` に置いてあります。この環境には Xcode がないので、手元で次の手順で組み込みます。
+- `ios/NanakorobiWidget/`：`NanakorobiWidget.swift`（WidgetKit）、`Info.plist`、`NanakorobiWidget.entitlements`（App Group `group.com.ookura.nanakorobi`）
+- `ios/Runner.xcodeproj` には、ターゲット `NanakorobiWidgetExtension`（Bundle ID `com.ookura.nanakorobi.NanakorobiWidget`、iOS 17 以上）を `tool/add_ios_widget_target.py` で足してあります。Xcode の New Target → Widget Extension と同じ中身で、Runner には `Runner/Runner.entitlements`（同じ App Group）を設定します。2 回目以降は何もしません
+- GitHub Actions（`.github/workflows/nanakorobi.yml` の `ios` ジョブ）が、署名なしでビルドして `.appex` がアプリに入っていることを確かめます
 
-1. Xcode で `ios/Runner.xcworkspace` を開く
-2. File → New → Target → **Widget Extension**。Product Name は `NanakorobiWidget`、Bundle Identifier は `com.ookura.nanakorobi.NanakorobiWidget`。"Include Configuration App Intent" はオフ。Activate する
-3. Xcode が作った `NanakorobiWidget/` の Swift ファイルを消し、`ios/NanakorobiWidget/NanakorobiWidget.swift`・`Info.plist`・`ja.lproj`・`en.lproj` をターゲットに加える（Target Membership は NanakorobiWidget だけ）
-4. **Signing & Capabilities** で、Runner と NanakorobiWidget の両方に **App Groups** を足し、`group.com.ookura.nanakorobi` を有効にする（`ios/Runner/Runner.entitlements`、`ios/NanakorobiWidget/NanakorobiWidget.entitlements` と同じ）
-5. NanakorobiWidget の Deployment Target を **iOS 17.0** にする（`containerBackground` を使っている）。Runner は Flutter の既定のまま
-6. Runner の Build Phases → Embed Foundation Extensions に NanakorobiWidget が入っていることを確かめる
-7. 実機で、アプリで記録 → ウィジェットが更新されることを確かめる。ロック画面にも置ける（円形：残り日数、横長：本番の名前と日数）
+手元で Xcode を開くときは、Runner と NanakorobiWidgetExtension の **Signing & Capabilities** で Team を選ぶだけです（署名は自動。App Group は初めて署名するときに Apple Developer に作られます）。Deployment Target は NanakorobiWidgetExtension が iOS 17.0（`containerBackground` を使うため）、Runner は Flutter の既定のままです。
 
 Flutter 側は起動時に `HomeWidget.setAppGroupId('group.com.ookura.nanakorobi')` を呼んでいます（`lib/services/widget_sync.dart`）。`HomeWidget.updateWidget(iOSName: 'NanakorobiWidget')` の名前は Swift の `kind` と同じにしてあります。
+
+### 実機で確かめること
+
+- [ ] アプリで記録 → ホーム画面のウィジェットが更新される
+- [ ] 翌日の 0 時を過ぎると、アプリを開かずに「あと N 日」が 1 減る（Timeline の切り替え）
+- [ ] ロック画面にも置ける（円形：残り日数、横長：本番の名前と日数）
 
 ### Timeline
 

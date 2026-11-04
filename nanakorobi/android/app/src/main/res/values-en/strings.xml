@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nanakorobi</string>
+    <string name="widget_label">Nanakorobi</string>
+    <string name="widget_description">Your daruma and the days left</string>
+    <string name="widget_empty">Make a daruma</string>
+    <string name="widget_default_label">The big day</string>
+    <string name="widget_days_left">%1$d days left</string>
+    <string name="widget_today">Today is the day</string>
+    <string name="widget_days_passed">%1$d days ago</string>
+    <string name="widget_day_n">Day %1$d</string>
+    <string name="widget_done">Done today</string>
+</resources>

@@ -1,0 +1,11 @@
+# アプリの画面と同じ生成り。中央に片目のだるま。
+# Android 12+ は中央にランチャーアイコンが出る（android_12.image は指定しない）
+flutter_native_splash:
+  color: "#F3ECDF"
+  color_dark: "#F3ECDF"
+  web: false
+  image: assets/splash/splash_icon.png
+  android_12:
+    color: "#F3ECDF"
+    color_dark: "#F3ECDF"
+    icon_background_color: "#EADFC9"

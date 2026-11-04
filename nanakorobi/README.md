@@ -84,7 +84,7 @@ dart run build_runner build --delete-conflicting-outputs
 
 ## 試験日プリセットの確認元
 
-`assets/presets/exam_dates.json` の 109 件は、主催団体の公式ページの本文を開いて日付を確認できたものだけを入れています（確認日 2026-11-04）。更新分は jsDelivr（このリポジトリの main ブランチの同梱 JSON）から取り、取得に失敗しても同梱版で動きます。日程を直すときは JSON の `updated_on` を進めてください。
+`assets/presets/exam_dates.json` の 109 件は、主催団体の公式ページの本文を開いて日付を確認できたものだけを入れています（確認日 2026-11-04）。更新分は jsDelivr（このリポジトリの `main` ブランチの同梱 JSON）から取り、取得に失敗しても同梱版で動きます。日程を直すときは JSON の `updated_on` を進めてください。いまの既定ブランチは `main` ではないので、`main` を作るか、`lib/services/presets_service.dart` の `remoteUrl` を配信元のブランチかタグに合わせてください（jsDelivr の参照名にスラッシュは使えません）。
 
 確認できず入れていない日程：
 

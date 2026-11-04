@@ -1,0 +1,19 @@
+name: ookura_daily
+description: "日替わりアプリの共通部品：日付の切り替え、連続日数、結果画像、ウィジェット用データの書き出し"
+version: 0.1.0
+publish_to: 'none'
+
+environment:
+  sdk: ^3.11.0
+  flutter: ">=3.41.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  home_widget: ^0.10.0
+  share_plus: ^13.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0

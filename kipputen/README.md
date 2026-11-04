@@ -60,7 +60,8 @@ flutter run
 | 評価依頼（初めての全解、図鑑の1ページ完成の直後。初回利用日は出さず、365日に3回まで） | できた | `in_app_review` |
 | 通知（1日1回・初期オフ） | まだ | 初版の範囲外 |
 | 同意（ATT・UMP、`ookura_consent`） | まだ | 広告を本物にするときに必要 |
-| アイコン・スプラッシュ・ストア素材 | まだ | |
+| アイコン・スプラッシュ | できた | 深緑の地に「10」の硬券。作り直しかたは [store/README.md](store/README.md) |
+| ストア素材（フィーチャーグラフィック、スクリーンショット、掲載文） | まだ | Play 用の 512 アイコンだけある |
 | 書体（活版風の無料フォント） | まだ | ライセンス確認が要るので、いまは端末の標準書体 |
 | 実機での確認（画像生成、ウィジェットの0時更新） | まだ | 画面は Web ビルドでだけ見た（Web は対象外なので、確認用に一時的に作っただけ） |
 
@@ -69,6 +70,7 @@ flutter run
 ```
 kipputen/
   tool/generate_solutions.dart   全解の事前計算（ビルド時に1回）
+  store/src/render.js            アイコンとスプラッシュの絵（SVG → PNG）
   assets/solutions.json          全解（1組み合わせ1行）
   assets/anniversaries.json      記念日の固定出題
   lib/core/      ルール・評価・正規化・探索・出題（Flutter を使わない純粋な Dart）

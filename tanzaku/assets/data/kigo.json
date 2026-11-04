@@ -1,0 +1,2756 @@
+{
+ "schema": 1,
+ "version": 1,
+ "note": "季語の説明はタンザクのための書き下ろし。例句は芭蕉・蕪村・一茶・子規の句のみ（パブリックドメイン）。",
+ "kigo": [
+  {
+   "id": 1,
+   "word": "正月",
+   "reading": "しょうがつ",
+   "season": "新年",
+   "category": "時候",
+   "period": "新年",
+   "start": "01-01",
+   "end": "01-07",
+   "description": "年の初めの祝いの期間。家族が集まり、改まった気分で過ごす。",
+   "aliases": [
+    "お正月"
+   ],
+   "examples": []
+  },
+  {
+   "id": 2,
+   "word": "元日",
+   "reading": "がんじつ",
+   "season": "新年",
+   "category": "時候",
+   "period": "新年",
+   "start": "01-01",
+   "end": "01-01",
+   "description": "一月一日。年が改まった最初の日で、町も家も静かに明ける。",
+   "aliases": [
+    "元旦"
+   ],
+   "examples": []
+  },
+  {
+   "id": 3,
+   "word": "初春",
+   "reading": "はつはる",
+   "season": "新年",
+   "category": "時候",
+   "period": "新年",
+   "start": "01-01",
+   "end": "01-07",
+   "description": "新年をことほぐ言い方。暦の上の春の始まりとして、明るさを込める。",
+   "aliases": [
+    "新春",
+    "おらが春"
+   ],
+   "examples": [
+    {
+     "text": "目出度さもちう位也おらが春",
+     "author": "小林一茶"
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "word": "初日の出",
+   "reading": "はつひので",
+   "season": "新年",
+   "category": "天文",
+   "period": "新年",
+   "start": "01-01",
+   "end": "01-01",
+   "description": "元日の朝に昇る太陽。山や海辺で拝む人も多い。",
+   "aliases": [
+    "初日"
+   ],
+   "examples": []
+  },
+  {
+   "id": 5,
+   "word": "初夢",
+   "reading": "はつゆめ",
+   "season": "新年",
+   "category": "生活",
+   "period": "新年",
+   "start": "01-01",
+   "end": "01-03",
+   "description": "年が明けて初めて見る夢。よい夢なら一年の吉兆とされる。",
+   "aliases": [],
+   "examples": []
+  },
+  {
+   "id": 6,
+   "word": "書初",
+   "reading": "かきぞめ",
+   "season": "新年",
+   "category": "生活",
+   "period": "新年",
+   "start": "01-02",
+   "end": "01-07",
+   "description": "年が明けて初めて筆をとり、文字を書くこと。多くは一月二日。",
+   "aliases": [
+    "書き初め",
+    "筆始"
+   ],
+   "examples": []
+  },
+  {
+   "id": 7,
+   "word": "雑煮",
+   "reading": "ぞうに",
+   "season": "新年",
+   "category": "生活",
+   "period": "新年",
+   "start": "01-01",
+   "end": "01-07",
+   "description": "餅を入れた正月の汁物。地方ごとに味も形も違う。",
+   "aliases": [
+    "お雑煮"
+   ],
+   "examples": []
+  },
+  {
+   "id": 8,
+   "word": "年賀状",
+   "reading": "ねんがじょう",
+   "season": "新年",
+   "category": "生活",
+   "period": "新年",
+   "start": "01-01",
+   "end": "01-07",
+   "description": "新年の挨拶を書いた葉書。届いた束をめくるのも正月の楽しみ。",
+   "aliases": [
+    "賀状"
+   ],
+   "examples": []
+  },
+  {
+   "id": 9,
+   "word": "初詣",
+   "reading": "はつもうで",
+   "season": "新年",
+   "category": "行事",
+   "period": "新年",
+   "start": "01-01",
+   "end": "01-07",
+   "description": "年が明けて初めて社寺に参ること。晴れ着の人で参道がにぎわう。",
+   "aliases": [
+    "初参り"
+   ],
+   "examples": []
+  },
+  {
+   "id": 10,
+   "word": "門松",
+   "reading": "かどまつ",
+   "season": "新年",
+   "category": "行事",
+   "period": "新年",
+   "start": "01-01",
+   "end": "01-07",
+   "description": "正月に家の門口に立てる松飾り。年神を迎える目印とされる。",
+   "aliases": [
+    "松飾"
+   ],
+   "examples": []
+  },
+  {
+   "id": 11,
+   "word": "鏡餅",
+   "reading": "かがみもち",
+   "season": "新年",
+   "category": "生活",
+   "period": "新年",
+   "start": "01-01",
+   "end": "01-07",
+   "description": "丸く平たい餅を重ねて供えたもの。鏡開きまで飾る。",
+   "aliases": [
+    "お鏡"
+   ],
+   "examples": []
+  },
+  {
+   "id": 12,
+   "word": "七草",
+   "reading": "ななくさ",
+   "season": "新年",
+   "category": "行事",
+   "period": "新年",
+   "start": "01-06",
+   "end": "01-07",
+   "description": "一月七日に春の七草を入れた粥を食べ、一年の無事を願う。",
+   "aliases": [
+    "七種",
+    "七草粥",
+    "七日粥"
+   ],
+   "examples": []
+  },
+  {
+   "id": 13,
+   "word": "福寿草",
+   "reading": "ふくじゅそう",
+   "season": "新年",
+   "category": "植物",
+   "period": "新年",
+   "start": "01-01",
+   "end": "01-07",
+   "description": "正月の床飾りにする黄色い花。名前のめでたさで好まれる。",
+   "aliases": [
+    "元日草"
+   ],
+   "examples": []
+  },
+  {
+   "id": 14,
+   "word": "立春",
+   "reading": "りっしゅん",
+   "season": "春",
+   "category": "時候",
+   "period": "初春",
+   "start": "02-04",
+   "end": "02-18",
+   "description": "二十四節気の一つで、暦の上の春の始まり。寒さの中に光が増す。",
+   "aliases": [
+    "春立つ"
+   ],
+   "examples": []
+  },
+  {
+   "id": 15,
+   "word": "春",
+   "reading": "はる",
+   "season": "春",
+   "category": "時候",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "立春から立夏の前日まで。草木が芽吹き、心もゆるむ季節。",
+   "aliases": [],
+   "examples": [
+    {
+     "text": "春や昔十五万石の城下哉",
+     "author": "正岡子規"
+    }
+   ]
+  },
+  {
+   "id": 16,
+   "word": "暖か",
+   "reading": "あたたか",
+   "season": "春",
+   "category": "時候",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "寒さがゆるみ、ほどよく暖かいこと。体も気持ちもほどける。",
+   "aliases": [
+    "暖かし",
+    "あたたか"
+   ],
+   "examples": []
+  },
+  {
+   "id": 17,
+   "word": "長閑",
+   "reading": "のどか",
+   "season": "春",
+   "category": "時候",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "春の日ののんびりと穏やかな様子。時間がゆっくり流れる感じ。",
+   "aliases": [
+    "のどけし",
+    "のどか"
+   ],
+   "examples": []
+  },
+  {
+   "id": 18,
+   "word": "麗か",
+   "reading": "うららか",
+   "season": "春",
+   "category": "時候",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "春の日がやわらかく照り、明るく晴れやかな様子。",
+   "aliases": [
+    "うらら",
+    "麗らか",
+    "うららか"
+   ],
+   "examples": []
+  },
+  {
+   "id": 19,
+   "word": "日永",
+   "reading": "ひなが",
+   "season": "春",
+   "category": "時候",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "春になり昼が長く感じられること。暮れそうで暮れない夕方。",
+   "aliases": [
+    "日長",
+    "遅日",
+    "遅き日"
+   ],
+   "examples": [
+    {
+     "text": "遅き日のつもりて遠きむかしかな",
+     "author": "与謝蕪村"
+    }
+   ]
+  },
+  {
+   "id": 20,
+   "word": "彼岸",
+   "reading": "ひがん",
+   "season": "春",
+   "category": "時候",
+   "period": "仲春",
+   "start": "03-17",
+   "end": "03-23",
+   "description": "春分の日を中日とした七日間。墓参りをし、寒さもここで区切りとなる。",
+   "aliases": [
+    "春彼岸",
+    "彼岸の入"
+   ],
+   "examples": []
+  },
+  {
+   "id": 21,
+   "word": "行く春",
+   "reading": "ゆくはる",
+   "season": "春",
+   "category": "時候",
+   "period": "晩春",
+   "start": "04-05",
+   "end": "05-04",
+   "description": "過ぎ去ろうとする春。名残を惜しむ気持ちを込める。",
+   "aliases": [
+    "行春",
+    "ゆく春",
+    "春の行方"
+   ],
+   "examples": [
+    {
+     "text": "行春や鳥啼魚の目は泪",
+     "author": "松尾芭蕉"
+    },
+    {
+     "text": "ゆく春やおもたき琵琶の抱ごころ",
+     "author": "与謝蕪村"
+    }
+   ]
+  },
+  {
+   "id": 22,
+   "word": "春風",
+   "reading": "はるかぜ",
+   "season": "春",
+   "category": "天文",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "春に吹く穏やかで暖かい風。",
+   "aliases": [
+    "春の風"
+   ],
+   "examples": []
+  },
+  {
+   "id": 23,
+   "word": "春雨",
+   "reading": "はるさめ",
+   "season": "春",
+   "category": "天文",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "春にしとしとと静かに降る雨。草木を潤し、景色を柔らかくする。",
+   "aliases": [
+    "春の雨"
+   ],
+   "examples": [
+    {
+     "text": "春雨や小磯の小貝ぬるるほど",
+     "author": "与謝蕪村"
+    }
+   ]
+  },
+  {
+   "id": 24,
+   "word": "霞",
+   "reading": "かすみ",
+   "season": "春",
+   "category": "天文",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "春に遠くの景色がぼんやりかすんで見えること。昼は霞、夜は朧という。",
+   "aliases": [
+    "薄霞",
+    "春霞",
+    "朝霞"
+   ],
+   "examples": []
+  },
+  {
+   "id": 25,
+   "word": "朧月",
+   "reading": "おぼろづき",
+   "season": "春",
+   "category": "天文",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "春の夜、水蒸気でぼんやりかすんで見える月。",
+   "aliases": [
+    "朧月夜",
+    "月朧"
+   ],
+   "examples": []
+  },
+  {
+   "id": 26,
+   "word": "陽炎",
+   "reading": "かげろう",
+   "season": "春",
+   "category": "天文",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "日差しで温められた地面の上で、景色がゆらゆら揺れて見えること。",
+   "aliases": [
+    "かげろふ",
+    "糸遊"
+   ],
+   "examples": []
+  },
+  {
+   "id": 27,
+   "word": "雪解",
+   "reading": "ゆきげ",
+   "season": "春",
+   "category": "地理",
+   "period": "仲春",
+   "start": "03-06",
+   "end": "04-04",
+   "description": "積もった雪が春の暖かさでとけること。川の水かさが増す。",
+   "aliases": [
+    "雪解け",
+    "雪とけ",
+    "雪どけ",
+    "雪解水"
+   ],
+   "examples": [
+    {
+     "text": "雪とけて村一ぱいの子ども哉",
+     "author": "小林一茶"
+    }
+   ]
+  },
+  {
+   "id": 28,
+   "word": "春の海",
+   "reading": "はるのうみ",
+   "season": "春",
+   "category": "地理",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "穏やかに凪いだ春の海。光がのどかにきらめく。",
+   "aliases": [
+    "春の浜"
+   ],
+   "examples": [
+    {
+     "text": "春の海終日のたりのたり哉",
+     "author": "与謝蕪村"
+    }
+   ]
+  },
+  {
+   "id": 29,
+   "word": "山笑ふ",
+   "reading": "やまわらう",
+   "season": "春",
+   "category": "地理",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "春の山が芽吹いて明るく華やぐ様子を、笑うと見立てた言葉。",
+   "aliases": [
+    "山笑う"
+   ],
+   "examples": []
+  },
+  {
+   "id": 30,
+   "word": "花見",
+   "reading": "はなみ",
+   "season": "春",
+   "category": "生活",
+   "period": "晩春",
+   "start": "04-05",
+   "end": "05-04",
+   "description": "桜の花を眺めて楽しむこと。花の下での宴も含む。",
+   "aliases": [
+    "花見客",
+    "観桜"
+   ],
+   "examples": []
+  },
+  {
+   "id": 31,
+   "word": "凧",
+   "reading": "いかのぼり",
+   "season": "春",
+   "category": "生活",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "風に乗せて空に揚げる遊び道具。昔は春の遊びだった。",
+   "aliases": [
+    "たこ",
+    "凧揚げ",
+    "いかのぼり"
+   ],
+   "examples": [
+    {
+     "text": "凧きのふの空のありどころ",
+     "author": "与謝蕪村"
+    }
+   ]
+  },
+  {
+   "id": 32,
+   "word": "雛祭",
+   "reading": "ひなまつり",
+   "season": "春",
+   "category": "行事",
+   "period": "仲春",
+   "start": "02-20",
+   "end": "03-03",
+   "description": "三月三日、雛人形を飾って女の子の成長を祝う。",
+   "aliases": [
+    "雛",
+    "雛祭り",
+    "ひな祭り",
+    "雛の家",
+    "ひなの家",
+    "桃の節句"
+   ],
+   "examples": [
+    {
+     "text": "草の戸も住替る代ぞひなの家",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 33,
+   "word": "お水取り",
+   "reading": "おみずとり",
+   "season": "春",
+   "category": "行事",
+   "period": "仲春",
+   "start": "03-01",
+   "end": "03-14",
+   "description": "奈良の東大寺二月堂で行われる修二会の行事。これが済むと春が来るという。",
+   "aliases": [
+    "水取",
+    "水とり",
+    "修二会"
+   ],
+   "examples": [
+    {
+     "text": "水とりや氷の僧の沓の音",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 34,
+   "word": "蛙",
+   "reading": "かわず",
+   "season": "春",
+   "category": "動物",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "春になって冬眠から覚め、田や池で鳴く。俳句では春の季語。",
+   "aliases": [
+    "かはづ",
+    "かえる",
+    "痩蛙",
+    "やせ蛙",
+    "初蛙"
+   ],
+   "examples": [
+    {
+     "text": "古池や蛙飛びこむ水の音",
+     "author": "松尾芭蕉"
+    },
+    {
+     "text": "やせ蛙まけるな一茶是に有",
+     "author": "小林一茶"
+    }
+   ]
+  },
+  {
+   "id": 35,
+   "word": "鶯",
+   "reading": "うぐいす",
+   "season": "春",
+   "category": "動物",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "春を告げる鳥。「ホーホケキョ」の声で知られる。",
+   "aliases": [
+    "うぐひす",
+    "春告鳥",
+    "初音"
+   ],
+   "examples": []
+  },
+  {
+   "id": 36,
+   "word": "燕",
+   "reading": "つばめ",
+   "season": "春",
+   "category": "動物",
+   "period": "仲春",
+   "start": "03-06",
+   "end": "04-04",
+   "description": "春に南から渡ってきて軒先に巣をかける鳥。",
+   "aliases": [
+    "燕来る",
+    "つばくらめ",
+    "乙鳥"
+   ],
+   "examples": []
+  },
+  {
+   "id": 37,
+   "word": "雀の子",
+   "reading": "すずめのこ",
+   "season": "春",
+   "category": "動物",
+   "period": "晩春",
+   "start": "04-05",
+   "end": "05-04",
+   "description": "春に生まれた雀のひな。親鳥のあとを追う姿が愛らしい。",
+   "aliases": [
+    "子雀",
+    "雀の雛"
+   ],
+   "examples": [
+    {
+     "text": "雀の子そこのけそこのけ御馬が通る",
+     "author": "小林一茶"
+    }
+   ]
+  },
+  {
+   "id": 38,
+   "word": "蝶",
+   "reading": "ちょう",
+   "season": "春",
+   "category": "動物",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "春の野を舞う蝶。俳句で単に蝶といえば春。",
+   "aliases": [
+    "蝶々",
+    "てふてふ",
+    "胡蝶",
+    "初蝶"
+   ],
+   "examples": []
+  },
+  {
+   "id": 39,
+   "word": "若鮎",
+   "reading": "わかあゆ",
+   "season": "春",
+   "category": "動物",
+   "period": "晩春",
+   "start": "04-05",
+   "end": "05-04",
+   "description": "春に海から川をさかのぼってくる若い鮎。",
+   "aliases": [
+    "小鮎",
+    "上り鮎"
+   ],
+   "examples": [
+    {
+     "text": "若鮎の二手になりて上りけり",
+     "author": "正岡子規"
+    }
+   ]
+  },
+  {
+   "id": 40,
+   "word": "梅",
+   "reading": "うめ",
+   "season": "春",
+   "category": "植物",
+   "period": "初春",
+   "start": "02-04",
+   "end": "03-05",
+   "description": "早春に香りのよい花を咲かせる木。春の訪れを告げる花。",
+   "aliases": [
+    "梅が香",
+    "白梅",
+    "しら梅",
+    "紅梅",
+    "梅の花"
+   ],
+   "examples": [
+    {
+     "text": "梅が香にのつと日の出る山路かな",
+     "author": "松尾芭蕉"
+    },
+    {
+     "text": "しら梅に明る夜ばかりとなりにけり",
+     "author": "与謝蕪村"
+    }
+   ]
+  },
+  {
+   "id": 41,
+   "word": "桜",
+   "reading": "さくら",
+   "season": "春",
+   "category": "植物",
+   "period": "晩春",
+   "start": "04-05",
+   "end": "05-04",
+   "description": "日本の春を代表する花。咲いてすぐ散るはかなさも好まれる。",
+   "aliases": [
+    "さくら",
+    "夜桜",
+    "山桜",
+    "初桜"
+   ],
+   "examples": [
+    {
+     "text": "さまざまの事おもひ出す桜かな",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 42,
+   "word": "花",
+   "reading": "はな",
+   "season": "春",
+   "category": "植物",
+   "period": "晩春",
+   "start": "04-05",
+   "end": "05-04",
+   "description": "俳句で単に花といえば桜の花のこと。",
+   "aliases": [
+    "花の雲",
+    "花盛り"
+   ],
+   "examples": [
+    {
+     "text": "花の雲鐘は上野か浅草か",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 43,
+   "word": "菜の花",
+   "reading": "なのはな",
+   "season": "春",
+   "category": "植物",
+   "period": "晩春",
+   "start": "04-05",
+   "end": "05-04",
+   "description": "畑一面に咲く黄色い花。春の明るい景色をつくる。",
+   "aliases": [
+    "花菜",
+    "菜の花畑"
+   ],
+   "examples": []
+  },
+  {
+   "id": 44,
+   "word": "菫",
+   "reading": "すみれ",
+   "season": "春",
+   "category": "植物",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "道ばたや野に咲く小さな紫の花。",
+   "aliases": [
+    "すみれ",
+    "すみれ草",
+    "菫草"
+   ],
+   "examples": [
+    {
+     "text": "山路来て何やらゆかしすみれ草",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 45,
+   "word": "蒲公英",
+   "reading": "たんぽぽ",
+   "season": "春",
+   "category": "植物",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "野原に咲く黄色い花。綿毛になって風に飛ぶ。",
+   "aliases": [
+    "たんぽぽ",
+    "鼓草"
+   ],
+   "examples": []
+  },
+  {
+   "id": 46,
+   "word": "椿",
+   "reading": "つばき",
+   "season": "春",
+   "category": "植物",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "厚い葉の間に赤や白の花をつける。花ごとぽとりと落ちる。",
+   "aliases": [
+    "藪椿",
+    "落椿",
+    "白椿"
+   ],
+   "examples": []
+  },
+  {
+   "id": 47,
+   "word": "柳",
+   "reading": "やなぎ",
+   "season": "春",
+   "category": "植物",
+   "period": "晩春",
+   "start": "04-05",
+   "end": "05-04",
+   "description": "芽吹いたばかりの細い枝が風に揺れる様子。",
+   "aliases": [
+    "青柳",
+    "糸柳"
+   ],
+   "examples": []
+  },
+  {
+   "id": 48,
+   "word": "薺の花",
+   "reading": "なずなのはな",
+   "season": "春",
+   "category": "植物",
+   "period": "三春",
+   "start": "02-04",
+   "end": "05-04",
+   "description": "ぺんぺん草とも呼ばれる、小さな白い花。",
+   "aliases": [
+    "薺花",
+    "花薺",
+    "ぺんぺん草"
+   ],
+   "examples": [
+    {
+     "text": "よく見れば薺花咲く垣ねかな",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 49,
+   "word": "桃の花",
+   "reading": "もものはな",
+   "season": "春",
+   "category": "植物",
+   "period": "仲春",
+   "start": "03-06",
+   "end": "04-04",
+   "description": "淡い紅色の花。雛祭りの頃に咲き、桃源郷の連想もある。",
+   "aliases": [
+    "桃",
+    "白桃"
+   ],
+   "examples": []
+  },
+  {
+   "id": 50,
+   "word": "藤",
+   "reading": "ふじ",
+   "season": "春",
+   "category": "植物",
+   "period": "晩春",
+   "start": "04-05",
+   "end": "05-04",
+   "description": "房になって垂れ下がる紫の花。藤棚の下は甘い香りがする。",
+   "aliases": [
+    "藤の花",
+    "藤棚"
+   ],
+   "examples": []
+  },
+  {
+   "id": 51,
+   "word": "立夏",
+   "reading": "りっか",
+   "season": "夏",
+   "category": "時候",
+   "period": "初夏",
+   "start": "05-05",
+   "end": "05-20",
+   "description": "二十四節気の一つで、暦の上の夏の始まり。",
+   "aliases": [
+    "夏立つ",
+    "夏来る"
+   ],
+   "examples": []
+  },
+  {
+   "id": 52,
+   "word": "夏",
+   "reading": "なつ",
+   "season": "夏",
+   "category": "時候",
+   "period": "三夏",
+   "start": "05-05",
+   "end": "08-06",
+   "description": "立夏から立秋の前日まで。日差しが強く、草木が茂る季節。",
+   "aliases": [],
+   "examples": []
+  },
+  {
+   "id": 53,
+   "word": "梅雨",
+   "reading": "つゆ",
+   "season": "夏",
+   "category": "時候",
+   "period": "仲夏",
+   "start": "06-06",
+   "end": "07-06",
+   "description": "六月から七月にかけて続く長雨の時期。",
+   "aliases": [
+    "梅雨入",
+    "梅雨晴",
+    "入梅",
+    "空梅雨"
+   ],
+   "examples": []
+  },
+  {
+   "id": 54,
+   "word": "涼し",
+   "reading": "すずし",
+   "season": "夏",
+   "category": "時候",
+   "period": "三夏",
+   "start": "05-05",
+   "end": "08-06",
+   "description": "暑い夏の中でふと感じる涼しさ。夏の季語。",
+   "aliases": [
+    "涼しさ",
+    "涼しき",
+    "すずし"
+   ],
+   "examples": [
+    {
+     "text": "涼しさや鐘をはなるるかねの声",
+     "author": "与謝蕪村"
+    },
+    {
+     "text": "大の字に寝て涼しさよ淋しさよ",
+     "author": "小林一茶"
+    }
+   ]
+  },
+  {
+   "id": 55,
+   "word": "暑し",
+   "reading": "あつし",
+   "season": "夏",
+   "category": "時候",
+   "period": "三夏",
+   "start": "05-05",
+   "end": "08-06",
+   "description": "夏の暑さそのもの。",
+   "aliases": [
+    "暑さ",
+    "暑き",
+    "炎暑"
+   ],
+   "examples": []
+  },
+  {
+   "id": 56,
+   "word": "五月雨",
+   "reading": "さみだれ",
+   "season": "夏",
+   "category": "天文",
+   "period": "仲夏",
+   "start": "06-06",
+   "end": "07-06",
+   "description": "陰暦五月に降る長雨。梅雨のこと。",
+   "aliases": [
+    "さみだれ",
+    "五月雨る"
+   ],
+   "examples": [
+    {
+     "text": "五月雨をあつめて早し最上川",
+     "author": "松尾芭蕉"
+    },
+    {
+     "text": "五月雨や大河を前に家二軒",
+     "author": "与謝蕪村"
+    },
+    {
+     "text": "五月雨や上野の山も見あきたり",
+     "author": "正岡子規"
+    }
+   ]
+  },
+  {
+   "id": 57,
+   "word": "夕立",
+   "reading": "ゆうだち",
+   "season": "夏",
+   "category": "天文",
+   "period": "三夏",
+   "start": "05-05",
+   "end": "08-06",
+   "description": "夏の午後に急に降り出す激しい雨。すぐにやむ。",
+   "aliases": [
+    "白雨",
+    "夕立雲"
+   ],
+   "examples": []
+  },
+  {
+   "id": 58,
+   "word": "雲の峰",
+   "reading": "くものみね",
+   "season": "夏",
+   "category": "天文",
+   "period": "三夏",
+   "start": "05-05",
+   "end": "08-06",
+   "description": "夏の空にそびえる入道雲を、山の峰に見立てた言葉。",
+   "aliases": [
+    "入道雲",
+    "積乱雲"
+   ],
+   "examples": []
+  },
+  {
+   "id": 59,
+   "word": "夏の月",
+   "reading": "なつのつき",
+   "season": "夏",
+   "category": "天文",
+   "period": "三夏",
+   "start": "05-05",
+   "end": "08-06",
+   "description": "夏の夜空の月。暑さの中に涼しさを感じさせる。",
+   "aliases": [
+    "月涼し"
+   ],
+   "examples": [
+    {
+     "text": "蛸壺やはかなき夢を夏の月",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 60,
+   "word": "涼風",
+   "reading": "すずかぜ",
+   "season": "夏",
+   "category": "天文",
+   "period": "晩夏",
+   "start": "07-07",
+   "end": "08-06",
+   "description": "夏の終わりに吹く涼しい風。",
+   "aliases": [
+    "風涼し"
+   ],
+   "examples": [
+    {
+     "text": "涼風の曲りくねって来たりけり",
+     "author": "小林一茶"
+    }
+   ]
+  },
+  {
+   "id": 61,
+   "word": "虹",
+   "reading": "にじ",
+   "season": "夏",
+   "category": "天文",
+   "period": "三夏",
+   "start": "05-05",
+   "end": "08-06",
+   "description": "夕立のあとなどに空にかかる七色の弧。",
+   "aliases": [
+    "朝虹",
+    "夕虹"
+   ],
+   "examples": []
+  },
+  {
+   "id": 62,
+   "word": "夏嵐",
+   "reading": "なつあらし",
+   "season": "夏",
+   "category": "天文",
+   "period": "三夏",
+   "start": "05-05",
+   "end": "08-06",
+   "description": "青葉を揺らして吹き渡る夏の強い風。",
+   "aliases": [
+    "青嵐"
+   ],
+   "examples": [
+    {
+     "text": "夏嵐机上の白紙飛び尽す",
+     "author": "正岡子規"
+    }
+   ]
+  },
+  {
+   "id": 63,
+   "word": "夏の川",
+   "reading": "なつのかわ",
+   "season": "夏",
+   "category": "地理",
+   "period": "三夏",
+   "start": "05-05",
+   "end": "08-06",
+   "description": "夏の川。水遊びや川風の涼しさを感じさせる。",
+   "aliases": [
+    "夏河",
+    "夏川"
+   ],
+   "examples": [
+    {
+     "text": "夏河を越すうれしさよ手に草履",
+     "author": "与謝蕪村"
+    }
+   ]
+  },
+  {
+   "id": 64,
+   "word": "滝",
+   "reading": "たき",
+   "season": "夏",
+   "category": "地理",
+   "period": "三夏",
+   "start": "05-05",
+   "end": "08-06",
+   "description": "高いところから落ちる水。見る人に涼しさを与える。",
+   "aliases": [
+    "瀑布",
+    "滝壺"
+   ],
+   "examples": []
+  },
+  {
+   "id": 65,
+   "word": "更衣",
+   "reading": "ころもがえ",
+   "season": "夏",
+   "category": "生活",
+   "period": "初夏",
+   "start": "05-05",
+   "end": "06-05",
+   "description": "季節に合わせて衣服を夏物に替えること。",
+   "aliases": [
+    "衣更",
+    "衣替"
+   ],
+   "examples": [
+    {
+     "text": "御手討の夫婦なりしを更衣",
+     "author": "与謝蕪村"
+    }
+   ]
+  },
+  {
+   "id": 66,
+   "word": "風鈴",
+   "reading": "ふうりん",
+   "season": "夏",
+   "category": "生活",
+   "period": "三夏",
+   "start": "05-05",
+   "end": "08-06",
+   "description": "軒先につるし、風に鳴る音で涼を感じる鈴。",
+   "aliases": [],
+   "examples": []
+  },
+  {
+   "id": 67,
+   "word": "花火",
+   "reading": "はなび",
+   "season": "夏",
+   "category": "生活",
+   "period": "晩夏",
+   "start": "07-07",
+   "end": "08-06",
+   "description": "夏の夜空に打ち上げる花火。線香花火なども含む。",
+   "aliases": [
+    "遠花火",
+    "線香花火",
+    "揚花火"
+   ],
+   "examples": []
+  },
+  {
+   "id": 68,
+   "word": "団扇",
+   "reading": "うちわ",
+   "season": "夏",
+   "category": "生活",
+   "period": "三夏",
+   "start": "05-05",
+   "end": "08-06",
+   "description": "あおいで風を起こす道具。",
+   "aliases": [
+    "うちは",
+    "渋団扇"
+   ],
+   "examples": []
+  },
+  {
+   "id": 69,
+   "word": "浴衣",
+   "reading": "ゆかた",
+   "season": "夏",
+   "category": "生活",
+   "period": "三夏",
+   "start": "05-05",
+   "end": "08-06",
+   "description": "夏に着る木綿の単衣。湯上がりや夏祭りに。",
+   "aliases": [
+    "ゆかた"
+   ],
+   "examples": []
+  },
+  {
+   "id": 70,
+   "word": "田植",
+   "reading": "たうえ",
+   "season": "夏",
+   "category": "生活",
+   "period": "仲夏",
+   "start": "06-06",
+   "end": "07-06",
+   "description": "苗代で育てた苗を田に植えること。",
+   "aliases": [
+    "田植え",
+    "早乙女"
+   ],
+   "examples": []
+  },
+  {
+   "id": 71,
+   "word": "鵜飼",
+   "reading": "うかい",
+   "season": "夏",
+   "category": "生活",
+   "period": "三夏",
+   "start": "05-05",
+   "end": "08-06",
+   "description": "鵜を使って川の鮎をとる漁。夜の川にかがり火が映る。",
+   "aliases": [
+    "鵜舟",
+    "鵜匠"
+   ],
+   "examples": [
+    {
+     "text": "おもしろうてやがてかなしき鵜舟哉",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 72,
+   "word": "祭",
+   "reading": "まつり",
+   "season": "夏",
+   "category": "行事",
+   "period": "三夏",
+   "start": "05-05",
+   "end": "08-06",
+   "description": "俳句で単に祭といえば夏祭のこと。神輿や山車が出る。",
+   "aliases": [
+    "夏祭",
+    "祭笛",
+    "神輿"
+   ],
+   "examples": []
+  },
+  {
+   "id": 73,
+   "word": "蝉",
+   "reading": "せみ",
+   "season": "夏",
+   "category": "動物",
+   "period": "晩夏",
+   "start": "07-07",
+   "end": "08-06",
+   "description": "夏の木立で鳴く虫。鳴き声が暑さを強く感じさせる。",
+   "aliases": [
+    "蝉の声",
+    "蝉時雨",
+    "油蝉"
+   ],
+   "examples": [
+    {
+     "text": "閑さや岩にしみ入る蝉の声",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 74,
+   "word": "時鳥",
+   "reading": "ほととぎす",
+   "season": "夏",
+   "category": "動物",
+   "period": "三夏",
+   "start": "05-05",
+   "end": "08-06",
+   "description": "初夏に渡ってきて鋭く鳴く鳥。声を待つことが古くからの風流。",
+   "aliases": [
+    "ほととぎす",
+    "郭公",
+    "杜鵑",
+    "不如帰"
+   ],
+   "examples": [
+    {
+     "text": "郭公声横たふや水の上",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 75,
+   "word": "蛍",
+   "reading": "ほたる",
+   "season": "夏",
+   "category": "動物",
+   "period": "仲夏",
+   "start": "06-06",
+   "end": "07-06",
+   "description": "夏の夜、水辺で光を放って飛ぶ虫。",
+   "aliases": [
+    "蛍火",
+    "初蛍",
+    "ほたる"
+   ],
+   "examples": []
+  },
+  {
+   "id": 76,
+   "word": "蠅",
+   "reading": "はえ",
+   "season": "夏",
+   "category": "動物",
+   "period": "三夏",
+   "start": "05-05",
+   "end": "08-06",
+   "description": "夏に多く出る小さな虫。",
+   "aliases": [
+    "蝿",
+    "はへ"
+   ],
+   "examples": [
+    {
+     "text": "やれ打な蠅が手をすり足をする",
+     "author": "小林一茶"
+    }
+   ]
+  },
+  {
+   "id": 77,
+   "word": "蟻",
+   "reading": "あり",
+   "season": "夏",
+   "category": "動物",
+   "period": "三夏",
+   "start": "05-05",
+   "end": "08-06",
+   "description": "地面を列になって働く小さな虫。夏に活発になる。",
+   "aliases": [
+    "蟻の道",
+    "山蟻"
+   ],
+   "examples": []
+  },
+  {
+   "id": 78,
+   "word": "夏草",
+   "reading": "なつくさ",
+   "season": "夏",
+   "category": "植物",
+   "period": "三夏",
+   "start": "05-05",
+   "end": "08-06",
+   "description": "夏に生い茂る草。勢いの強さを感じさせる。",
+   "aliases": [
+    "夏の草",
+    "草茂る"
+   ],
+   "examples": [
+    {
+     "text": "夏草や兵どもが夢の跡",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 79,
+   "word": "牡丹",
+   "reading": "ぼたん",
+   "season": "夏",
+   "category": "植物",
+   "period": "初夏",
+   "start": "05-05",
+   "end": "06-05",
+   "description": "大きく豪華な花。百花の王と呼ばれる。",
+   "aliases": [
+    "ぼうたん",
+    "白牡丹"
+   ],
+   "examples": [
+    {
+     "text": "牡丹散て打かさなりぬ二三片",
+     "author": "与謝蕪村"
+    }
+   ]
+  },
+  {
+   "id": 80,
+   "word": "紫陽花",
+   "reading": "あじさい",
+   "season": "夏",
+   "category": "植物",
+   "period": "仲夏",
+   "start": "06-06",
+   "end": "07-06",
+   "description": "梅雨の頃に咲く、手毬のような花。色が移ろう。",
+   "aliases": [
+    "あぢさゐ",
+    "あじさい",
+    "七変化"
+   ],
+   "examples": [
+    {
+     "text": "紫陽花や昨日の誠今日の嘘",
+     "author": "正岡子規"
+    }
+   ]
+  },
+  {
+   "id": 81,
+   "word": "向日葵",
+   "reading": "ひまわり",
+   "season": "夏",
+   "category": "植物",
+   "period": "晩夏",
+   "start": "07-07",
+   "end": "08-06",
+   "description": "太陽の方を向いて咲く大きな黄色い花。",
+   "aliases": [
+    "ひまわり",
+    "日車"
+   ],
+   "examples": []
+  },
+  {
+   "id": 82,
+   "word": "若葉",
+   "reading": "わかば",
+   "season": "夏",
+   "category": "植物",
+   "period": "初夏",
+   "start": "05-05",
+   "end": "06-05",
+   "description": "初夏の生き生きとした若い葉。",
+   "aliases": [
+    "若葉風",
+    "柿若葉"
+   ],
+   "examples": []
+  },
+  {
+   "id": 83,
+   "word": "花茨",
+   "reading": "はないばら",
+   "season": "夏",
+   "category": "植物",
+   "period": "初夏",
+   "start": "05-05",
+   "end": "06-05",
+   "description": "野山に咲く野ばらの白い花。",
+   "aliases": [
+    "茨の花",
+    "花いばら",
+    "野茨の花"
+   ],
+   "examples": [
+    {
+     "text": "愁ひつつ岡にのぼれば花いばら",
+     "author": "与謝蕪村"
+    },
+    {
+     "text": "ふるさとや寄るもさはるも茨の花",
+     "author": "小林一茶"
+    }
+   ]
+  },
+  {
+   "id": 84,
+   "word": "合歓の花",
+   "reading": "ねむのはな",
+   "season": "夏",
+   "category": "植物",
+   "period": "晩夏",
+   "start": "07-07",
+   "end": "08-06",
+   "description": "夕方に葉を閉じる合歓の木に咲く、刷毛のような淡紅色の花。",
+   "aliases": [
+    "ねぶの花",
+    "花合歓"
+   ],
+   "examples": [
+    {
+     "text": "象潟や雨に西施がねぶの花",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 85,
+   "word": "立秋",
+   "reading": "りっしゅう",
+   "season": "秋",
+   "category": "時候",
+   "period": "初秋",
+   "start": "08-07",
+   "end": "08-22",
+   "description": "二十四節気の一つで、暦の上の秋の始まり。暑さの中に秋の気配を探す。",
+   "aliases": [
+    "秋立つ",
+    "今朝の秋"
+   ],
+   "examples": []
+  },
+  {
+   "id": 86,
+   "word": "秋",
+   "reading": "あき",
+   "season": "秋",
+   "category": "時候",
+   "period": "三秋",
+   "start": "08-07",
+   "end": "11-06",
+   "description": "立秋から立冬の前日まで。実りと物思いの季節。",
+   "aliases": [],
+   "examples": []
+  },
+  {
+   "id": 87,
+   "word": "残暑",
+   "reading": "ざんしょ",
+   "season": "秋",
+   "category": "時候",
+   "period": "初秋",
+   "start": "08-07",
+   "end": "09-07",
+   "description": "立秋を過ぎてもなお残る暑さ。",
+   "aliases": [
+    "秋暑し",
+    "残る暑さ"
+   ],
+   "examples": []
+  },
+  {
+   "id": 88,
+   "word": "秋深し",
+   "reading": "あきふかし",
+   "season": "秋",
+   "category": "時候",
+   "period": "晩秋",
+   "start": "10-08",
+   "end": "11-06",
+   "description": "秋がいよいよ深まった頃。もの寂しさが増す。",
+   "aliases": [
+    "秋深き",
+    "深秋",
+    "秋闌"
+   ],
+   "examples": [
+    {
+     "text": "秋深き隣は何をする人ぞ",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 89,
+   "word": "夜長",
+   "reading": "よなが",
+   "season": "秋",
+   "category": "時候",
+   "period": "三秋",
+   "start": "08-07",
+   "end": "11-06",
+   "description": "秋になって夜が長く感じられること。読書や物思いの時間。",
+   "aliases": [
+    "長き夜",
+    "夜長し"
+   ],
+   "examples": []
+  },
+  {
+   "id": 90,
+   "word": "夜寒",
+   "reading": "よさむ",
+   "season": "秋",
+   "category": "時候",
+   "period": "晩秋",
+   "start": "10-08",
+   "end": "11-06",
+   "description": "秋の夜の寒さ。冬の近さを感じる。",
+   "aliases": [
+    "夜寒し"
+   ],
+   "examples": []
+  },
+  {
+   "id": 91,
+   "word": "秋の暮",
+   "reading": "あきのくれ",
+   "season": "秋",
+   "category": "時候",
+   "period": "三秋",
+   "start": "08-07",
+   "end": "11-06",
+   "description": "秋の夕暮れ。または秋の終わり。寂しさを象徴する季語。",
+   "aliases": [
+    "秋の夕暮",
+    "秋の夕"
+   ],
+   "examples": [
+    {
+     "text": "此道や行人なしに秋の暮",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 92,
+   "word": "月",
+   "reading": "つき",
+   "season": "秋",
+   "category": "天文",
+   "period": "三秋",
+   "start": "08-07",
+   "end": "11-06",
+   "description": "俳句で単に月といえば秋の月。一年で最も澄んで美しい。",
+   "aliases": [
+    "月光",
+    "月夜",
+    "月影"
+   ],
+   "examples": [
+    {
+     "text": "月天心貧しき町を通りけり",
+     "author": "与謝蕪村"
+    }
+   ]
+  },
+  {
+   "id": 93,
+   "word": "名月",
+   "reading": "めいげつ",
+   "season": "秋",
+   "category": "天文",
+   "period": "仲秋",
+   "start": "09-08",
+   "end": "10-07",
+   "description": "陰暦八月十五日の月。中秋の名月。",
+   "aliases": [
+    "明月",
+    "望月",
+    "今日の月",
+    "十五夜"
+   ],
+   "examples": [
+    {
+     "text": "名月や池をめぐりて夜もすがら",
+     "author": "松尾芭蕉"
+    },
+    {
+     "text": "名月をとってくれろと泣く子哉",
+     "author": "小林一茶"
+    }
+   ]
+  },
+  {
+   "id": 94,
+   "word": "天の川",
+   "reading": "あまのがわ",
+   "season": "秋",
+   "category": "天文",
+   "period": "初秋",
+   "start": "08-07",
+   "end": "09-07",
+   "description": "秋の夜空に白く帯のように見える星の集まり。",
+   "aliases": [
+    "天河",
+    "天の河",
+    "銀河",
+    "銀漢"
+   ],
+   "examples": [
+    {
+     "text": "荒海や佐渡によこたふ天河",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 95,
+   "word": "秋風",
+   "reading": "あきかぜ",
+   "season": "秋",
+   "category": "天文",
+   "period": "三秋",
+   "start": "08-07",
+   "end": "11-06",
+   "description": "秋に吹く風。もの寂しさを運ぶ。",
+   "aliases": [
+    "秋の風",
+    "あきの風",
+    "金風"
+   ],
+   "examples": [
+    {
+     "text": "あかあかと日は難面もあきの風",
+     "author": "松尾芭蕉"
+    },
+    {
+     "text": "石山の石より白し秋の風",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 96,
+   "word": "野分",
+   "reading": "のわき",
+   "season": "秋",
+   "category": "天文",
+   "period": "仲秋",
+   "start": "09-08",
+   "end": "10-07",
+   "description": "秋に野の草を分けて吹き荒れる強い風。台風のこと。",
+   "aliases": [
+    "野分立つ",
+    "台風"
+   ],
+   "examples": [
+    {
+     "text": "鳥羽殿へ五六騎いそぐ野分哉",
+     "author": "与謝蕪村"
+    }
+   ]
+  },
+  {
+   "id": 97,
+   "word": "露",
+   "reading": "つゆ",
+   "season": "秋",
+   "category": "天文",
+   "period": "三秋",
+   "start": "08-07",
+   "end": "11-06",
+   "description": "秋の朝、草葉におりる水の玉。はかないものの象徴。",
+   "aliases": [
+    "白露",
+    "朝露",
+    "露けし"
+   ],
+   "examples": [
+    {
+     "text": "露の世は露の世ながらさりながら",
+     "author": "小林一茶"
+    }
+   ]
+  },
+  {
+   "id": 98,
+   "word": "秋晴",
+   "reading": "あきばれ",
+   "season": "秋",
+   "category": "天文",
+   "period": "三秋",
+   "start": "08-07",
+   "end": "11-06",
+   "description": "秋の澄みきった晴天。",
+   "aliases": [
+    "秋晴れ",
+    "秋日和"
+   ],
+   "examples": []
+  },
+  {
+   "id": 99,
+   "word": "鰯雲",
+   "reading": "いわしぐも",
+   "season": "秋",
+   "category": "天文",
+   "period": "三秋",
+   "start": "08-07",
+   "end": "11-06",
+   "description": "鰯の群れのように細かく並んだ秋の雲。",
+   "aliases": [
+    "いわし雲",
+    "鱗雲",
+    "うろこ雲"
+   ],
+   "examples": []
+  },
+  {
+   "id": 100,
+   "word": "月見",
+   "reading": "つきみ",
+   "season": "秋",
+   "category": "生活",
+   "period": "仲秋",
+   "start": "09-08",
+   "end": "10-07",
+   "description": "名月を眺めて楽しむこと。団子や芒を供える。",
+   "aliases": [
+    "観月",
+    "月見団子"
+   ],
+   "examples": []
+  },
+  {
+   "id": 101,
+   "word": "案山子",
+   "reading": "かかし",
+   "season": "秋",
+   "category": "生活",
+   "period": "三秋",
+   "start": "08-07",
+   "end": "11-06",
+   "description": "鳥を追い払うために田に立てる人形。",
+   "aliases": [
+    "かかし",
+    "捨案山子"
+   ],
+   "examples": []
+  },
+  {
+   "id": 102,
+   "word": "稲刈",
+   "reading": "いねかり",
+   "season": "秋",
+   "category": "生活",
+   "period": "晩秋",
+   "start": "10-08",
+   "end": "11-06",
+   "description": "実った稲を刈り取ること。",
+   "aliases": [
+    "稲刈り",
+    "刈田"
+   ],
+   "examples": []
+  },
+  {
+   "id": 103,
+   "word": "盆",
+   "reading": "ぼん",
+   "season": "秋",
+   "category": "行事",
+   "period": "初秋",
+   "start": "08-10",
+   "end": "08-20",
+   "description": "先祖の霊を迎えてまつる行事。",
+   "aliases": [
+    "盂蘭盆",
+    "お盆",
+    "盆踊"
+   ],
+   "examples": []
+  },
+  {
+   "id": 104,
+   "word": "七夕",
+   "reading": "たなばた",
+   "season": "秋",
+   "category": "行事",
+   "period": "初秋",
+   "start": "08-07",
+   "end": "09-07",
+   "description": "牽牛と織女が年に一度会うという星祭り。旧暦の七月七日で秋の季語。",
+   "aliases": [
+    "星祭",
+    "星合"
+   ],
+   "examples": []
+  },
+  {
+   "id": 105,
+   "word": "赤蜻蛉",
+   "reading": "あかとんぼ",
+   "season": "秋",
+   "category": "動物",
+   "period": "三秋",
+   "start": "08-07",
+   "end": "11-06",
+   "description": "秋の空を群れて飛ぶ赤いとんぼ。",
+   "aliases": [
+    "赤とんぼ",
+    "あかとんぼ"
+   ],
+   "examples": [
+    {
+     "text": "赤蜻蛉筑波に雲もなかりけり",
+     "author": "正岡子規"
+    }
+   ]
+  },
+  {
+   "id": 106,
+   "word": "蜻蛉",
+   "reading": "とんぼ",
+   "season": "秋",
+   "category": "動物",
+   "period": "三秋",
+   "start": "08-07",
+   "end": "11-06",
+   "description": "秋の野や水辺を飛ぶ虫。",
+   "aliases": [
+    "とんぼ",
+    "蜻蜓"
+   ],
+   "examples": []
+  },
+  {
+   "id": 107,
+   "word": "虫",
+   "reading": "むし",
+   "season": "秋",
+   "category": "動物",
+   "period": "三秋",
+   "start": "08-07",
+   "end": "11-06",
+   "description": "秋に草むらで鳴く虫の総称。",
+   "aliases": [
+    "虫の声",
+    "虫の音",
+    "虫時雨"
+   ],
+   "examples": []
+  },
+  {
+   "id": 108,
+   "word": "蟋蟀",
+   "reading": "こおろぎ",
+   "season": "秋",
+   "category": "動物",
+   "period": "三秋",
+   "start": "08-07",
+   "end": "11-06",
+   "description": "秋の夜、床下や草むらで鳴く虫。古くはきりぎりすと呼んだ。",
+   "aliases": [
+    "こほろぎ",
+    "きりぎりす",
+    "ちちろ"
+   ],
+   "examples": [
+    {
+     "text": "むざんやな甲の下のきりぎりす",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 109,
+   "word": "雁",
+   "reading": "かり",
+   "season": "秋",
+   "category": "動物",
+   "period": "晩秋",
+   "start": "10-08",
+   "end": "11-06",
+   "description": "秋に北から渡ってくる鳥。列をなして飛ぶ。",
+   "aliases": [
+    "雁が音",
+    "雁渡る",
+    "がん"
+   ],
+   "examples": []
+  },
+  {
+   "id": 110,
+   "word": "鹿",
+   "reading": "しか",
+   "season": "秋",
+   "category": "動物",
+   "period": "三秋",
+   "start": "08-07",
+   "end": "11-06",
+   "description": "秋は鹿の恋の季節。妻を呼ぶ声が哀れを誘う。",
+   "aliases": [
+    "小鹿",
+    "鹿の声"
+   ],
+   "examples": []
+  },
+  {
+   "id": 111,
+   "word": "柿",
+   "reading": "かき",
+   "season": "秋",
+   "category": "植物",
+   "period": "晩秋",
+   "start": "10-08",
+   "end": "11-06",
+   "description": "秋に赤く熟す果実。日本の秋の景色に欠かせない。",
+   "aliases": [
+    "熟柿",
+    "渋柿",
+    "柿の実"
+   ],
+   "examples": [
+    {
+     "text": "柿食へば鐘が鳴るなり法隆寺",
+     "author": "正岡子規"
+    }
+   ]
+  },
+  {
+   "id": 112,
+   "word": "菊",
+   "reading": "きく",
+   "season": "秋",
+   "category": "植物",
+   "period": "三秋",
+   "start": "08-07",
+   "end": "11-06",
+   "description": "秋を代表する花。香りと気品が尊ばれる。",
+   "aliases": [
+    "白菊",
+    "黄菊",
+    "菊の香"
+   ],
+   "examples": [
+    {
+     "text": "菊の香や奈良には古き仏達",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 113,
+   "word": "萩",
+   "reading": "はぎ",
+   "season": "秋",
+   "category": "植物",
+   "period": "初秋",
+   "start": "08-07",
+   "end": "09-07",
+   "description": "秋の七草の一つ。小さな紅紫の花が枝垂れて咲く。",
+   "aliases": [
+    "萩の花",
+    "白萩"
+   ],
+   "examples": []
+  },
+  {
+   "id": 114,
+   "word": "芒",
+   "reading": "すすき",
+   "season": "秋",
+   "category": "植物",
+   "period": "三秋",
+   "start": "08-07",
+   "end": "11-06",
+   "description": "秋の七草の一つ。穂が風になびく。",
+   "aliases": [
+    "すすき",
+    "尾花",
+    "花芒"
+   ],
+   "examples": []
+  },
+  {
+   "id": 115,
+   "word": "紅葉",
+   "reading": "もみじ",
+   "season": "秋",
+   "category": "植物",
+   "period": "晩秋",
+   "start": "10-08",
+   "end": "11-06",
+   "description": "秋に木の葉が赤や黄に色づくこと。",
+   "aliases": [
+    "もみぢ",
+    "紅葉狩",
+    "色葉"
+   ],
+   "examples": []
+  },
+  {
+   "id": 116,
+   "word": "鶏頭",
+   "reading": "けいとう",
+   "season": "秋",
+   "category": "植物",
+   "period": "三秋",
+   "start": "08-07",
+   "end": "11-06",
+   "description": "鶏のとさかに似た赤い花。",
+   "aliases": [
+    "鶏頭花"
+   ],
+   "examples": [
+    {
+     "text": "鶏頭の十四五本もありぬべし",
+     "author": "正岡子規"
+    }
+   ]
+  },
+  {
+   "id": 117,
+   "word": "糸瓜",
+   "reading": "へちま",
+   "season": "秋",
+   "category": "植物",
+   "period": "初秋",
+   "start": "08-07",
+   "end": "09-07",
+   "description": "棚に長い実を垂らす瓜。茎から化粧水をとる。",
+   "aliases": [
+    "へちま",
+    "糸瓜の水"
+   ],
+   "examples": [
+    {
+     "text": "糸瓜咲て痰のつまりし仏かな",
+     "author": "正岡子規"
+    }
+   ]
+  },
+  {
+   "id": 118,
+   "word": "朝顔",
+   "reading": "あさがお",
+   "season": "秋",
+   "category": "植物",
+   "period": "初秋",
+   "start": "08-07",
+   "end": "09-07",
+   "description": "朝に咲いて昼にはしぼむ花。俳句では秋の季語。",
+   "aliases": [
+    "あさがほ",
+    "牽牛花"
+   ],
+   "examples": []
+  },
+  {
+   "id": 119,
+   "word": "曼珠沙華",
+   "reading": "まんじゅしゃげ",
+   "season": "秋",
+   "category": "植物",
+   "period": "仲秋",
+   "start": "09-08",
+   "end": "10-07",
+   "description": "秋の彼岸の頃、田のあぜなどに咲く赤い花。",
+   "aliases": [
+    "彼岸花",
+    "曼殊沙華"
+   ],
+   "examples": []
+  },
+  {
+   "id": 120,
+   "word": "立冬",
+   "reading": "りっとう",
+   "season": "冬",
+   "category": "時候",
+   "period": "初冬",
+   "start": "11-07",
+   "end": "11-21",
+   "description": "二十四節気の一つで、暦の上の冬の始まり。",
+   "aliases": [
+    "冬立つ",
+    "冬来る",
+    "今朝の冬"
+   ],
+   "examples": []
+  },
+  {
+   "id": 121,
+   "word": "冬",
+   "reading": "ふゆ",
+   "season": "冬",
+   "category": "時候",
+   "period": "三冬",
+   "start": "11-07",
+   "end": "02-03",
+   "description": "立冬から立春の前日まで。寒さの中で静けさが際立つ季節。",
+   "aliases": [],
+   "examples": []
+  },
+  {
+   "id": 122,
+   "word": "小春",
+   "reading": "こはる",
+   "season": "冬",
+   "category": "時候",
+   "period": "初冬",
+   "start": "11-07",
+   "end": "12-06",
+   "description": "初冬の、春のように暖かく穏やかな日。",
+   "aliases": [
+    "小春日和",
+    "小春日",
+    "小六月"
+   ],
+   "examples": []
+  },
+  {
+   "id": 123,
+   "word": "寒し",
+   "reading": "さむし",
+   "season": "冬",
+   "category": "時候",
+   "period": "三冬",
+   "start": "11-07",
+   "end": "02-03",
+   "description": "冬の寒さそのもの。",
+   "aliases": [
+    "寒さ",
+    "寒き"
+   ],
+   "examples": []
+  },
+  {
+   "id": 124,
+   "word": "冬の日",
+   "reading": "ふゆのひ",
+   "season": "冬",
+   "category": "時候",
+   "period": "三冬",
+   "start": "11-07",
+   "end": "02-03",
+   "description": "冬の一日。または冬の弱い日差し。",
+   "aliases": [
+    "冬日",
+    "冬日向"
+   ],
+   "examples": [
+    {
+     "text": "冬の日や馬上に氷る影法師",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 125,
+   "word": "冬至",
+   "reading": "とうじ",
+   "season": "冬",
+   "category": "時候",
+   "period": "仲冬",
+   "start": "12-20",
+   "end": "12-24",
+   "description": "一年で最も昼が短い日。柚子湯に入り、南瓜を食べる。",
+   "aliases": [
+    "冬至湯",
+    "柚子湯"
+   ],
+   "examples": []
+  },
+  {
+   "id": 126,
+   "word": "年の暮",
+   "reading": "としのくれ",
+   "season": "冬",
+   "category": "時候",
+   "period": "仲冬",
+   "start": "12-15",
+   "end": "12-31",
+   "description": "一年の終わり。慌ただしさと感慨が交じる。",
+   "aliases": [
+    "としの暮",
+    "年暮る",
+    "年暮ぬ",
+    "歳末",
+    "年の瀬"
+   ],
+   "examples": [
+    {
+     "text": "年暮ぬ笠きて草鞋はきながら",
+     "author": "松尾芭蕉"
+    },
+    {
+     "text": "ともかくもあなた任せのとしの暮",
+     "author": "小林一茶"
+    }
+   ]
+  },
+  {
+   "id": 127,
+   "word": "大晦日",
+   "reading": "おおみそか",
+   "season": "冬",
+   "category": "時候",
+   "period": "仲冬",
+   "start": "12-31",
+   "end": "12-31",
+   "description": "一年の最後の日。年越しの支度をする。",
+   "aliases": [
+    "大晦",
+    "大年"
+   ],
+   "examples": []
+  },
+  {
+   "id": 128,
+   "word": "大寒",
+   "reading": "だいかん",
+   "season": "冬",
+   "category": "時候",
+   "period": "晩冬",
+   "start": "01-20",
+   "end": "02-03",
+   "description": "二十四節気の一つで、一年で最も寒い頃。",
+   "aliases": [
+    "寒の内"
+   ],
+   "examples": []
+  },
+  {
+   "id": 129,
+   "word": "木枯",
+   "reading": "こがらし",
+   "season": "冬",
+   "category": "天文",
+   "period": "初冬",
+   "start": "11-07",
+   "end": "12-06",
+   "description": "冬の初めに吹く冷たく強い北風。木の葉を吹き落とす。",
+   "aliases": [
+    "木枯し",
+    "木枯らし",
+    "凩",
+    "こがらし"
+   ],
+   "examples": [
+    {
+     "text": "木枯や竹に隠れてしづまりぬ",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 130,
+   "word": "時雨",
+   "reading": "しぐれ",
+   "season": "冬",
+   "category": "天文",
+   "period": "初冬",
+   "start": "11-07",
+   "end": "12-06",
+   "description": "冬の初めに降ったりやんだりする通り雨。",
+   "aliases": [
+    "初時雨",
+    "初しぐれ",
+    "しぐれ",
+    "小夜時雨"
+   ],
+   "examples": [
+    {
+     "text": "初しぐれ猿も小蓑をほしげ也",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 131,
+   "word": "雪",
+   "reading": "ゆき",
+   "season": "冬",
+   "category": "天文",
+   "period": "晩冬",
+   "start": "01-05",
+   "end": "02-03",
+   "description": "空から降る雪。冬を代表する季語。",
+   "aliases": [
+    "深雪",
+    "大雪",
+    "雪五尺",
+    "ゆき"
+   ],
+   "examples": [
+    {
+     "text": "いくたびも雪の深さを尋ねけり",
+     "author": "正岡子規"
+    },
+    {
+     "text": "これがまあつひの栖か雪五尺",
+     "author": "小林一茶"
+    }
+   ]
+  },
+  {
+   "id": 132,
+   "word": "霜",
+   "reading": "しも",
+   "season": "冬",
+   "category": "天文",
+   "period": "三冬",
+   "start": "11-07",
+   "end": "02-03",
+   "description": "冬の寒い朝、地面や草に白くおりる氷の結晶。",
+   "aliases": [
+    "初霜",
+    "霜夜"
+   ],
+   "examples": []
+  },
+  {
+   "id": 133,
+   "word": "冬の月",
+   "reading": "ふゆのつき",
+   "season": "冬",
+   "category": "天文",
+   "period": "三冬",
+   "start": "11-07",
+   "end": "02-03",
+   "description": "冬の夜空に冴え冴えと光る月。",
+   "aliases": [
+    "寒月",
+    "月冴ゆ"
+   ],
+   "examples": []
+  },
+  {
+   "id": 134,
+   "word": "枯野",
+   "reading": "かれの",
+   "season": "冬",
+   "category": "地理",
+   "period": "三冬",
+   "start": "11-07",
+   "end": "02-03",
+   "description": "草木が枯れ果てた冬の野原。",
+   "aliases": [
+    "枯原",
+    "冬野"
+   ],
+   "examples": [
+    {
+     "text": "旅に病んで夢は枯野をかけ廻る",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 135,
+   "word": "炬燵",
+   "reading": "こたつ",
+   "season": "冬",
+   "category": "生活",
+   "period": "三冬",
+   "start": "11-07",
+   "end": "02-03",
+   "description": "布団をかけて足を温める暖房具。",
+   "aliases": [
+    "こたつ",
+    "掘炬燵"
+   ],
+   "examples": []
+  },
+  {
+   "id": 136,
+   "word": "焚火",
+   "reading": "たきび",
+   "season": "冬",
+   "category": "生活",
+   "period": "三冬",
+   "start": "11-07",
+   "end": "02-03",
+   "description": "落ち葉や木切れを集めて燃やし、暖をとること。",
+   "aliases": [
+    "焚き火",
+    "夕焚火"
+   ],
+   "examples": []
+  },
+  {
+   "id": 137,
+   "word": "冬籠",
+   "reading": "ふゆごもり",
+   "season": "冬",
+   "category": "生活",
+   "period": "三冬",
+   "start": "11-07",
+   "end": "02-03",
+   "description": "冬の寒さを避けて家にこもって過ごすこと。",
+   "aliases": [
+    "冬ごもり"
+   ],
+   "examples": []
+  },
+  {
+   "id": 138,
+   "word": "日向ぼこ",
+   "reading": "ひなたぼこ",
+   "season": "冬",
+   "category": "生活",
+   "period": "三冬",
+   "start": "11-07",
+   "end": "02-03",
+   "description": "冬の日だまりで体を温めること。",
+   "aliases": [
+    "日向ぼっこ",
+    "日向ぼこり"
+   ],
+   "examples": []
+  },
+  {
+   "id": 139,
+   "word": "マスク",
+   "reading": "ますく",
+   "season": "冬",
+   "category": "生活",
+   "period": "三冬",
+   "start": "11-07",
+   "end": "02-03",
+   "description": "寒さや風邪を防ぐために口元を覆うもの。冬の季語。",
+   "aliases": [],
+   "examples": []
+  },
+  {
+   "id": 140,
+   "word": "年忘",
+   "reading": "としわすれ",
+   "season": "冬",
+   "category": "生活",
+   "period": "仲冬",
+   "start": "12-01",
+   "end": "12-31",
+   "description": "年末にその年の苦労を忘れるために開く宴。",
+   "aliases": [
+    "忘年会",
+    "年忘れ"
+   ],
+   "examples": []
+  },
+  {
+   "id": 141,
+   "word": "七五三",
+   "reading": "しちごさん",
+   "season": "冬",
+   "category": "行事",
+   "period": "初冬",
+   "start": "11-07",
+   "end": "11-20",
+   "description": "十一月十五日、三歳・五歳・七歳の子の成長を祝う。",
+   "aliases": [
+    "千歳飴"
+   ],
+   "examples": []
+  },
+  {
+   "id": 142,
+   "word": "除夜の鐘",
+   "reading": "じょやのかね",
+   "season": "冬",
+   "category": "行事",
+   "period": "仲冬",
+   "start": "12-31",
+   "end": "12-31",
+   "description": "大晦日の夜、寺で百八回つく鐘。",
+   "aliases": [
+    "除夜"
+   ],
+   "examples": []
+  },
+  {
+   "id": 143,
+   "word": "クリスマス",
+   "reading": "くりすます",
+   "season": "冬",
+   "category": "行事",
+   "period": "仲冬",
+   "start": "12-18",
+   "end": "12-25",
+   "description": "十二月二十五日、キリストの降誕を祝う日。",
+   "aliases": [
+    "聖夜",
+    "降誕祭"
+   ],
+   "examples": []
+  },
+  {
+   "id": 144,
+   "word": "鴨",
+   "reading": "かも",
+   "season": "冬",
+   "category": "動物",
+   "period": "三冬",
+   "start": "11-07",
+   "end": "02-03",
+   "description": "秋に渡ってきて冬の水辺で過ごす鳥。",
+   "aliases": [
+    "鴨の声",
+    "真鴨"
+   ],
+   "examples": [
+    {
+     "text": "海暮れて鴨のこゑほのかに白し",
+     "author": "松尾芭蕉"
+    }
+   ]
+  },
+  {
+   "id": 145,
+   "word": "白鳥",
+   "reading": "はくちょう",
+   "season": "冬",
+   "category": "動物",
+   "period": "晩冬",
+   "start": "01-05",
+   "end": "02-03",
+   "description": "冬に北から渡ってくる大きな白い鳥。",
+   "aliases": [
+    "スワン"
+   ],
+   "examples": []
+  },
+  {
+   "id": 146,
+   "word": "冬木立",
+   "reading": "ふゆこだち",
+   "season": "冬",
+   "category": "植物",
+   "period": "三冬",
+   "start": "11-07",
+   "end": "02-03",
+   "description": "葉を落とした冬の木々が立ち並ぶ様子。",
+   "aliases": [
+    "寒林"
+   ],
+   "examples": [
+    {
+     "text": "斧入て香におどろくや冬木立",
+     "author": "与謝蕪村"
+    }
+   ]
+  },
+  {
+   "id": 147,
+   "word": "水仙",
+   "reading": "すいせん",
+   "season": "冬",
+   "category": "植物",
+   "period": "晩冬",
+   "start": "01-05",
+   "end": "02-03",
+   "description": "寒い時期に香りのよい白や黄色の花を咲かせる。",
+   "aliases": [
+    "水仙花"
+   ],
+   "examples": []
+  },
+  {
+   "id": 148,
+   "word": "落葉",
+   "reading": "おちば",
+   "season": "冬",
+   "category": "植物",
+   "period": "初冬",
+   "start": "11-07",
+   "end": "12-06",
+   "description": "冬に木から落ちた葉。降り積もった葉の音も含む。",
+   "aliases": [
+    "落ち葉",
+    "落葉焚"
+   ],
+   "examples": []
+  },
+  {
+   "id": 149,
+   "word": "葱",
+   "reading": "ねぎ",
+   "season": "冬",
+   "category": "植物",
+   "period": "三冬",
+   "start": "11-07",
+   "end": "02-03",
+   "description": "冬が旬の野菜。鍋物に欠かせない。",
+   "aliases": [
+    "ねぶか",
+    "根深"
+   ],
+   "examples": [
+    {
+     "text": "葱買て枯木の中を帰りけり",
+     "author": "与謝蕪村"
+    }
+   ]
+  },
+  {
+   "id": 150,
+   "word": "大根",
+   "reading": "だいこん",
+   "season": "冬",
+   "category": "植物",
+   "period": "三冬",
+   "start": "11-07",
+   "end": "02-03",
+   "description": "冬の畑で育つ白い根菜。",
+   "aliases": [
+    "だいこ",
+    "大根引"
+   ],
+   "examples": []
+  }
+ ]
+}

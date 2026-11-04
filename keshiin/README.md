@@ -13,7 +13,7 @@
 
 ## 動かし方
 
-Flutter 3.47（Dart 3.13）で確認しました。
+Flutter 3.47（Dart 3.13）で確認しました。ネイティブのビルドは GitHub Actions（Xcode 26.6）で確認しています。
 
 ```bash
 cd keshiin
@@ -41,7 +41,7 @@ DB の定義（`lib/data/db.dart`）を変えたときは、生成コードを�
 dart run build_runner build
 ```
 
-iOS のホーム画面ウィジェットは、Xcode でターゲットを足す作業が要ります（[ios/KeshiinWidget/README.md](ios/KeshiinWidget/README.md)）。
+iOS のホーム画面ウィジェットは、Xcode のターゲット `KeshiinWidgetExtension` に入っています（[ios/KeshiinWidget/README.md](ios/KeshiinWidget/README.md)）。
 
 ## できたこと・まだのこと
 
@@ -58,8 +58,8 @@ iOS のホーム画面ウィジェットは、Xcode でターゲットを足す�
 | 過去の日に貼る | できた | 撮影日のマスに自動で振り分け。撮影日が無ければタップしたマスの日。「まとめて貼る」で複数枚を一度に振り分け、すでに貼ってある日は飛ばす（失敗にしない） |
 | 共有画像 | できた | 切手を斜めに置いた 1080×1350（紙色・黒の2種）、背景が透明な PNG、月のシート 1080×1350、旅の小型シート、年間ポスター。画像の右下に小さくアプリ名、ストアリンクは入れない |
 | データ | できた | drift で stamp・sheet・place_history。元の写真は長辺2400px に縮小してアプリ内にコピー、表示用に長辺600px の縮小版も作る。ZIP（JSON＋元画像）を年ごとに書き出し |
-| ウィジェット（Android） | コードはできた・未ビルド | 今月の埋まり「12／30」、5×6の縮小表示、今日の空欄。今日の分と明日の分を書いておき、0時に端末の日付で切り替える。この環境に Android SDK がなく、ビルドと実機での確認はまだ |
-| ウィジェット（iOS） | コードはできた・未組み込み | WidgetKit（小・中・ロック画面）の Swift を `ios/KeshiinWidget/` に置いた。Xcode のターゲット追加と App Group の設定はまだ |
+| ウィジェット（Android） | できた・実機未確認 | 今月の埋まり「12／30」、5×6の縮小表示、今日の空欄。今日の分と明日の分を書いておき、0時に端末の日付で切り替える。GitHub Actions でビルドが通り、APK に入っていることを確かめた |
+| ウィジェット（iOS） | できた・実機未確認 | WidgetKit（小・中・ロック画面）。Xcode のターゲット `KeshiinWidgetExtension` として追加し（`tool/add_ios_widget_target.py`）、GitHub Actions でビルドが通り、アプリに入っていることを確かめた |
 | 購入（記念 ¥730） | コードはできた・商品登録はまだ | 追加フレーム8種、消印の書体2種、旅の小型シート、年間ポスター、1日に複数枚、高解像度（2倍）の書き出し。リリースビルドは in_app_purchase（商品ID `keshiin_kinen`）、デバッグビルドは端末内だけで解放する仮の実装（`lib/main.dart` の `usesStorePurchases`）。ストアの商品登録はまだ。広告はない |
 | リマインダー | できた・実機未確認 | 1日1回・初期オフ。文面は「今日の切手を貼る？」だけ。設定でオンにしたときだけ通知の許可を求め、時刻（初期は20:00）を選べる。その日の切手を貼ってあれば知らせない。通知をタップすると写真の選択を開く。flutter_local_notifications を使い、Android の正確な時刻の権限は求めない（数分ずれることがある） |
 | 評価依頼 | できた | 1枚目・30枚目の保存直後と、月のシートが初めて埋まった直後。365日に3回まで |
@@ -67,11 +67,13 @@ iOS のホーム画面ウィジェットは、Xcode でターゲットを足す�
 | テスト | できた | 127件。ストアの購入、リマインダーの予約、目打ち、禁止語、日付→マス、最寄りの市区町村、消印の再現性、EXIF、DB、主な画面の流れ（ウィジェットテスト） |
 | 正方形の共有画像 | まだ | 共通の技術方針にある2サイズのうち、1080×1350 だけ |
 | ookura_design などの共通基盤 | まだ | 非公開パッケージのため、この環境では使えない（ひそかぎと同じ） |
-| アイコン・スプラッシュ・ストア素材 | できた | アイコン、スプラッシュ、Play のアイコンとフィーチャーグラフィック、スクリーンショット5枚（iOS 6.9インチ・Android）、掲載文。スクリーンショットの写真はイラストの見本なので、実際の写真への差し替えをすすめる（[store/README.md](store/README.md)） |
+| アイコン・スプラッシュ・ストア素材 | できた | アイコン、スプラッシュ、Play のアイコンとフィーチャーグラフィック、スクリーンショット5枚（iOS 6.9インチ・Android）、掲載文。スクリーンショットの写真はイラスト（このまま使う）（[store/README.md](store/README.md)） |
 | プライバシーポリシー | できた | アプリ内（設定）と [docs/PRIVACY.md](docs/PRIVACY.md)。置き場所の URL はまだ |
 | リリースの設定 | できた | バージョン 1.0.0+1、Android の署名鍵（`android/key.properties` があれば使う）、iOS の App Group の entitlements |
 | ストアの登録・審査 | まだ | 手順は [docs/STORE_SETUP.md](docs/STORE_SETUP.md) |
-| ネイティブのビルドと実機での確認 | まだ | この環境に Android SDK と Xcode が無い（Android SDK の配布元への接続も許可されていない）。共通の技術方針の「端末3機種で画像生成とウィジェット更新を確認」も未実施。確かめる項目は [docs/STORE_SETUP.md](docs/STORE_SETUP.md) |
+| ネイティブのビルド | できた | GitHub Actions（`.github/workflows/keshiin.yml`）で、push のたびにテストと署名なしの Android（AAB・APK）・iOS のビルドをする |
+| ストアへのアップロード | 仕組みはできた・シークレット待ち | 同じワークフローを手動で動かすと、Google Play の内部テスト（下書き）と TestFlight に上げる。署名鍵と API キーをリポジトリのシークレットに入れる必要がある（[docs/STORE_SETUP.md](docs/STORE_SETUP.md) の8）。一般公開は人がストアの管理画面で行う |
+| 実機での確認 | まだ | 共通の技術方針の「端末3機種で画像生成とウィジェット更新を確認」は未実施。確かめる項目は [docs/STORE_SETUP.md](docs/STORE_SETUP.md) の7 |
 
 ## 法規制への配慮
 
@@ -112,6 +114,7 @@ iOS のホーム画面ウィジェットは、Xcode でターゲットを足す�
 | `lib/ui/` | 画面 |
 | `assets/data/municipalities.csv` | 市区町村の代表座標（code, pref, city, lat, lng） |
 | `android/app/src/main/kotlin/.../KeshiinWidgetProvider.kt` | Android のウィジェット |
-| `ios/KeshiinWidget/` | iOS のウィジェット（Xcode への組み込みはまだ） |
+| `ios/KeshiinWidget/` | iOS のウィジェット |
+| `tool/` | iOS のウィジェットのターゲットを Xcode のプロジェクトに足すスクリプト |
 | `store/` | ストア素材、掲載文、素材とスクリーンショットを作るスクリプト（`store/src/`） |
 | `docs/` | ストアに出すまでの手順、プライバシーポリシー |

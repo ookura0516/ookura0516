@@ -84,6 +84,8 @@ class Settings {
     this.design = 'standard',
     this.hideExpression = true,
     this.shareSize = ResultImageSize.portrait,
+    this.notify = false,
+    this.notifyMinutes = 8 * 60,
   });
 
   /// タイマーを出すか。初期はオフ（焦らせない）。
@@ -99,6 +101,12 @@ class Settings {
   bool hideExpression;
 
   ResultImageSize shareSize;
+
+  /// 1日1回の通知。初期はオフ。
+  bool notify;
+
+  /// 通知の時刻（日本時間の0時からの分）。初期は 8:00。
+  int notifyMinutes;
 
   Map<String, Object?> toJson() => {
     'timer': showTimer,

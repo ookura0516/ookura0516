@@ -7,6 +7,7 @@ import '../app_controller.dart';
 import '../theme.dart';
 import '../ticket_design.dart';
 import 'how_to.dart';
+import 'privacy_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -51,6 +52,39 @@ class SettingsScreen extends StatelessWidget {
             value: s.showTimer,
             onChanged: (v) => app.updateSettings((s) => s.showTimer = v),
           ),
+          SwitchListTile(
+            key: const Key('toggle-notify'),
+            title: const Text('毎日の通知'),
+            subtitle: const Text('1日1回、今日の4桁をお知らせします'),
+            value: s.notify,
+            onChanged: (v) async {
+              final ok = await app.setNotify(v);
+              if (!ok && context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('通知が許可されていません。端末の設定で許可してください')),
+                );
+              }
+            },
+          ),
+          if (s.notify)
+            ListTile(
+              key: const Key('notify-time'),
+              title: const Text('通知の時刻（日本時間）'),
+              trailing: Text(
+                '${s.notifyMinutes ~/ 60}:${(s.notifyMinutes % 60).toString().padLeft(2, '0')}',
+              ),
+              onTap: () async {
+                final t = await showTimePicker(
+                  context: context,
+                  initialTime: TimeOfDay(
+                    hour: s.notifyMinutes ~/ 60,
+                    minute: s.notifyMinutes % 60,
+                  ),
+                  helpText: '通知の時刻（日本時間）',
+                );
+                if (t != null) await app.setNotifyTime(t.hour * 60 + t.minute);
+              },
+            ),
           ListTile(
             title: const Text('誕生日'),
             subtitle: const Text('図鑑でその番号が金縁になります'),
@@ -66,23 +100,24 @@ class SettingsScreen extends StatelessWidget {
           const _Header('購入'),
           for (final p in Product.values) _ProductTile(product: p),
           ListTile(
+            key: const Key('restore'),
             leading: const Icon(Icons.restore),
             title: const Text('購入を復元'),
-            onTap: () => app.purchases.restore(),
+            onTap: () => _restore(context, app),
           ),
-          if (app.purchases.isPlaceholder)
-            const Padding(
-              padding: EdgeInsets.fromLTRB(16, 0, 16, 8),
-              child: Text(
-                '※ 購入は仮の実装です（ストアの商品 ID は未設定）。',
-                style: TextStyle(fontSize: 12, color: KipTheme.inkDim),
-              ),
-            ),
           const _Header('このアプリについて'),
           const ListTile(
-            title: Text('通信しません'),
-            subtitle: Text('問題は端末の中で日付から決まります。記録は端末にだけ保存します。'),
+            title: Text('問題と記録は端末の中だけ'),
+            subtitle: Text('問題は端末の中で日付から決まります。記録はサーバーに送りません。'),
           ),
+          ListTile(
+            key: const Key('open-privacy'),
+            title: const Text('プライバシーポリシー'),
+            onTap: () => Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (_) => const PrivacyScreen())),
+          ),
+          if (app.showAds) const _AdPrivacyTile(),
           ListTile(
             title: const Text('ライセンス'),
             onTap: () =>
@@ -92,6 +127,31 @@ class SettingsScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _restore(BuildContext context, AppController app) async {
+    final messenger = ScaffoldMessenger.of(context);
+    await app.purchases.restore();
+    // ストアの返事を少し待つ（復元は結果が遅れて届くことがある）。
+    void report() {
+      final msg = switch (app.purchases.status) {
+        PurchaseStatus.restored => '購入を復元しました',
+        PurchaseStatus.nothingToRestore => '復元できる購入はありませんでした',
+        PurchaseStatus.unavailable => 'ストアに接続できません',
+        PurchaseStatus.failed => '復元できませんでした',
+        _ => null,
+      };
+      if (msg != null) {
+        messenger.showSnackBar(SnackBar(content: Text(msg)));
+        app.purchases.removeListener(report);
+      }
+    }
+
+    if (app.purchases.status == PurchaseStatus.pending) {
+      app.purchases.addListener(report);
+    } else {
+      report();
+    }
   }
 
   Future<void> _pickBirthday(BuildContext context, AppController app) async {
@@ -113,6 +173,35 @@ class SettingsScreen extends StatelessWidget {
     final mmdd =
         '${picked.month.toString().padLeft(2, '0')}${picked.day.toString().padLeft(2, '0')}';
     await app.updateSettings((s) => s.birthday = mmdd);
+  }
+}
+
+/// EEA などで必要なときだけ出す、広告のプライバシー設定（UMP）。
+class _AdPrivacyTile extends StatefulWidget {
+  const _AdPrivacyTile();
+
+  @override
+  State<_AdPrivacyTile> createState() => _AdPrivacyTileState();
+}
+
+class _AdPrivacyTileState extends State<_AdPrivacyTile> {
+  bool _required = false;
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<AppController>().ads.privacyOptionsRequired().then((v) {
+      if (mounted) setState(() => _required = v);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_required) return const SizedBox.shrink();
+    return ListTile(
+      title: const Text('広告のプライバシー設定'),
+      onTap: () => context.read<AppController>().ads.showPrivacyOptions(),
+    );
   }
 }
 
@@ -170,12 +259,12 @@ class _DesignTile extends StatelessWidget {
           ? const Icon(Icons.check, color: KipTheme.accent)
           : null,
       onTap: () async {
-        if (locked) {
-          // 購入の入口は「デザインを変えようとした時」（設計書）。
-          await _confirmBuy(context, Product.designPack);
-          if (!app.owns(Product.designPack)) return;
-        }
+        // 購入の入口は「デザインを変えようとした時」（設計書）。
+        // 先に選んでおき、パックが届いた時点でこのデザインになる。
         await app.updateSettings((s) => s.design = design.id);
+        if (locked && context.mounted) {
+          await _confirmBuy(context, Product.designPack);
+        }
       },
     );
   }
@@ -226,17 +315,28 @@ Future<void> _confirmBuy(BuildContext context, Product p) async {
       ],
     ),
   );
-  if (ok != true) return;
+  if (ok != true || !context.mounted) return;
+  final messenger = ScaffoldMessenger.of(context);
   await app.purchases.buy(p);
-  if (!context.mounted) return;
-  final st = app.purchases.status;
-  final msg = switch (st) {
-    PurchaseStatus.purchased => '購入しました',
-    PurchaseStatus.unavailable => 'いまは購入できません（ストア未設定）',
-    PurchaseStatus.failed => '購入できませんでした',
-    _ => null,
-  };
-  if (msg != null) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+  // ストアの購入は、結果があとから届く。届いたら一言出す。
+  void report() {
+    final msg = switch (app.purchases.status) {
+      PurchaseStatus.purchased ||
+      PurchaseStatus.restored => app.owns(p) ? '購入しました' : null,
+      PurchaseStatus.unavailable => 'ストアに接続できません',
+      PurchaseStatus.failed => '購入できませんでした',
+      PurchaseStatus.idle => '購入をやめました',
+      _ => null,
+    };
+    if (msg != null) {
+      messenger.showSnackBar(SnackBar(content: Text(msg)));
+      app.purchases.removeListener(report);
+    }
+  }
+
+  if (app.purchases.status == PurchaseStatus.pending) {
+    app.purchases.addListener(report);
+  } else {
+    report();
   }
 }

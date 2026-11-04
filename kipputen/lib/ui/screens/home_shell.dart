@@ -36,6 +36,7 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
       if (!mounted) return;
       setState(() {});
       app.exportWidget();
+      app.scheduleReminders();
       _armMidnight();
     });
   }

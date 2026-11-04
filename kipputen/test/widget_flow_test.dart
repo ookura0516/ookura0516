@@ -218,4 +218,28 @@ void main() {
     await _key(tester, 'confirm-buy');
     expect(h.app.design.id, 'sakura');
   });
+
+  testWidgets('設定：通知をオンにすると時刻が出て、プライバシーポリシーが読める', (tester) async {
+    final h = await _pumpApp(tester, friday);
+    await _tap(tester, find.text('設定'));
+    final toggle = find.byKey(const Key('toggle-notify'));
+    await tester.scrollUntilVisible(
+      toggle,
+      200,
+      scrollable: find.byType(Scrollable).last,
+    );
+    await _tap(tester, toggle);
+    expect(h.app.settings.notify, isTrue);
+    expect(find.byKey(const Key('notify-time')), findsOneWidget);
+    expect(h.reminders.scheduled, isNotEmpty);
+
+    final privacy = find.byKey(const Key('open-privacy'));
+    await tester.scrollUntilVisible(
+      privacy,
+      200,
+      scrollable: find.byType(Scrollable).last,
+    );
+    await _tap(tester, privacy);
+    expect(find.text('広告'), findsOneWidget);
+  });
 }

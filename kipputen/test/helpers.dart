@@ -47,13 +47,38 @@ class FakeReview implements ReviewService {
   Future<void> request() async => asked++;
 }
 
+class FakeReminders implements ReminderService {
+  bool allow = true;
+  int asked = 0;
+  Map<int, Reminder> scheduled = {};
+  @override
+  Future<void> init() async {}
+  @override
+  Future<bool> requestPermission() async {
+    asked++;
+    return allow;
+  }
+
+  @override
+  Future<void> replaceAll(Map<int, Reminder> reminders) async =>
+      scheduled = Map.of(reminders);
+}
+
 class Harness {
-  Harness(this.app, this.prefs, this.sink, this.share, this.review);
+  Harness(
+    this.app,
+    this.prefs,
+    this.sink,
+    this.share,
+    this.review,
+    this.reminders,
+  );
   final AppController app;
   final SharedPreferences prefs;
   final RecordingWidgetSink sink;
   final FakeShare share;
   final FakeReview review;
+  final FakeReminders reminders;
 }
 
 /// テスト用のアプリ。購入はすぐ通り、バナーは仮の枠を出す。
@@ -68,16 +93,18 @@ Future<Harness> makeHarness(
   final sink = RecordingWidgetSink();
   final share = FakeShare();
   final review = FakeReview();
+  final reminders = FakeReminders();
   final app = AppController(
     book: book,
     picker: PuzzlePicker(book, anniversaries: loadAnniversaries()),
     records: Records(p),
-    purchases: PlaceholderPurchaseService(p, grantForFree: true),
+    purchases: PlaceholderPurchaseService(p),
     ads: const PlaceholderAdService(visible: true),
     clock: DailyClock.fixed(noonJst(day)),
     widgets: WidgetExporter(sink),
     review: review,
     share: share,
+    reminders: reminders,
   );
-  return Harness(app, p, sink, share, review);
+  return Harness(app, p, sink, share, review, reminders);
 }

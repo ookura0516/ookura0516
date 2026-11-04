@@ -50,6 +50,7 @@ class AppController extends ChangeNotifier {
     this.widgets = const WidgetExporter(NoWidgetSink()),
     this.review = const NoReviewService(),
     this.share = const SharePlusService(),
+    this.reminders = const NoReminderService(),
   }) : clock = clock ?? DailyClock() {
     purchases.addListener(notifyListeners);
     _firstUseDay = records.plays.keys.isEmpty
@@ -66,6 +67,7 @@ class AppController extends ChangeNotifier {
   final WidgetExporter widgets;
   final ReviewService review;
   final ShareService share;
+  final ReminderService reminders;
   late final Day _firstUseDay;
 
   Settings get settings => records.settings;
@@ -157,6 +159,7 @@ class AppController extends ChangeNotifier {
         log.seconds = seconds;
         await records.savePlays();
         await exportWidget();
+        await scheduleReminders();
       }
     }
 
@@ -245,6 +248,53 @@ class AppController extends ChangeNotifier {
     await purchases.init();
     if (showAds) await ads.init();
     await exportWidget();
+    await scheduleReminders();
+  }
+
+  // ------------------------------------------------------------ 通知
+
+  /// 先に予約しておく日数。アプリを開くたびに予約し直すので、開かない日が続くと止まる。
+  static const reminderDays = 7;
+
+  /// これから出す通知。今日の分は、まだ解いていなくて時刻が過ぎていないときだけ。
+  Map<int, Reminder> plannedReminders() {
+    if (!settings.notify) return const {};
+    final out = <int, Reminder>{};
+    for (var i = 0; i < reminderDays; i++) {
+      final d = today.addDays(i);
+      final at = DailyClock.startOf(
+        d,
+      ).add(Duration(minutes: settings.notifyMinutes));
+      if (!at.isAfter(clock.nowUtc)) continue;
+      if (records.plays[d.key]?.cleared ?? false) continue;
+      out[Reminder.idFor(d)] = Reminder(
+        at: at,
+        title: 'キップテン',
+        body: '今日は ${picker.forDay(d).number}',
+      );
+    }
+    return out;
+  }
+
+  Future<void> scheduleReminders() async {
+    try {
+      await reminders.replaceAll(plannedReminders());
+    } catch (e) {
+      debugPrint('reminder schedule failed: $e');
+    }
+  }
+
+  /// 通知をオンにする。許可されなければオフのまま false を返す。
+  Future<bool> setNotify(bool on) async {
+    if (on && !await reminders.requestPermission()) return false;
+    await updateSettings((s) => s.notify = on);
+    await scheduleReminders();
+    return true;
+  }
+
+  Future<void> setNotifyTime(int minutes) async {
+    await updateSettings((s) => s.notifyMinutes = minutes);
+    await scheduleReminders();
   }
 
   // ------------------------------------------------------------ ウィジェット

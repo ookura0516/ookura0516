@@ -8,6 +8,7 @@ library;
 export 'daily_clock.dart';
 export 'day.dart';
 export 'result_image.dart';
+export 'reminder.dart';
 export 'review_policy.dart';
 export 'seeded_random.dart';
 export 'streak.dart';

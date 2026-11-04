@@ -1,0 +1,12 @@
+# アプリの画面と同じ生成りの紙の色。ブランド表記（kiyokura）は他のアプリと共通の画像。
+# Android 12+ は中央にランチャーアイコンが出る（android_12.image は指定しない）
+flutter_native_splash:
+  color: "#FBF7F0"
+  web: false
+  image: assets/splash/splash_icon.png
+  branding: assets/splash/branding.png
+  branding_mode: bottom
+  android_12:
+    color: "#FBF7F0"
+    icon_background_color: "#A8322C"
+    branding: assets/splash/branding.png

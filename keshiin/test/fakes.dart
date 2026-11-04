@@ -99,6 +99,28 @@ class FakeWidgetBridge implements WidgetBridge {
   Future<Uri?> initialLaunch() async => null;
 }
 
+class FakeReminders implements ReminderScheduler {
+  bool grant = true;
+  int permissionAsks = 0;
+  List<DateTime> scheduled = [];
+  final controller = StreamController<Uri?>.broadcast();
+
+  @override
+  Future<bool> requestPermission() async {
+    permissionAsks++;
+    return grant;
+  }
+
+  @override
+  Future<void> replaceAll(List<DateTime> times) async => scheduled = [...times];
+
+  @override
+  Stream<Uri?> get launches => controller.stream;
+
+  @override
+  Future<Uri?> initialLaunch() async => null;
+}
+
 class FakeReview implements ReviewPrompter {
   int calls = 0;
   @override
@@ -114,6 +136,7 @@ class Harness {
     this.widgets,
     this.review,
     this.geocoder,
+    this.reminders,
   );
 
   final AppState app;
@@ -123,6 +146,7 @@ class Harness {
   final FakeWidgetBridge widgets;
   final FakeReview review;
   final FakeGeocoder geocoder;
+  final FakeReminders reminders;
 
   StampRepository get repo => app.repo;
 
@@ -144,6 +168,7 @@ class Harness {
     final widgets = FakeWidgetBridge();
     final review = FakeReview();
     final geocoder = FakeGeocoder();
+    final reminders = FakeReminders();
     final t = now ?? DateTime(2026, 11, 4, 9, 30);
     final app = AppState(
       repo: StampRepository(memoryDb()),
@@ -157,11 +182,21 @@ class Harness {
         sharer: sharer,
         widgets: widgets,
         review: review,
+        reminders: reminders,
       ),
       places: _places ??= loadMunicipalities(),
       clock: () => t,
     );
-    return Harness._(app, photos, store, sharer, widgets, review, geocoder);
+    return Harness._(
+      app,
+      photos,
+      store,
+      sharer,
+      widgets,
+      review,
+      geocoder,
+      reminders,
+    );
   }
 
   Future<void> close() => app.repo.db.close();

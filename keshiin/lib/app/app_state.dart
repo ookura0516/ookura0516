@@ -11,6 +11,7 @@ import '../core/frames.dart';
 import '../core/photo_meta.dart';
 import '../core/places.dart';
 import '../core/postmark_jitter.dart';
+import '../core/reminder.dart';
 import '../core/widget_snapshot.dart';
 import '../data/db.dart';
 import '../data/export_service.dart';
@@ -515,9 +516,46 @@ class AppState extends ChangeNotifier {
     _changed();
   }
 
-  // ---- ウィジェット ----
+  // ---- ウィジェットとリマインダー ----
 
+  /// ホーム画面のウィジェットとリマインダーを、いまの切手に合わせて書き直す。
+  /// 起動時と、切手を貼った・消したときに呼ぶ。
   Future<void> refreshWidget() async {
+    await _publishWidget();
+    await refreshReminders();
+  }
+
+  /// リマインダーを予約し直す。オフなら全部取り消す。すでに貼った日は予約しない。
+  Future<void> refreshReminders() async {
+    if (!settings.reminderOn) {
+      await services.reminders.replaceAll(const []);
+      return;
+    }
+    final plan = reminderSchedule(
+      now: clock(),
+      time: settings.reminderTime,
+      filled: await repo.occupiedDays(),
+    );
+    await services.reminders.replaceAll([for (final p in plan) p.at]);
+  }
+
+  /// リマインダーをオン・オフする。オンにするときだけ通知の許可を求め、
+  /// 許可されなければオフのままにして偽を返す。
+  Future<bool> setReminder({required bool on, ReminderTime? time}) async {
+    if (time != null) await settings.setReminderTime(time);
+    if (on && !await services.reminders.requestPermission()) {
+      await settings.setReminderOn(false);
+      await refreshReminders();
+      _changed();
+      return false;
+    }
+    await settings.setReminderOn(on);
+    await refreshReminders();
+    _changed();
+    return true;
+  }
+
+  Future<void> _publishWidget() async {
     final t = today;
     final tomorrow = t.addDays(1);
     final m = await loadMonth(t.year, t.month);

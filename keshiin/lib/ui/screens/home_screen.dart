@@ -22,6 +22,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _tab = 0;
   StreamSubscription<Uri?>? _sub;
+  StreamSubscription<Uri?>? _reminderSub;
 
   @override
   void initState() {
@@ -30,12 +31,19 @@ class _HomeScreenState extends State<HomeScreen> {
     // ホーム画面のウィジェットから開かれたら、写真の選択を直接開く。
     app.services.widgets.initialLaunch().then(_onLaunch);
     _sub = app.services.widgets.launches.listen(_onLaunch, onError: (_) {});
+    // リマインダーの通知から開かれたときも同じ。
+    app.services.reminders.initialLaunch().then(_onLaunch);
+    _reminderSub = app.services.reminders.launches.listen(
+      _onLaunch,
+      onError: (_) {},
+    );
     WidgetsBinding.instance.addPostFrameCallback((_) => _firstNotice());
   }
 
   @override
   void dispose() {
     _sub?.cancel();
+    _reminderSub?.cancel();
     super.dispose();
   }
 

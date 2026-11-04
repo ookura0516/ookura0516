@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../app/app_state.dart';
 import '../../core/frames.dart';
+import '../../core/reminder.dart';
 import '../../monetize/purchase_service.dart';
 import '../theme.dart';
 import '../widgets/paywall.dart';
@@ -104,6 +105,46 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                 ],
               ),
+            ),
+            const SizedBox(height: 16),
+            Text('リマインダー', style: text.titleMedium),
+            SwitchListTile(
+              key: const Key('reminder-switch'),
+              contentPadding: EdgeInsets.zero,
+              title: const Text('1日1回、「今日の切手を貼る？」と知らせる'),
+              subtitle: const Text('その日の切手を貼ってあれば、知らせません'),
+              value: app.settings.reminderOn,
+              onChanged: (on) async {
+                final messenger = ScaffoldMessenger.of(context);
+                final ok = await app.setReminder(on: on);
+                if (!ok) {
+                  messenger.showSnackBar(
+                    const SnackBar(
+                      content: Text('通知が許可されていません。端末の設定から許可してください'),
+                    ),
+                  );
+                }
+              },
+            ),
+            ListTile(
+              key: const Key('reminder-time'),
+              contentPadding: EdgeInsets.zero,
+              enabled: app.settings.reminderOn,
+              leading: const Icon(Icons.schedule),
+              title: const Text('知らせる時刻'),
+              trailing: Text(app.settings.reminderTime.label),
+              onTap: () async {
+                final cur = app.settings.reminderTime;
+                final picked = await showTimePicker(
+                  context: context,
+                  initialTime: TimeOfDay(hour: cur.hour, minute: cur.minute),
+                );
+                if (picked == null) return;
+                await app.setReminder(
+                  on: app.settings.reminderOn,
+                  time: ReminderTime(picked.hour, picked.minute),
+                );
+              },
             ),
             const SizedBox(height: 16),
             Text('書き出し', style: text.titleMedium),

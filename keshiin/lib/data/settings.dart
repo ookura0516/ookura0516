@@ -1,6 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/frames.dart';
+import '../core/reminder.dart';
 
 /// 端末に保存する設定。
 class AppSettings {
@@ -15,6 +16,17 @@ class AppSettings {
   static const _kReviews = 'keshiin.reviewPrompts';
   static const _kSaved = 'keshiin.savedCount';
   static const _kNoticeSeen = 'keshiin.noticeSeen';
+  static const _kReminderOn = 'keshiin.reminder.on';
+  static const _kReminderTime = 'keshiin.reminder.time';
+
+  /// リマインダー。初期はオフ（設計書）。
+  bool get reminderOn => _prefs.getBool(_kReminderOn) ?? false;
+  Future<void> setReminderOn(bool v) => _prefs.setBool(_kReminderOn, v);
+
+  ReminderTime get reminderTime =>
+      ReminderTime.parse(_prefs.getString(_kReminderTime));
+  Future<void> setReminderTime(ReminderTime t) =>
+      _prefs.setString(_kReminderTime, t.encode());
 
   /// 新しい月のシートに付ける名前（「2026 日常」など）。
   String get sheetTitle => _prefs.getString(_kTitle) ?? '';

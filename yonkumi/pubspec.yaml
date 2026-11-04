@@ -1,0 +1,27 @@
+name: yonkumi
+description: "ヨンクミ：16語を4組に分ける、日替わりの言葉パズル"
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_local_notifications: ^22.3.3
+  ookura_daily:
+    path: ../packages/ookura_daily
+  provider: ^6.1.5+1
+  shared_preferences: ^2.5.6
+  timezone: ^0.11.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/puzzles.json

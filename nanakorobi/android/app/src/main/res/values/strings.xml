@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ナナコロビ</string>
+    <string name="widget_description">だるまと、本番までの残り日数</string>
+    <string name="widget_empty">だるまを作る</string>
+    <string name="widget_days_left">あと%1$d日</string>
+    <string name="widget_strokes">%1$d筆</string>
+    <string name="widget_deadline">%1$sまで あと%2$d日</string>
+    <string name="widget_next">次：%1$s あと%2$d日</string>
+    <string name="widget_stats">%1$d筆・起き上がり%2$d回</string>
+    <string name="widget_fallen">転んでいます</string>
+</resources>

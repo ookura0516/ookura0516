@@ -17,9 +17,9 @@ class NanakorobiTheme {
   static const Color good = Color(0xFF3C8C5A);
   static const Color danger = Color(0xFFB4322A);
 
-  /// 毛筆体のフォント名。pubspec に登録したら 'NanakorobiBrush' にする（README「毛筆体フォントの候補」）。
-  /// 未登録なら null で、端末のフォントの太字で描く。
-  static const String? brushFontFamily = null;
+  /// 毛筆体のフォント（Yuji Syuku、SIL OFL 1.1）。pubspec の family 名。
+  /// 描画側（DarumaPainter）は null も受け付け、そのときは端末のフォントの太字で描く（README「毛筆体フォント」）。
+  static const String brushFontFamily = 'NanakorobiBrush';
 
   static ThemeData get light {
     final base = ThemeData.light(useMaterial3: true);

@@ -48,7 +48,7 @@ dart run build_runner build --delete-conflicting-outputs
 | プラス（¥600、非消耗型、現役無制限・全12色・ポスター・全テンプレ・JSON 書き出し/読み込み） | コードとテストはできた。ストアの商品登録はまだ（[docs/STORE_SETUP.md](docs/STORE_SETUP.md)） |
 | 計測（端末内カウンタ）と評価依頼（7日目の節目と両目の直後、365日3回まで） | できた |
 | 共有パッケージ ookura_iap・ookura_settings・ookura_streak・ookura_design・ookura_a11y の組み込み | まだ（非公開のため、窓口と仮実装で動く。下の表） |
-| 毛筆体フォント | まだ。端末のフォントの太字で描いている（候補は下の表） |
+| 毛筆体フォント | できた。Yuji Syuku（SIL OFL 1.1）を同梱し、腹の文字と共有画像で使う |
 | 英語版 | ARB の en キーまで。文言の見直しと切り替えの導線はまだ |
 | アイコン・スプラッシュ・ストア素材 | まだ |
 | 実機での確認 | まだ（この環境は Linux で、iOS/Android のビルドは未確認） |
@@ -68,19 +68,21 @@ dart run build_runner build --delete-conflicting-outputs
 | ookura_design | `NanakorobiTheme`（`lib/ui/theme.dart`） | 和紙の生成りと墨、朱と金の ThemeData | テーマを ookura_design のものに差し替える。だるまの色は `lib/core/daruma_colors.dart` で別に持つ |
 | ookura_a11y | `A11y`（`lib/ui/a11y.dart`） | 「視覚効果を減らす」の判定と最小タップ領域 | ookura_a11y のユーティリティに差し替える |
 
-## 毛筆体フォントの候補
+## 毛筆体フォント
 
-腹の文字は縦書きの毛筆体にしたいが、商用可の書体を1つに絞るまでは端末のフォントの太字で描いています（`NanakorobiTheme.brushFontFamily` が `null`）。候補は次の5つ。どれも SIL Open Font License 1.1 で商用可、アプリへの同梱可（ライセンス全文の同梱が条件）。大きさは Google Fonts の TTF（2026-11-04 時点）。
+腹の文字（縦書き）と共有画像には **Yuji Syuku**（Kinuta Font Factory、Version 3.002、SIL Open Font License 1.1、TTF 7.8 MB）を使います。`assets/fonts/YujiSyuku-Regular.ttf` を family `NanakorobiBrush` で登録し、`NanakorobiTheme.brushFontFamily` から参照しています。ライセンス全文は `assets/fonts/OFL.txt` に同梱し、設定 → ライセンスに表示します。Regular の1ウェイトだけなので、太字の指定はせず、筆の線の太さは描画側で出します。
+
+検討した候補（どれも SIL OFL 1.1。大きさは Google Fonts の TTF、2026-11-04 時点）：
 
 | 書体 | 印象 | TTF | 備考 |
 | --- | --- | --- | --- |
-| Yuji Syuku（Kinuta Font Factory） | 楷書寄りの筆文字。縁起文字に合い、読みやすい | 7.8 MB | 第一候補 |
+| Yuji Syuku（Kinuta Font Factory） | 楷書寄りの筆文字。縁起文字に合い、読みやすい | 7.8 MB | 採用 |
 | Yuji Boku | 墨のかすれが強い筆文字 | 7.8 MB | 迫力はあるが小さい字でつぶれやすい |
 | Yuji Mai | 舞うような行書 | 7.8 MB | 「合格」「必勝」には柔らかすぎるかもしれない |
 | Zen Antique | 古風な明朝 | 5.5 MB | 毛筆感は弱いが軽い |
 | Kaisei Decol | 装飾の付いた明朝 | 4.2 MB | 同上 |
 
-日本語フォントは1書体でアプリが 4〜8 MB 増えます。「容量を小さく保つ」との兼ね合いで、入れるなら1書体だけにします。入れ方：TTF を `assets/fonts/` に置き、`pubspec.yaml` のコメントアウトしてある `fonts` を有効にし、`NanakorobiTheme.brushFontFamily` を `'NanakorobiBrush'` にする。OFL の全文を `assets/fonts/OFL.txt` に同梱し、設定画面の「ライセンス」から見えるようにする。
+日本語フォントは1書体でアプリが 4〜8 MB 増えるので、同梱は Yuji Syuku の1書体だけにします。書体を替えるときは、TTF を `assets/fonts/` に置き換えて `pubspec.yaml` の `fonts` と `assets/fonts/OFL.txt` を差し替えます。
 
 ## 試験日プリセットの確認元
 
@@ -174,4 +176,4 @@ dart run build_runner build --delete-conflicting-outputs
 - 無料の色：赤・白・黒
 - 0〜3時の記録は当日扱い（設定で「前日の記録」に切り替えられる）
 - 開眼で先に入れる目：左目（向かって右）。設定で変えられる
-- 毛筆体フォント：未決（上の候補から1書体）
+- 毛筆体フォント：Yuji Syuku に決定（同梱済み）

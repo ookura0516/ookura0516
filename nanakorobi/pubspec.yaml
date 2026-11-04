@@ -44,10 +44,11 @@ flutter:
   generate: true
   assets:
     - assets/presets/exam_dates.json
+    - assets/fonts/OFL.txt
 
-  # 毛筆体フォントは未確定（README「毛筆体フォントの候補」）。決まったら assets/fonts/ に置いて
-  # ここで family: NanakorobiBrush として登録する。登録がなくても端末のフォントで動く。
-  # fonts:
-  #   - family: NanakorobiBrush
-  #     fonts:
-  #       - asset: assets/fonts/YujiSyuku-Regular.ttf
+  # 毛筆体：Yuji Syuku（Kinuta Font Factory、SIL Open Font License 1.1）。腹の文字と共有画像で使う。
+  # ライセンス全文は assets/fonts/OFL.txt に同梱し、設定 → ライセンスに出す（lib/main.dart）。
+  fonts:
+    - family: NanakorobiBrush
+      fonts:
+        - asset: assets/fonts/YujiSyuku-Regular.ttf

@@ -1,7 +1,8 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart' show LicenseEntryWithLineBreaks, LicenseRegistry;
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,6 +20,13 @@ import 'state/app_deps.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // 毛筆体 Yuji Syuku の SIL Open Font License を、設定 → ライセンスに出す。
+  LicenseRegistry.addLicense(() async* {
+    yield LicenseEntryWithLineBreaks(
+      const ['Yuji Syuku'],
+      await rootBundle.loadString('assets/fonts/OFL.txt'),
+    );
+  });
   final prefs = await SharedPreferences.getInstance();
   final settingsStore = PrefsSettingsStore(prefs);
   final settings = await settingsStore.load();

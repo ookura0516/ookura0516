@@ -124,6 +124,9 @@ class DarumaPainter extends CustomPainter {
 
   Color get _lineOnBody => _color.isLight ? Color(_color.shade) : const Color(0xFFF3E8D2);
 
+  /// 金の文字と縁。白・黄・金などの明るい体では、沈まないよう濃い金にする。
+  Color get _goldOnBody => _color.isLight ? const Color(0xFF9A7A14) : _gold;
+
   void _paintBase(Canvas canvas) {
     final rect = RRect.fromRectAndRadius(const Rect.fromLTWH(20, 108, 60, 13), const Radius.circular(4));
     final n = look.goldLines;
@@ -324,7 +327,7 @@ class DarumaPainter extends CustomPainter {
       final lineHeight = fontSize * 1.05;
       final total = lineHeight * n;
       var y = bellyCenter.dy - total / 2;
-      final color = look.goldText ? _gold : (_color.isLight ? _ink : const Color(0xFFF7EFDF));
+      final color = look.goldText ? _goldOnBody : (_color.isLight ? _ink : const Color(0xFFF7EFDF));
       for (final ch in chars) {
         final tp = TextPainter(
           text: TextSpan(
@@ -332,7 +335,8 @@ class DarumaPainter extends CustomPainter {
             style: TextStyle(
               fontFamily: brushFontFamily,
               fontSize: fontSize,
-              fontWeight: FontWeight.w800,
+              // 毛筆体（Yuji Syuku）は Regular だけなので太字を指定しない。端末のフォントで描くときは太く。
+              fontWeight: brushFontFamily == null ? FontWeight.w800 : FontWeight.w400,
               color: color,
               height: 1,
             ),
@@ -349,7 +353,7 @@ class DarumaPainter extends CustomPainter {
     final ring = Path()..addOval(Rect.fromCenter(center: bellyCenter, width: 34, height: 40));
     final metric = ring.computeMetrics().first;
     final seg = metric.length / StrokePlan.bellyStrokes;
-    final color = look.goldText ? _gold : _lineOnBody;
+    final color = look.goldText ? _goldOnBody : _lineOnBody;
     for (var i = 0; i < count; i++) {
       final start = seg * i + 0.8 + _jitter.at(80 + i) * 0.5;
       final end = seg * (i + 1) - 0.8;
@@ -365,7 +369,7 @@ class DarumaPainter extends CustomPainter {
     canvas.save();
     canvas.clipPath(bodyPath());
     final face = facePath();
-    final color = look.goldRobe ? _gold : _lineOnBody.withValues(alpha: 0.85);
+    final color = look.goldRobe ? _goldOnBody : _lineOnBody.withValues(alpha: 0.85);
     for (var i = 0; i < count; i++) {
       final p = _robeMark(i);
       if (p == null) continue;

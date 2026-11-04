@@ -1,0 +1,41 @@
+name: kipputen
+description: "キップテン：切符の4桁で10を作る日替わりパズル"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_local_notifications: ^22.3.3
+  google_mobile_ads: ^9.2.0
+  home_widget: ^0.10.0
+  in_app_purchase: ^3.3.1
+  in_app_review: ^2.0.12
+  provider: ^6.1.5+1
+  share_plus: ^13.3.1
+  shared_preferences: ^2.5.6
+  timezone: ^0.11.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.8
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/solutions.json
+    - assets/anniversaries.json
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "#2D6A4F"
+  adaptive_icon_foreground: "assets/icon/icon_foreground.png"

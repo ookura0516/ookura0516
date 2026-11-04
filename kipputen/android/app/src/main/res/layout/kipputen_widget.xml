@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/kipputen_widget_bg"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="今日の切符"
+        android:textColor="#22342A"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/widget_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="- - - -"
+        android:textColor="#22342A"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/widget_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#66756B"
+        android:textSize="11sp" />
+</LinearLayout>

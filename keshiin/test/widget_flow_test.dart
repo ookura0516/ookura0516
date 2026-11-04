@@ -252,4 +252,14 @@ void main() {
     expect(find.text('2026年11月4日のマスに貼る'), findsOneWidget);
     expect(const Day(2026, 11, 4), h.app.today);
   });
+
+  testWidgets('設定からプライバシーポリシーを開ける', (tester) async {
+    final h = await Harness.create();
+    addTearDown(h.close);
+    await pumpApp(tester, h);
+    await tapAndSettle(tester, find.byKey(const Key('tab-settings')));
+    await tapAndSettle(tester, find.byKey(const Key('open-privacy')));
+    expect(find.text('プライバシーポリシー'), findsOneWidget);
+    expect(find.text('集める情報'), findsOneWidget);
+  });
 }

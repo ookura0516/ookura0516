@@ -8,6 +8,7 @@ import '../../core/reminder.dart';
 import '../../monetize/purchase_service.dart';
 import '../theme.dart';
 import '../widgets/paywall.dart';
+import 'privacy_screen.dart';
 
 /// 設定：シート名、消印の書体、書き出し、購入、注意書き。
 class SettingsScreen extends StatefulWidget {
@@ -211,6 +212,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             const SizedBox(height: 24),
             Text('このアプリについて', style: text.titleMedium),
+            ListTile(
+              key: const Key('open-privacy'),
+              contentPadding: EdgeInsets.zero,
+              leading: const Icon(Icons.privacy_tip_outlined),
+              title: const Text('プライバシーポリシー'),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute<void>(builder: (_) => const PrivacyScreen()),
+              ),
+            ),
             const SizedBox(height: 4),
             const Text(kNotPostageNotice, key: Key('notice')),
             const SizedBox(height: 4),

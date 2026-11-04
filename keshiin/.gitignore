@@ -46,3 +46,6 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# スクリーンショット用の見本の絵（store/src/render.js が作る）
+/store/src/photos/

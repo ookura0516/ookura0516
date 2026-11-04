@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -18,9 +19,13 @@ import 'platform/services.dart';
 import 'ui/screens/home_screen.dart';
 import 'ui/theme.dart';
 
-/// 購入の実装の切り替え。ストアに商品「keshiin_kinen」を登録したら true にする。
-/// false の間は端末内だけで解放する仮の実装（[ProvisionalPurchaseService]）を使う。
-const bool usesStorePurchases = false;
+/// 購入の実装の切り替え。
+///
+/// リリースビルド（ストアに出すもの）は in_app_purchase の [StorePurchaseService]、
+/// デバッグビルドは端末内だけで解放する仮の [ProvisionalPurchaseService] を使う。
+/// デバッグでもストアの購入を試すときは `--dart-define=STORE_PURCHASES=true` を付ける。
+const bool usesStorePurchases =
+    kReleaseMode || bool.fromEnvironment('STORE_PURCHASES');
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -241,9 +241,10 @@ void paintMonthSheet(Canvas canvas, Size size, MonthSheetVisual v) {
   }
 
   if (v.completed) {
+    // 右下（アプリ名の上）。見出しやシート名に重ならない場所。
     _completeSeal(
       canvas,
-      Offset(size.width - pad - u * 7, pad + u * 3.5),
+      Offset(size.width - pad - u * 5, size.height - u * 13),
       u * 5,
     );
   }

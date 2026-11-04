@@ -91,7 +91,10 @@ class _ShareScreenState extends ConsumerState<ShareScreen> {
     final l = context.l10n;
     final hasPlus = ref.watch(hasPlusProvider);
     final today = ref.watch(todayProvider);
-    final renderer = ShareImageRenderer(brushFontFamily: NanakorobiTheme.brushFontFamily);
+    final renderer = ShareImageRenderer(
+      brushFontFamily: NanakorobiTheme.brushFontFamily,
+      textFontFamily: ref.watch(appDepsProvider).uiFontFamily,
+    );
     final t = Theme.of(context).textTheme;
 
     final Widget preview;

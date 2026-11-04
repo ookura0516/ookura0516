@@ -32,6 +32,7 @@ class AppDeps {
     DateTime Function()? now,
     this.scheduleClockTimer = true,
     this.locale = const Locale('ja'),
+    this.uiFontFamily,
   })  : now = now ?? DateTime.now,
         repo = DarumaRepository(db);
 
@@ -59,6 +60,9 @@ class AppDeps {
   /// 通知文などを作る言語。
   final Locale locale;
 
+  /// 画面の文字のフォント。普段は null（端末のフォント）。ストア素材の撮影でだけ指定する。
+  final String? uiFontFamily;
+
   /// テストと、ストアのない環境で使う仮の組み合わせ。
   static AppDeps fake({
     AppDatabase? db,
@@ -67,6 +71,7 @@ class AppDeps {
     DateTime Function()? now,
     String bundledPresets = '{"version":1,"updated_on":"2026-11-04","presets":[]}',
     Locale locale = const Locale('ja'),
+    String? uiFontFamily,
   }) =>
       AppDeps(
         db: db ?? AppDatabase.memory(),
@@ -83,6 +88,7 @@ class AppDeps {
         now: now,
         scheduleClockTimer: false,
         locale: locale,
+        uiFontFamily: uiFontFamily,
       );
 }
 

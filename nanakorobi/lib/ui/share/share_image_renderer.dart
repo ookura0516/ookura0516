@@ -54,9 +54,12 @@ class PosterTexts {
 /// だるまと文字から PNG を作る。RepaintBoundary ではなく Canvas に直接描くので、
 /// 画面に出していなくても作れる（テストでも同じ）。
 class ShareImageRenderer {
-  const ShareImageRenderer({this.brushFontFamily});
+  const ShareImageRenderer({this.brushFontFamily, this.textFontFamily});
 
   final String? brushFontFamily;
+
+  /// 説明文のフォント。普段は null（端末のフォント）。ストア素材の撮影でだけ指定する。
+  final String? textFontFamily;
 
   Future<Uint8List> renderPng({
     required DarumaLook look,
@@ -189,7 +192,7 @@ class ShareImageRenderer {
     final tp = TextPainter(
       text: TextSpan(
         text: text,
-        style: TextStyle(fontSize: fontSize, color: color, fontWeight: weight, height: 1.3),
+        style: TextStyle(fontFamily: textFontFamily, fontSize: fontSize, color: color, fontWeight: weight, height: 1.3),
       ),
       textAlign: TextAlign.center,
       textDirection: TextDirection.ltr,

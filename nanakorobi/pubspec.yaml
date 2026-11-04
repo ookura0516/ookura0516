@@ -1,7 +1,7 @@
 name: nanakorobi
 description: "ナナコロビ：だるまに目を入れて目標を始め、毎日の一歩で模様が入る目標帳"
 publish_to: 'none'
-version: 0.1.0+1
+version: 1.0.0+1
 
 environment:
   sdk: ^3.13.7
@@ -38,6 +38,8 @@ dev_dependencies:
   drift_dev: ^2.35.2
   freezed: ^4.0.3
   json_serializable: ^6.15.2
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.8
 
 flutter:
   uses-material-design: true
@@ -52,3 +54,11 @@ flutter:
     - family: NanakorobiBrush
       fonts:
         - asset: assets/fonts/YujiSyuku-Regular.ttf
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "#F7F1E6"
+  adaptive_icon_foreground: "assets/icon/icon_foreground.png"

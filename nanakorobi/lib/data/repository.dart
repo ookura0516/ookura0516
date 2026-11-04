@@ -179,3 +179,8 @@ class DarumaRepository {
   Future<void> deleteDaruma(String id) =>
       (db.delete(db.darumas)..where((t) => t.id.equals(id))).go();
 }
+
+extension DarumaRepositoryMaintenance on DarumaRepository {
+  /// 全部消す（読み込み前の入れ替えや、ストア素材の撮影で使う）。記録は外部キーで一緒に消える。
+  Future<void> deleteAll() => db.delete(db.darumas).go();
+}

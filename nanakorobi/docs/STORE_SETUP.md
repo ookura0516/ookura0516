@@ -32,8 +32,26 @@
 
 ## 3. Android の設定
 
-- `AndroidManifest.xml`：`POST_NOTIFICATIONS`（Android 13 以降の通知）、`RECEIVE_BOOT_COMPLETED`（0時更新の再登録）。`SCHEDULE_EXACT_ALARM` は使わない（通知は inexact で予約している）
-- ウィジェットの receiver（docs/WIDGETS.md）
+- `AndroidManifest.xml`：`POST_NOTIFICATIONS`（Android 13 以降の通知）、`RECEIVE_BOOT_COMPLETED`（0時更新の再登録）は設定済み。`SCHEDULE_EXACT_ALARM` は使わない（通知もウィジェットも inexact で予約している）
+- ウィジェットの receiver は設定済み（docs/WIDGETS.md）
+- 署名：`android/key.properties`（Git には入れない）を置くと `build.gradle.kts` がリリース鍵で署名する。なければデバッグ鍵
+
+```
+storePassword=＜キーストアのパスワード＞
+keyPassword=＜鍵のパスワード＞
+keyAlias=upload
+storeFile=/絶対パス/upload-keystore.jks
+```
+
+```bash
+keytool -genkey -v -keystore ~/upload-keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+```
+
+```bash
+flutter build appbundle --release
+```
+
+- Play Console の「アプリのコンテンツ」で、`POST_NOTIFICATIONS` の用途（リマインド通知）を申告する
 
 ## 4. プライバシーの表示
 
@@ -43,6 +61,7 @@
 - **Google Play のデータセーフティ**：「ユーザーデータを収集・共有しない」
 - 試験日プリセットの更新で jsDelivr（CDN）に JSON を1つ取りに行く。個人情報は送らない。プライバシーポリシーにこの通信を書く
 - 端末内の計測は設定画面で見せ、ユーザーが自分で共有シートに出したときだけ外に出る
+- プライバシーポリシーの本文は `store/privacy_policy.md`。両ストアとも URL が要るので、GitHub Pages などに公開してその URL を登録する
 
 ## 5. 審査メモ（App Store）
 
@@ -54,7 +73,15 @@
 - 縁起物としての風習の説明はするが、ご利益や効能はうたわない
 - 通信はストアと試験日プリセットの更新（CDN）だけ。アカウントなし
 
-## 6. 実機で確かめること
+## 6. 提出に使うもの
+
+- 掲載文：`store/listing_ja.md`（アプリ名・サブタイトル・説明・キーワード・審査メモ）
+- アイコン：App Store は Xcode の Assets（`flutter_launcher_icons` が生成済み）、Google Play は `store/icon_512.png`
+- フィーチャーグラフィック：`store/feature_graphic.png`
+- スクリーンショット：`store/screens/ios/`（6.9インチ、1320×2868）、`store/screens/android/`（1080×1920）。作り直しは `store/README.md`
+- iOS の暗号の申告：`Info.plist` に `ITSAppUsesNonExemptEncryption = false` を設定済み
+
+## 7. 実機で確かめること
 
 - [ ] iOS：Sandbox アカウントで購入 → アプリを消して入れ直し →「購入を復元する」でプラスが戻る
 - [ ] Android：ライセンステスターで購入 → アプリを消して入れ直し → 起動するだけでプラスが戻る

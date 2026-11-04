@@ -6,7 +6,8 @@
 
 - 設計：[docs/DESIGN.md](docs/DESIGN.md)
 - ウィジェット（iOS WidgetKit・Android Glance）の実装手順：[docs/WIDGETS.md](docs/WIDGETS.md)
-- ストアの設定手順（プラスの商品、プライバシー、審査メモ）：[docs/STORE_SETUP.md](docs/STORE_SETUP.md)
+- ストアの設定手順（プラスの商品、署名、プライバシー、審査メモ）：[docs/STORE_SETUP.md](docs/STORE_SETUP.md)
+- ストア素材（アイコン、スクリーンショット、掲載文、プライバシーポリシー）：[store/README.md](store/README.md)
 - スタック：Flutter 3.47 / Riverpod（Notifier）/ Drift / Freezed / go_router / CustomPainter / ARB（ja 先行、en も同じキー）
 
 ## 動かす
@@ -42,7 +43,7 @@ dart run build_runner build --delete-conflicting-outputs
 | 棚（現役・満願・納めの3段、年で絞り込み） | できた |
 | 試験日プリセット（同梱 JSON 109件、jsDelivr から更新、失敗時は同梱版） | できた。日程は公式発表を確認できたものだけ（下の表）。兵庫県の公立高校入試は公式の日程 PDF を開けず未収録 |
 | ウィジェット：Dart 側（WidgetSyncService、14日分のタイムライン、0時で進む設計） | できた |
-| ウィジェット：ネイティブ側（iOS 小・中・ロック画面、Android 小・中） | まだ。手順と参考コードは [docs/WIDGETS.md](docs/WIDGETS.md) |
+| ウィジェット：ネイティブ側（iOS 小・中・ロック画面、Android 小・中） | ソースはできた（iOS は `ios/NanakorobiWidget/`、Android は Glance と home_widget の 0 時予約）。この環境には Xcode も Android SDK もなく、ビルドは未確認。Xcode でのターゲット追加は [docs/WIDGETS.md](docs/WIDGETS.md) |
 | 共有画像（1080×1350 と 1:1、テンプレ5種、年末の棚ポスター、ストアリンクなし） | できた。PNG の大きさをテスト済み |
 | リマインド通知（既定オフ、1日1回、14日分を日ごとの本文で予約） | コードはできた。実機での確認はまだ |
 | プラス（¥600、非消耗型、現役無制限・全12色・ポスター・全テンプレ・JSON 書き出し/読み込み） | コードとテストはできた。ストアの商品登録はまだ（[docs/STORE_SETUP.md](docs/STORE_SETUP.md)） |
@@ -50,7 +51,8 @@ dart run build_runner build --delete-conflicting-outputs
 | 共有パッケージ ookura_iap・ookura_settings・ookura_streak・ookura_design・ookura_a11y の組み込み | まだ（非公開のため、窓口と仮実装で動く。下の表） |
 | 毛筆体フォント | できた。Yuji Syuku（SIL OFL 1.1）を同梱し、腹の文字と共有画像で使う |
 | 英語版 | ARB の en キーまで。文言の見直しと切り替えの導線はまだ |
-| アイコン・スプラッシュ・ストア素材 | まだ |
+| アイコン・スプラッシュ・ストア素材 | できた（[store/README.md](store/README.md)）。スクリーンショットは Flutter のテスト実行で画面を組み立てて描いたもので、実機の画面ではない |
+| リリース設定（版 1.0.0+1、Android の署名、権限、iOS の App Group・エンタイトルメント・暗号の申告） | できた。署名鍵、ストアの商品登録、プライバシーポリシーの公開 URL は人の作業（[docs/STORE_SETUP.md](docs/STORE_SETUP.md)） |
 | 実機での確認 | まだ（この環境は Linux で、iOS/Android のビルドは未確認） |
 | Apple Watch・Live Activity | 後回し |
 

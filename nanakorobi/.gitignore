@@ -49,3 +49,6 @@ app.*.map.json
 
 # 生成コード（flutter pub get / build_runner で作る）
 lib/l10n/generated/
+
+# ストア素材を作るときだけ使う UI フォント（store/src/fetch_fonts.sh で取る）
+store/src/fonts/

@@ -40,6 +40,16 @@ class HomeWidgetSyncService implements WidgetSyncService {
         androidName: androidWidgetName,
         qualifiedAndroidName: androidQualifiedName,
       );
+      // Android：各日の 0 時（端末のタイムゾーン）に描き直す。iOS は WidgetKit のタイムラインが進めるので何もしない。
+      // 翌日分の表示は JSON に入っているので、Doze で遅れても日付で正しい行を選べる。
+      final midnights = snapshot == null
+          ? <DateTime>[]
+          : [for (final e in snapshot.timeline.skip(1)) e.date.toDateTime()];
+      if (midnights.isEmpty) {
+        await HomeWidget.cancelScheduledWidgetUpdates(qualifiedAndroidName: androidQualifiedName);
+      } else {
+        await HomeWidget.scheduleWidgetUpdates(midnights, qualifiedAndroidName: androidQualifiedName);
+      }
     } catch (_) {
       // ウィジェットが置かれていない、または未対応の環境。アプリは止めない。
     }

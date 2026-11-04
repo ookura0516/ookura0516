@@ -57,11 +57,12 @@ class _NanakorobiAppState extends ConsumerState<NanakorobiApp> with WidgetsBindi
   @override
   Widget build(BuildContext context) {
     final router = ref.watch(routerProvider);
-    final locale = ref.watch(appDepsProvider).locale;
+    final deps = ref.watch(appDepsProvider);
+    final locale = deps.locale;
     return MaterialApp.router(
       onGenerateTitle: (context) => AppLocalizations.of(context).appName,
       debugShowCheckedModeBanner: false,
-      theme: NanakorobiTheme.light,
+      theme: NanakorobiTheme.light(fontFamily: deps.uiFontFamily),
       routerConfig: router,
       locale: locale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,

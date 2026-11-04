@@ -21,8 +21,15 @@ class NanakorobiTheme {
   /// 描画側（DarumaPainter）は null も受け付け、そのときは端末のフォントの太字で描く（README「毛筆体フォント」）。
   static const String brushFontFamily = 'NanakorobiBrush';
 
-  static ThemeData get light {
-    final base = ThemeData.light(useMaterial3: true);
+  /// [fontFamily] は画面の文字のフォント。null なら端末のフォント。ストア素材の撮影でだけ指定する。
+  static ThemeData light({String? fontFamily}) {
+    var base = ThemeData.light(useMaterial3: true);
+    if (fontFamily != null) {
+      base = base.copyWith(
+        textTheme: base.textTheme.apply(fontFamily: fontFamily),
+        primaryTextTheme: base.primaryTextTheme.apply(fontFamily: fontFamily),
+      );
+    }
     return base.copyWith(
       scaffoldBackgroundColor: paper,
       colorScheme: const ColorScheme.light(
@@ -55,9 +62,9 @@ class NanakorobiTheme {
         backgroundColor: card,
         showDragHandle: true,
       ),
-      snackBarTheme: const SnackBarThemeData(
+      snackBarTheme: SnackBarThemeData(
         backgroundColor: ink,
-        contentTextStyle: TextStyle(color: paper),
+        contentTextStyle: TextStyle(color: paper, fontFamily: fontFamily),
         behavior: SnackBarBehavior.floating,
       ),
       chipTheme: ChipThemeData(
@@ -82,7 +89,7 @@ class NanakorobiTheme {
         style: FilledButton.styleFrom(
           minimumSize: const Size(0, 52),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, fontFamily: fontFamily),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
@@ -91,11 +98,14 @@ class NanakorobiTheme {
           foregroundColor: ink,
           side: const BorderSide(color: Color(0xFFD9CDB8), width: 1.5),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-          textStyle: const TextStyle(fontSize: 16),
+          textStyle: TextStyle(fontSize: 16, fontFamily: fontFamily),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(foregroundColor: vermilion),
+        style: TextButton.styleFrom(
+          foregroundColor: vermilion,
+          textStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, fontFamily: fontFamily),
+        ),
       ),
       listTileTheme: const ListTileThemeData(iconColor: inkDim),
       dividerTheme: const DividerThemeData(color: paperDeep),

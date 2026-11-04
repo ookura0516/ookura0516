@@ -1,10 +1,14 @@
 # KeshiinWidget（iOS ウィジェット）
 
-このフォルダの Swift は、まだ Xcode のターゲットに入っていません（この開発環境に Xcode がないため）。
-Mac で次の手順を行ってください。
+ホーム画面（小・中）とロック画面のウィジェット。`ios/Runner.xcodeproj` に
+ターゲット `KeshiinWidgetExtension`（Bundle ID `com.ookura.keshiin.KeshiinWidget`、iOS 17 以上）として入っています。
+ターゲットは `tool/add_ios_widget_target.py` で足しました（Xcode の New Target → Widget Extension と同じ中身）。
 
-1. Xcode で `ios/Runner.xcworkspace` を開く
-2. File → New → Target → Widget Extension、名前は `KeshiinWidget`（Live Activity と Configuration は外す）
-3. 自動で作られた Swift を消し、このフォルダの `KeshiinWidget.swift` をターゲットに入れる
-4. Runner には App Group の entitlements（`Runner/Runner.entitlements`、`group.com.ookura.keshiin`）を設定済み。KeshiinWidget の Signing & Capabilities で App Groups を足し、同じ `group.com.ookura.keshiin` を選ぶ（このフォルダの `KeshiinWidget.entitlements` を使ってよい）
-5. KeshiinWidget の Deployment Target を iOS 17 以上にする（`containerBackground` を使うため）
+| ファイル | 中身 |
+| --- | --- |
+| `KeshiinWidget.swift` | WidgetKit のウィジェット。App Group の UserDefaults から今日と明日の分を読み、0時に切り替える |
+| `Info.plist` | 拡張の種類（`com.apple.widgetkit-extension`）とバージョン（アプリと同じ `FLUTTER_BUILD_NAME`・`FLUTTER_BUILD_NUMBER`） |
+| `KeshiinWidget.entitlements` | App Group `group.com.ookura.keshiin` |
+
+署名は自動（Automatic）です。Xcode か GitHub Actions で初めて署名するときに、
+Apple Developer に App Group とウィジェットの App ID が作られます。

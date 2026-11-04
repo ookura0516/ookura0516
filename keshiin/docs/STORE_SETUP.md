@@ -52,11 +52,13 @@ storeFile=/Users/<あなた>/keshiin-upload.jks
 
 1. Xcode で `ios/Runner.xcworkspace` を開き、Signing & Capabilities で Team を選ぶ
 2. Runner には App Group の entitlements（`Runner/Runner.entitlements`）を設定済み。Apple Developer で `group.com.ookura.keshiin` が作られることを確かめる
-3. ホーム画面のウィジェットのターゲットを足す（[ios/KeshiinWidget/README.md](../ios/KeshiinWidget/README.md)）
+3. ホーム画面のウィジェットのターゲット（`KeshiinWidgetExtension`）は Xcode のプロジェクトに入れてある（[ios/KeshiinWidget/README.md](../ios/KeshiinWidget/README.md)）。Signing & Capabilities で、ウィジェットにも同じ Team と App Group が付いていることを確かめる
 
-## 3. 初めてのビルド（この開発環境ではできなかった）
+## 3. ビルドの確認
 
-この開発環境には Android SDK と Xcode が無く、ネイティブのビルドは一度も通していません。`flutter analyze` と `flutter test`（127件）は通っています。
+GitHub Actions（`.github/workflows/keshiin.yml`）が、push のたびに `flutter analyze`・`flutter test`・署名なしの Android（AAB・APK）と iOS のビルドを行います。Android のウィジェット（Kotlin）と、iOS のアプリ・ウィジェット（Swift）のコンパイルはここで確かめます。結果は GitHub の Actions タブで見られます。
+
+手元で作るときは次のとおりです。
 
 ```bash
 flutter build appbundle --release
@@ -66,10 +68,6 @@ flutter build appbundle --release
 flutter build ipa --release
 ```
 
-確かめるところ：
-
-- [ ] Android：`KeshiinWidgetProvider.kt`（ウィジェット）がコンパイルできる。flutter_local_notifications のための desugaring（`build.gradle.kts`）が通る
-- [ ] iOS：`AppDelegate.swift` の通知の設定、`KeshiinWidget.swift` がコンパイルできる。Deployment Target は Runner が Flutter の既定、ウィジェットが iOS 17 以上
 - [ ] iOS：App Store に上げたときに、`Info.plist` の `NSPhotoLibraryUsageDescription`・`NSCameraUsageDescription` について警告が出ないか（image_picker がこれらの API を参照するため入れてある。カメラは使っていない）
 
 ## 4. 「記念」の商品を作る
@@ -131,3 +129,38 @@ flutter build ipa --release
 - [ ] 購入：Sandbox／ライセンステスターで購入→アプリを消して入れ直し→復元で「記念」が戻る。途中でキャンセルしても有効にならない
 - [ ] ZIP の書き出し：「ファイル」に保存でき、中に JSON と元の写真が入っている
 - [ ] 評価依頼：1枚目の保存の直後に出る（出すかどうかは OS が決める）
+
+## 8. GitHub Actions でのビルドとアップロード
+
+Actions → keshiin → Run workflow で `upload` を選ぶと、署名してストアのテスト用の場所に上げます。
+
+| upload | 上げる先 |
+| --- | --- |
+| `play-internal` | Google Play の内部テスト（下書き） |
+| `testflight` | App Store Connect（TestFlight） |
+| `both` | 両方 |
+
+一般公開（Google Play の製品版への昇格、App Store の審査への提出）は、ストアの管理画面で人が行います。ワークフローはしません。
+
+### 前もってストアの管理画面でやること
+
+- Google Play：アプリを作り、**最初の AAB は Play Console に手で上げる**（API で上げられるのは2本目から）。Actions の成果物 `keshiin-android` の `app-release.aab` を使ってよい（署名鍵のシークレットを入れたあとのもの）
+- App Store Connect：アプリ（Bundle ID `com.ookura.keshiin`）を作る
+
+### シークレット（Settings → Secrets and variables → Actions）
+
+| 名前 | 中身 |
+| --- | --- |
+| `ANDROID_KEYSTORE_BASE64` | アップロード鍵（`.jks`）を base64 にしたもの（`base64 -i keshiin-upload.jks`） |
+| `ANDROID_KEYSTORE_PASSWORD` | 鍵ストアのパスワード |
+| `ANDROID_KEY_ALIAS` | 鍵の別名（`upload`） |
+| `ANDROID_KEY_PASSWORD` | 鍵のパスワード |
+| `PLAY_SERVICE_ACCOUNT_JSON` | Play Console の API アクセスで作ったサービスアカウントの JSON（「リリース」の権限） |
+| `APPLE_TEAM_ID` | Apple Developer のチーム ID（10文字） |
+| `ASC_KEY_ID` | App Store Connect の API キーの ID（役割は「App Manager」以上） |
+| `ASC_ISSUER_ID` | API キーの Issuer ID |
+| `ASC_KEY_P8_BASE64` | API キー（`AuthKey_XXXX.p8`）を base64 にしたもの |
+
+署名鍵のシークレットが無いと、Android はデバッグ鍵で署名されます（ビルドの確認にはなるが、ストアには出せません）。
+iOS の署名は自動（API キーで証明書とプロビジョニングプロファイルを作る）です。
+

@@ -1,6 +1,8 @@
 // アイコンとスプラッシュの絵を書き出す。
 //
-//   node store/src/render.js <出力先のルート（kipputen/）>
+//   node store/src/render.js <出力先のルート（kipputen/）> [アプリ画面のPNGがあるフォルダ]
+//
+// アプリ画面のフォルダを渡したときだけ、ストアのスクリーンショットも作る（撮り方は store/README.md）。
 //
 // Chromium（Playwright）で SVG を描いて PNG にする。書き出したあと、
 //   dart run flutter_launcher_icons
@@ -13,6 +15,8 @@ const path = require('path');
 const { chromium } = require('playwright');
 
 const root = path.resolve(process.argv[2] || '.');
+const shotsDir = process.argv[3] ? path.resolve(process.argv[3]) : null;
+const FONT = '"Noto Sans CJK JP","IPAPGothic","IPAGothic","Hiragino Sans","WenQuanYi Zen Hei",sans-serif';
 
 // アプリの配色（lib/ui/theme.dart・ticket_design.dart の「若草」と同じ）
 const C = {
@@ -86,8 +90,48 @@ const svg = (size, body, bg = true) => `
 </svg>`;
 
 const page = (body, w, h) => `<!doctype html><html><head><meta charset="utf-8">
-<style>html,body{margin:0;width:${w}px;height:${h}px;overflow:hidden;background:transparent}</style>
+<style>html,body{margin:0;width:${w}px;height:${h}px;overflow:hidden;background:transparent}
+body{font-family:${FONT}}</style>
 </head><body>${body}</body></html>`;
+
+// ストアのスクリーンショット：上に見出し、下にアプリの画面。[名前, 見出し, 小見出し, 画面, 上から見せる割合]
+const captions = [
+  ['01_today', '切符の4桁で、10を作れ', '＋−×÷と括弧だけ。途中の計算も見える', 'typing.png', 0.6],
+  ['02_punch', '毎日0時に、新しい切符', '解けたら入鋏。ほかの解き方も探そう', 'solved.png', 0.66],
+  ['03_all', '全部見つけたら「完」', '並べ替えただけの式は、同じ解として数える', 'back.png', 0.42],
+  ['04_share', '式は★★★で隠して投稿', '全部見つけた日は、切符が3枚', 'share.png', 0.74],
+  ['05_collection', '0000〜9999の硬券図鑑', 'ゾロ目・連番・回文・誕生日は金縁', 'collection.png', 1],
+];
+
+/// 端末の画面の縦横比（440×956）。
+const SCREEN_RATIO = 956 / 440;
+
+function shotHtml(w, h, [, title, sub, file, crop]) {
+  const s = w / 1320;
+  const src = 'data:image/png;base64,' + fs.readFileSync(path.join(shotsDir, file)).toString('base64');
+  const top = 470 * s;
+  const maxH = h - top - 90 * s;
+  let phoneW = 1060 * s;
+  if (phoneW * SCREEN_RATIO * crop > maxH) phoneW = maxH / (SCREEN_RATIO * crop);
+  const phoneH = phoneW * SCREEN_RATIO * crop;
+  const phoneTop = top + (maxH - phoneH) * 0.35; // 余った高さは上下に分ける（上を少なめに）
+  const fade = crop < 1
+    ? `<div style="position:absolute;left:0;right:0;bottom:0;height:${phoneH * 0.16}px;
+         background:linear-gradient(180deg,rgba(243,239,228,0),rgba(243,239,228,1))"></div>` : '';
+  return page(`
+  <div style="width:${w}px;height:${h}px;position:relative;overflow:hidden;
+       background:linear-gradient(180deg,${C.bgTop} 0%,${C.bgBottom} 100%)">
+    <div style="position:absolute;top:${150 * s}px;width:100%;text-align:center;color:${C.paper};
+         font-size:${92 * s}px;font-weight:700;letter-spacing:${2 * s}px">${title}</div>
+    <div style="position:absolute;top:${285 * s}px;width:100%;text-align:center;color:#CFE0C9;
+         font-size:${48 * s}px">${sub}</div>
+    <div style="position:absolute;top:${phoneTop}px;left:${(w - phoneW) / 2}px;width:${phoneW}px;height:${phoneH}px;
+         overflow:hidden;border-radius:${52 * s}px;border:${10 * s}px solid #183B2C;
+         box-shadow:0 ${30 * s}px ${80 * s}px rgba(0,0,0,.45);background:#F3EFE4;box-sizing:content-box">
+      <img src="${src}" style="display:block;width:100%">${fade}
+    </div>
+  </div>`, w, h);
+}
 
 async function shoot(browser, html, w, h, out, { transparent = false } = {}) {
   const p = await browser.newPage({ viewport: { width: w, height: h }, deviceScaleFactor: 1 });
@@ -119,5 +163,25 @@ async function shoot(browser, html, w, h, out, { transparent = false } = {}) {
   await shoot(browser, page(svg(512, ticket(512, 520, 790)), 512, 512), 512, 512,
     a('store/icon_512.png'));
 
+  // Play ストアのフィーチャーグラフィック（1024×500）
+  await shoot(browser, page(`
+    <div style="width:1024px;height:500px;position:relative;overflow:hidden;
+         background:linear-gradient(180deg,${C.bgTop} 0%,${C.bgBottom} 100%)">
+      <svg width="1024" height="500" viewBox="0 0 1024 500" style="position:absolute;inset:0">
+        ${ticket(820, 250, 360, { tilt: -8, id: 'fg' })}
+      </svg>
+      <div style="position:absolute;left:70px;top:110px;color:${C.paper};font-size:92px;font-weight:700;letter-spacing:8px">キップテン</div>
+      <div style="position:absolute;left:74px;top:250px;color:#EAF2E4;font-size:36px;line-height:1.6">切符の4桁で、10を作れ。</div>
+      <div style="position:absolute;left:74px;top:320px;color:#CFE0C9;font-size:24px">毎日0時に新しい切符 ・ 全解探し ・ 硬券図鑑</div>
+    </div>`, 1024, 500), 1024, 500, a('store/feature_graphic.png'));
+
+  if (shotsDir) {
+    // App Store（6.9インチ：1320×2868）と Google Play（1080×1920、縦横比 2:1 以内）
+    for (const [dir, w, h] of [['ios', 1320, 2868], ['android', 1080, 1920]]) {
+      for (const c of captions) {
+        await shoot(browser, shotHtml(w, h, c), w, h, a(`store/screens/${dir}/${c[0]}.png`));
+      }
+    }
+  }
   await browser.close();
 })();

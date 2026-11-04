@@ -5,7 +5,8 @@
 毎日 0 時（日本時間）に、全員に同じ番号の切符が出ます。4つの数字を全部1回ずつ使い、＋−×÷と括弧で 10 を作ります。解けたら入鋏が入り、ほかの解き方も探せます（全解探し）。解いた番号は硬券図鑑（0000〜9999）に集まります。
 
 - 設計：ブランチ `claude/dazzling-planck-qofymj` の「アプリ4案_設計書_第2弾.md」の「案4 キップテン」と「共通の技術方針」
-- サーバー・アカウントなし。通信しないで動きます
+- サーバー・アカウントなし。ゲームは通信しないで動きます（通信するのは広告とストアだけ）
+- ストアへの提出手順：[docs/STORE_SETUP.md](docs/STORE_SETUP.md)　プライバシーポリシー：[docs/PRIVACY.md](docs/PRIVACY.md)　掲載文と画像：[store/](store/)
 - 実在の鉄道事業者名・駅名・地紋は使っていません。硬券のデザインと地紋（波線）はすべて自作です
 
 ## 動かし方
@@ -16,9 +17,10 @@ Flutter 3.47（Dart 3.13）で確認しました。
 | --- | --- |
 | パッケージを入れる | `flutter pub get` |
 | 静的解析 | `flutter analyze` |
-| テスト（66件） | `flutter test` |
+| テスト（81件） | `flutter test` |
 | 実機・シミュレーターで動かす | `flutter run` |
 | 全解を計算し直す（`assets/solutions.json` を作る） | `dart run tool/generate_solutions.dart` |
+| ストア用のビルド | `flutter build ipa`、`flutter build appbundle`（署名の準備は [docs/STORE_SETUP.md](docs/STORE_SETUP.md)） |
 
 ```bash
 cd kipputen
@@ -36,7 +38,7 @@ flutter test
 flutter run
 ```
 
-デバッグビルドでは、購入ボタンを押すとすぐ「買った」ことになり、図鑑の下に仮のバナー枠が出ます（画面の流れを確かめるため）。リリースビルドでは、購入はできず、バナーも出ません。
+デバッグビルドでは、図鑑の下に Google のテスト広告が出ます。購入はストア（Sandbox・ライセンステスター）につながります。AdMob の本番 ID が未設定のあいだは、リリースビルドに広告は出ません。
 
 ## できたこと、まだのこと
 
@@ -49,40 +51,44 @@ flutter run
 | 今日の切符（硬券の見た目、数字・演算子のキー、途中結果、入鋏の動き） | できた | |
 | 全解探し（切符の裏、5つまで、「完」の印） | できた | |
 | 硬券図鑑（100×100、ゾロ目・連番・回文・誕生日は金縁、千番台ごとの「完」） | できた | マスを押すか番号を入れると、その切符で練習できる |
-| 設定（遊び方、成績、タイマー表示、誕生日、デザイン、購入） | できた | タイマーは初期オフ。タイムは表示しなくても記録する |
+| 設定（遊び方、成績、タイマー表示、通知、誕生日、デザイン、購入・復元、プライバシーポリシー） | できた | タイマーは初期オフ。タイムは表示しなくても記録する |
 | 共有画像（日付・通し番号・式・入鋏、★★★で隠す／見せる、全解の日は3枚の扇、縦長・正方形） | できた | ストアリンクは入れない（共通方針）。アプリ名は発行者欄と下に小さく |
 | 共通部品 `lib/daily/`（日替わりの切り替え、連続日数、結果画像、ウィジェット用データ、評価依頼の回数制限、決定的な乱数） | できた | `packages/ookura_daily` がリポジトリに無かったので、アプリ内に同じ形で作った。`lib/daily/` はアプリ固有のコードを読まないので、そのまま切り出せる |
 | ウィジェット：Dart 側（今日と翌日の分を書き出し、JST 0時の描き直しを予約） | できた | `home_widget` を使用。テストあり |
 | ウィジェット：Android（`KipputenWidgetProvider`） | コードはできた、ビルド未確認 | この環境では Android SDK を取得できず、`flutter build apk` を通せていない |
-| ウィジェット：iOS（`ios/KipputenWidget/KipputenWidget.swift`） | コードだけ | Xcode で Widget Extension の target を作り、このファイルと App Group `group.com.ookura.kipputen` を設定する必要がある（下記） |
-| 広告（図鑑画面の下のバナーだけ） | 仮の実装 | `AdService` を `google_mobile_ads` の実装に差し替える。広告ユニット ID は未設定 |
-| 購入（広告削除 ¥480、硬券デザインパック ¥320） | 仮の実装 | `PurchaseService` を `in_app_purchase` の実装に差し替える（ひそかぎの `StorePurchaseService` と同じ形）。商品 ID は未設定 |
+| ウィジェット：iOS（`ios/KipputenWidget/KipputenWidget.swift`） | コードだけ | **提出前に必須**。Xcode で Widget Extension の target を作り、App Group を設定する（[docs/STORE_SETUP.md](docs/STORE_SETUP.md) の1） |
+| 広告（図鑑画面の下のバナーだけ、非パーソナライズ、G レーティング） | できた。本番 ID は未設定 | `google_mobile_ads`。いまは Google のテスト ID。切り替えは [docs/STORE_SETUP.md](docs/STORE_SETUP.md) の4 |
+| 購入（広告削除 ¥480、硬券デザインパック ¥320、復元） | できた。ストアの商品は未登録 | `in_app_purchase`。商品 ID は `kipputen_remove_ads` と `kipputen_design_pack`。デザインパックは、デザインを選ぼうとしたときに購入の確認を出す |
 | 評価依頼（初めての全解、図鑑の1ページ完成の直後。初回利用日は出さず、365日に3回まで） | できた | `in_app_review` |
-| 通知（1日1回・初期オフ） | まだ | 初版の範囲外 |
-| 同意（ATT・UMP、`ookura_consent`） | まだ | 広告を本物にするときに必要 |
+| 通知（1日1回・初期オフ、時刻は選べる、文面は「今日は ◯◯◯◯」） | できた | `flutter_local_notifications`。7日分を端末で予約し、開くたびに予約し直す。解いた日は出さない。Android は正確なアラームの権限を使わないので数分ずれることがある |
+| 同意（UMP） | できた | EEA・英国などで起動時に同意フォーム。設定に「広告のプライバシー設定」。ATT は出さない（非パーソナライズのみ）。`ookura_consent` が無いのでアプリ内に書いた |
+| プライバシーポリシー | できた | アプリ内と `docs/PRIVACY.md`（同じ文かテストで確かめる）。公開 URL はまだ |
+| リリースの設定（1.0.0、iPhone のみ・縦向き、Android の署名、輸出コンプライアンス） | できた | 署名の鍵は人が作る（[docs/STORE_SETUP.md](docs/STORE_SETUP.md) の2） |
 | アイコン・スプラッシュ | できた | 深緑の地に「10」の硬券。作り直しかたは [store/README.md](store/README.md) |
-| ストア素材（フィーチャーグラフィック、スクリーンショット、掲載文） | まだ | Play 用の 512 アイコンだけある |
+| ストア素材（512 アイコン、フィーチャーグラフィック、スクリーンショット5枚×2サイズ、掲載文） | できた | スクリーンショットは Web ビルドで撮ったもの（[store/README.md](store/README.md)） |
+| ストアの登録・AdMob・審査 | まだ | 人がやる作業。順番は [docs/STORE_SETUP.md](docs/STORE_SETUP.md) |
 | 書体（活版風の無料フォント） | まだ | ライセンス確認が要るので、いまは端末の標準書体 |
-| 実機での確認（画像生成、ウィジェットの0時更新） | まだ | 画面は Web ビルドでだけ見た（Web は対象外なので、確認用に一時的に作っただけ） |
+| Android・iOS のビルドと実機での確認 | まだ | この環境では Android SDK も Xcode も使えず、`flutter build` を通せていない。確かめる項目は [docs/STORE_SETUP.md](docs/STORE_SETUP.md) の9 |
 
 ## 作り
 
 ```
 kipputen/
   tool/generate_solutions.dart   全解の事前計算（ビルド時に1回）
-  store/src/render.js            アイコンとスプラッシュの絵（SVG → PNG）
+  store/                         アイコン・スプラッシュ・ストア素材と、その作り方（render.js・shots_main.dart）
+  docs/                          ストア提出の手順、プライバシーポリシー
   assets/solutions.json          全解（1組み合わせ1行）
   assets/anniversaries.json      記念日の固定出題
   lib/core/      ルール・評価・正規化・探索・出題（Flutter を使わない純粋な Dart）
   lib/daily/     日替わりの共通部品（後で packages/ookura_daily に切り出す）
   lib/data/      端末に保存する記録（solved / play_log / 設定）
-  lib/monetize/  広告と購入（差し替えられる仮の実装）
-  lib/platform/  home_widget・share_plus・in_app_review への窓口
+  lib/monetize/  広告（AdMob・UMP）と購入（in_app_purchase）
+  lib/platform/  home_widget・share_plus・in_app_review・通知への窓口
   lib/ui/        画面
   test/          ユニットテストとウィジェットテスト
 ```
 
-パッケージはひそかぎに合わせて `provider` と `shared_preferences` を使い、共通方針にある `home_widget`・`share_plus`・`in_app_review` を足しました。
+パッケージはひそかぎに合わせて `provider`・`shared_preferences`・`google_mobile_ads`・`in_app_purchase`・`flutter_launcher_icons`・`flutter_native_splash` を使い、共通方針にある `home_widget`・`share_plus`・`in_app_review` と、通知のための `flutter_local_notifications`・`timezone` を足しました。
 
 ### 正規化（「本質的に違う解」の数え方）
 
@@ -115,14 +121,10 @@ kipputen/
 | 曜日の難易度帯は月（易）と金（分数）だけ指定 | 上の表のとおり全曜日に割り当てた | 指定のない曜日を決める必要があった |
 | 同じ番号を過去1年避ける | それに加えて、同じ組み合わせもなるべく30日空ける | 7168 と 6781 のように、並べ替えただけの番号が近い日に続くと同じ問題になるため |
 | 活版風の無料フォント | 端末の標準書体 | フォントのライセンス確認が済んでいない |
+| iPhone・iPad の両方 | iOS は iPhone のみ（iPad では iPhone 版として動く）。縦向きのみ | 画面を縦向きの電話の大きさで作っている。iPad 向けの画面とスクリーンショットは初版では用意しない |
+| 共通基盤 ookura_consent で同意を取る | アプリ内（`lib/monetize/ad_service.dart`）で UMP を呼ぶ | ookura_consent がリポジトリに無い。ひそかぎと同じ書き方にした |
+| 通知は1日1回 | 7日分を先に予約し、アプリを開くたびに予約し直す | サーバーなしで日替わりの番号を文面に入れるため。開かない日が7日続くと通知も止まる（しつこくしない） |
 
-## iOS ウィジェット
+## ストアに出すまで
 
-1. Xcode で `ios/Runner.xcworkspace` を開き、File → New → Target → Widget Extension を `KipputenWidget` という名前で作る
-2. 作られた Swift ファイルを消し、`ios/KipputenWidget/KipputenWidget.swift` を target に入れる
-3. Runner と KipputenWidget の両方に App Groups を足し、`group.com.ookura.kipputen` を選ぶ
-
-## 本番の広告と購入に差し替えるとき
-
-- 広告：`lib/monetize/ad_service.dart` の `AdService` を実装したクラスを作り、`banner()` で `google_mobile_ads` の `BannerAd` を返す。`lib/main.dart` の `PlaceholderAdService` を置き換える。図鑑画面以外には出さない
-- 購入：`lib/monetize/products.dart` の `storeId` に商品 ID を入れ、`PurchaseService` を `in_app_purchase` で実装したクラスに置き換える
+人がやる作業（iOS ウィジェットの target 追加、署名の鍵、ストアの商品登録、AdMob の本番 ID、プライバシーの申告、審査メモ、Google Play のクローズドテスト、実機での確認）は、順番どおりに [docs/STORE_SETUP.md](docs/STORE_SETUP.md) にまとめました。

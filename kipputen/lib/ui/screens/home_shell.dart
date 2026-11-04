@@ -10,14 +10,17 @@ import 'settings_screen.dart';
 
 /// 下のタブ：今日の切符・硬券図鑑・設定。
 class HomeShell extends StatefulWidget {
-  const HomeShell({super.key});
+  const HomeShell({super.key, this.initialTab = 0});
+
+  /// 最初に開くタブ（0 = 今日の切符、1 = 図鑑、2 = 設定）。
+  final int initialTab;
 
   @override
   State<HomeShell> createState() => _HomeShellState();
 }
 
 class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
-  int _tab = 0;
+  late int _tab = widget.initialTab;
   Timer? _midnight;
 
   @override

@@ -8,8 +8,13 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import path from 'node:path';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-// Playwright は全体に入っているものを使う（ESM の import では見つからないため require で読む）
-const { chromium } = createRequire(import.meta.url)('playwright');
+// Playwright は全体に入っているものを使う（ESM の import では見つからないため require で読む）。
+// playwright が無ければ playwright-core（npm i playwright-core）でもよい
+const req = createRequire(import.meta.url);
+let pw = null;
+for (const m of ['playwright', 'playwright-core']) { try { pw = req(m); break; } catch { /* 次を試す */ } }
+if (!pw) { console.error('Playwright が見つかりません。promo_videos で npm i playwright-core を実行してください'); process.exit(1); }
+const { chromium } = pw;
 const [app, fmt] = process.argv.slice(2);
 const opt = (k, d) => { const i = process.argv.indexOf(k); return i > 0 ? process.argv[i + 1] : d; };
 const cps = Number(opt('--cps', '6.2'));
@@ -18,7 +23,9 @@ const outDir = path.join(here, 'out');
 mkdirSync(outDir, { recursive: true });
 
 const size = fmt === 'V' ? { width: 1080, height: 1920 } : { width: 1920, height: 1080 };
-const browser = await chromium.launch();
+// Playwright の Chromium が無い Mac では、入っている Google Chrome を使う
+let browser;
+try { browser = await chromium.launch(); } catch { browser = await chromium.launch({ channel: 'chrome' }); }
 const page = await browser.newPage({ viewport: size, deviceScaleFactor: 1 });
 page.on('pageerror', e => { console.error('page error:', e.message); process.exitCode = 1; });
 await page.goto(pathToFileURL(path.join(here, 'page.html')).href);

@@ -1,0 +1,11 @@
+{
+  "name": "promo-videos",
+  "private": true,
+  "description": "Web体験つきアプリ4案の宣伝動画（字幕と図・声は後入れ）",
+  "type": "module",
+  "dependencies": {
+    "@fontsource/noto-sans-jp": "^5.3.1",
+    "@fontsource/shippori-mincho": "^5.3.0",
+    "@fontsource/zen-maru-gothic": "^5.3.1"
+  }
+}

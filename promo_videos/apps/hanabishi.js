@@ -211,7 +211,7 @@
   }
 
   function motif(ctx) {
-    const lt = (ctx.lt % 3.2);
+    const lt = (ctx.lt % 2.6);
     const b = { at: 0, x: 0, y: 0, type: 'kiku', colors: COL.kiku, core: '#7fd1ff', cores: 1, size: 0.7, seed: 5 };
     return `<g filter="url(#hbGlow)">${shell(b, lt + RISE - 0.3, 0, 0, 0, 1)}</g>`;
   }

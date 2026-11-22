@@ -162,7 +162,7 @@
     if (face && scaleX > 0) {
       s += L.rect(-w / 2, -h / 2, w, h, { rx: 32, fill: '#fff', stroke: '#ffca3a', 'stroke-width': 10 })
         + L.text(0, -150, 'お題', { size: 44, weight: 900, fill: TH.accent, fam: 'maru' });
-      text.split('|').forEach((t, k) => { s += L.text(0, -20 + k * 76, t, { size: 56, weight: 900, fill: TH.ink, fam: 'maru' }); });
+      const ls = text.split('|'); ls.forEach((t, k) => { s += L.text(0, 10 + (k - (ls.length - 1) / 2) * 72, t, { size: 52, weight: 900, fill: TH.ink, fam: 'maru' }); });
     } else {
       s += L.rect(-w / 2, -h / 2, w, h, { rx: 32, fill: '#2ec4b6', stroke: '#fff', 'stroke-width': 10 })
         + L.circle(0, 0, 90, { fill: 'rgba(255,255,255,0.18)' }) + L.text(0, 4, 'お題', { size: 64, weight: 900, fill: '#fff', fam: 'maru' });
@@ -178,7 +178,7 @@
     s += card(c1x, 380, L.lerp(-4, 4, flip1), flip1 > 0.5, '好きな給食を|発表する', Math.cos(Math.PI * flip1) * -1 || 0.02);
     if (flip2 > 0) {
       const c2x = L.lerp(560, 1420, L.ease(flip2));
-      s += card(c2x, 380, L.lerp(-4, 6, flip2), flip2 > 0.5, '最近うれしかった|こと', Math.cos(Math.PI * flip2) * -1 || 0.02);
+      s += card(c2x, 380, L.lerp(-4, 6, flip2), flip2 > 0.5, '最近|うれしかった|こと', Math.cos(Math.PI * flip2) * -1 || 0.02);
     }
     s += L.tr(300, 100, 1, L.circle(0, 0, 110, { fill: TH.accent }) + L.text(0, -18, '300', { size: 76, weight: 900, fill: '#fff', fam: 'maru' }) + L.text(0, 48, '枚', { size: 40, weight: 900, fill: '#fff', fam: 'maru' }));
     return s;

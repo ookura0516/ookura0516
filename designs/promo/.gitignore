@@ -1,0 +1,5 @@
+node_modules/
+out/*.cues.json
+out/*.silent.mp4
+out/*.wav
+__pycache__/

@@ -235,7 +235,8 @@ def sfx_good():
         x = marimba(note_hz(n), 0.6, 0.35)
         i = int(k * 0.07 * SR)
         out[i:i + len(x)] += x
-    return out + sfx_sparkle(0.6) * 0.5
+    place(out, sfx_sparkle(0.6) * 0.5, 0.0)
+    return out
 
 
 def sfx_print(dur=1.5):
@@ -336,7 +337,8 @@ def sfx_fanfare():
         x = musicbox(note_hz(n), 1.4, 0.32)
         i = int(k * 0.06 * SR)
         out[i:i + len(x)] += x
-    return out + np.pad(sfx_sparkle(0.6), (int(0.3 * SR), 0))[: len(out)] * 0.6
+    place(out, sfx_sparkle(0.6) * 0.6, 0.3)
+    return out
 
 
 def sfx_type():
@@ -352,7 +354,8 @@ def sfx_carve(dur=1.0):
         x = sfx_tap() * 0.35
         j = int((i / k) * dur * SR)
         out[j:j + len(x)] += x
-    return out + np.pad(sfx_swoosh(dur), (0, int(0.2 * SR)))[: len(out)] * 0.5
+    place(out, sfx_swoosh(dur) * 0.5, 0.0)
+    return out
 
 
 def sfx_envelope():

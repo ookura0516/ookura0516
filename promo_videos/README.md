@@ -38,6 +38,16 @@ macOS の読み上げで仮の声を入れるだけなら、次の1行で8本で
 python3 mix_voice.py --all --say Kyoko
 ```
 
+## Mac でまとめて作る
+
+Mac のターミナルで次を実行すると、声なし動画を8本作り、macOS の読み上げで仮の声を入れた完成版（`out/*_final.mp4`）まで作ります（15分ほど）。
+
+```sh
+git clone https://github.com/ookura0516/ookura0516.git && cd ookura0516
+git fetch origin claude/focused-keller-4ihp18 && git checkout claude/focused-keller-4ihp18
+./promo_videos/mac_voice.sh             # 声を変えるなら VOICE=Otoya ./promo_videos/mac_voice.sh
+```
+
 ## 名前や台本を変える
 
 名前はすべて仮称です。変えるときは `apps/<案>.js` の `name`・`catch`・`scripts` を直して `./build.sh <案>` を実行します。字幕・終わりの画面・ナレーション台本がまとめて変わります。
